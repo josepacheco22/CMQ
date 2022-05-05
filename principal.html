@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8"/>
+        <title>CONSULTORIO MÉDICO QUININDÉ</title>
+        <script src="librerias/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="principal.css" type="text/css">
+        <link  type="image/svg+xml" rel="icon" href="iconos/icono_pulso_corazon.svg">
+    </head>
+    <body>
+        <header>
+            <div id="titulo_presentacion_pgpr">
+                <h1>CONSULTORIO MÉDICO QUININDÉ</h1>
+                <br/>
+                <samp>A LA GLORIA DE DIOS Y AL SERVICIO DE LA PROVINCIA</samp>
+                <br/>
+                <br/>
+                <button id="inicio_sesion_pgpr">INICIAR SESIÓN</button>
+            </div>
+        </header>
+        <footer>
+            <div id="informacion_contacto_pgpr">
+                <samp>QUININDÉ - ESMERALDAS</samp> 
+                <br/>
+                <br/>
+                <samp>Dirección: Av. Simón Plata Torres y Gustavo Becerra</samp>
+                <br/>
+                <samp>Teléfono: (06) 2736-870</samp>
+            </div>
+        </footer>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MODAL INICIAR SESION
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <div id="modal_ids" class="modal_ids">
+            <div class="modal_contenido_ids">
+                <div class ="modal_interior_formulario_ids"  id="modal_interior_superior_formulario_ids">
+                    <label id="modal_titulo_ids">INICIAR SESIÓN</label>
+                    <button id="modal_boton_cerrar_superior_ids">
+                        <svg id="modal_icono_cerrar_ids" xmlns="http://www.w3.org/2000/svg" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal_interior_formulario_ids" id="modal_interior_mensaje_error_ids">
+                    <label class="modal_mensaje_ids" id="mensaje_error_usuario_ids"></label>
+                    <label class="modal_mensaje_ids" id="mensaje_error_contrasena_ids"></label>
+                </div>
+                <div class="modal_interior_formulario_ids"  id="modal_interior_valores_formulario_ids">                 
+                    <label class="modal_label_formulario_ids" >USUARIO</label>
+                    <br/>
+                    <input class="modal_input_formulario_ids" type="text" id="usuario_ids" minlength="8" maxlength="16">
+                    <br/> <br/>
+                    <label class="modal_label_formulario_ids">CONTRASEÑA </label>
+                    <br/>
+                    <div class="grupo_grupo_input_contraseña_ids">
+                        <input class="modal_input_formulario_ids" type="password" id="contrasena_ids" minlength="8" maxlength="16">
+                        <span id="mostrar_ocultar_contrasena_ids">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="visualizar_contrasena_ids" viewBox="0 0 16 16">
+                                <path id="bandera_ocultar_contrasena_ids" display="none" d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path id="bandera_mostrar_contrasena_ids" display="block" d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                              </svg>
+                        </span>
+                    </div>
+                    <br/>
+                    <input class="modal_input_formulario_checkbox_recordar_sesion_ids" type="checkbox" id="recordar_sesion_ids">
+                    <label class="modal_label_formulario_ids modal_label_formulario_checkbox_ids" for="recordar_sesion_ids">RECORDAR SESIÓN </label>
+                </div>
+                <div class ="modal_interior_formulario_ids" id="modal_interior_contenedor_botones_formulario_ids">
+                    <button class="modal_interior_botones_formulario_ids" id="modal_ejecutar_aceptar_ids">ACEPTAR</button>
+                    <button class="modal_interior_botones_formulario_ids" id="modal_ejecutar_cancelar_ids">CANCELAR</button>
+                </div>
+            </div>
+        </div>
+
+    </body>
+    <script type="text/javascript" src="principal.js"></script>
+</html>

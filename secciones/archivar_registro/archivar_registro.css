@@ -1,0 +1,73 @@
+#contenido_archivar_historial_pp {
+    background-color: #fefefe;
+    margin-top: 50px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 450px;
+    display: none;
+    font-size: 15px;
+  }
+  .interior_confirmar_archivar_mensaje_pp{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px 5px 10px;
+    border-top: 2px solid var(--color-1-formulario);
+    border-bottom: 2px solid var(--color-1-formulario);
+    float: right;
+    width: 100%;
+  }
+  .interior_confirmar_archivar_botones_pp{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 10px 5px;
+    width: 100%;
+  }
+  .interior_botones_confimrar_archivar_pp{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    padding: 13px 10px;
+    width: 49.5%;
+    color: white;
+    border-radius: 8px;
+    font-size: var(--tamano-letra);
+  }
+  .interior_botones_confimrar_archivar_pp:hover,
+  .interior_botones_confimrar_archivar_pp:focus {
+  cursor: pointer;
+  }
+  .informacion_label_1_pp{
+    display: block;
+    justify-content: right;
+    width: 40%;
+  }
+  .informacion_label_1_pp>label{
+    padding: 5px 0;
+    float: right;
+    width: 100%;
+    text-align: right;
+    height: 26px;
+  }
+  .informacion_label_2_pp{
+    display: block;
+    width: 60%;
+    padding-left: 10px;
+  }
+  .informacion_label_2_pp>label{
+    padding: 5px 0;
+    float: left;
+    width: 100%;
+    text-align: left;
+    color: rgb(95, 95, 95);
+    height: 26px;
+  }
+  .interior_confirmar_archivar_superior_pp
+  {
+    padding: 20px 0;
+  }
+  .interior_confirmar_archivar_superior_pp>label
+  {
+    font-size: 20px;
+  }

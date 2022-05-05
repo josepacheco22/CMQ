@@ -1,0 +1,262 @@
+@import '/estilos/estilo.css';
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+llenar formulario
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  #contenido_general{
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      font-size: var(--tamano-letra);
+  }
+  #contenido_rpa{
+    width: 600px;
+    padding-bottom: 50px;
+  }
+  .interior_formulario_rpa{
+    width: 100%;
+  }
+.interior_formulario_rpa:first-child{
+    padding: 20px 0 10px 0;
+}
+.interior_formulario_rpa>div{
+    float: left;
+    width: 100%;
+    /*min-width: 371.688px;*/
+    min-height: 68px;
+    padding: 5px 5px;
+}
+.contenedor_boton_guardar_rpa{
+    width: 100%;
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    padding-bottom: 0;
+    margin-top: 20px;
+    height: auto;
+}
+  .label_formulario_rpa{
+    width: 100%;
+    float:left;
+    text-align: left;
+    padding-left: 25px;
+  }
+  .input_formulario_rpa{
+    font-size: var(--tamano-letra);
+    border: 3px solid var(--color-1-formulario);
+    border-radius: 20px;
+    height: 50px;
+    width: 100%;
+    padding: 5px 30px;
+  }
+  .alerta_input_general_rpa{
+    text-align: center;
+    color: var(--color-1-error);
+    display: none;
+  }
+  .alerta_input_general_rpa:before,.alerta_input_general_rpa:after{
+    padding: 0 5px;
+    content: '⚠';
+    font-size: 18px;
+    margin: 0;
+    font-family: 'Times New Roman';
+    color: var(--color-1-error);
+    margin-top: -5px;
+    
+  }
+  .interior_botones_formulario_rpa{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    padding: 5px 10px;
+    width: 210px;
+    color: white;
+    border-radius: 12px;
+    height: 40px;
+    font-size: calc(var(--tamano-letra) - 3px);
+  }
+  .ultimo_contenedor{
+    margin-top: 0;
+  }
+  .interior_botones_formulario_rpa:hover,
+  .interior_botones_formulario_rpa:focus {
+  cursor: pointer;
+  }
+  #contenedor_alerta_general{
+    display: none;
+    margin: 20px 20px;
+    padding-bottom: 15px;
+    width: auto;
+  }
+  .alerta_general{
+    display: block;
+  }
+  
+  #input_direccion_rpa{
+    padding-top: 10px;
+    height: 100px;
+  }
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    modal
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  #modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+     /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(32, 32, 36); /* Fallback color */
+    background-color: rgba(41, 81, 87, 0.4); /* Black w/ opacity */
+  }
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal confirmar registro
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  #contenido_confirmar_rpa {
+    background-color: #fefefe;
+    margin-top: 50px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 450px;
+    display: none;
+    font-size: 15px;
+  }
+  .interior_confirmar_registro_mensaje_rpa{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px 5px 10px;
+    border-top: 2px solid var(--color-1-formulario);
+    border-bottom: 2px solid var(--color-1-formulario);
+    float: right;
+    width: 100%;
+  }
+  .interior_confirmar_registro_botones_rpa{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 10px 5px;
+    width: 100%;
+  }
+  .interior_botones_confimrar_rpa{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    padding: 13px 10px;
+    width: 49.5%;
+    color: white;
+    border-radius: 8px;
+    font-size: var(--tamano-letra);
+  }
+  .interior_botones_confimrar_rpa:hover,
+  .interior_botones_confimrar_rpa:focus {
+  cursor: pointer;
+  }
+  .informacion_label_1_rpa{
+    display: block;
+    justify-content: right;
+    width: 40%;
+  }
+  .informacion_label_1_rpa>label{
+    padding: 5px 0;
+    float: right;
+    width: 100%;
+    text-align: right;
+    height: 26px;
+  }
+  .informacion_label_2_rpa{
+    display: block;
+    width: 60%;
+    padding-left: 10px;
+  }
+  .informacion_label_2_rpa>label{
+    padding: 5px 0;
+    float: left;
+    width: 100%;
+    text-align: left;
+    color: rgb(95, 95, 95);
+    height: 26px;
+  }
+  .interior_confirmar_registro_superior_rpa
+  {
+    padding: 20px 0;
+  }
+  .interior_confirmar_registro_superior_rpa>label
+  {
+    font-size: 20px;
+  }
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal alerta
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  #mensaje_alerta_rpa {
+    background-color: #fefefe;
+    margin-top: 50px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 450px;
+    display: none;
+    font-size: 15px;
+  }       
+  .interior_alerta_rpa{
+    display:flex;
+    justify-content: right;
+    align-items: center;
+    padding: 20px 10px 10px 5px;
+    width: 100%;
+  }
+  .mensaje_alerta_boton_rpa{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    padding: 13px 10px;
+    width: 49.5%;
+    color: white;
+    border-radius: 8px;
+    font-size: var(--tamano-letra);
+  }
+  #interior_alerta_botones_rpa{
+    font-size: 20px;
+    padding: 20px 0;
+    justify-content: center;
+    margin-top: 30px;
+    border-top: 2px solid var(--color-1-formulario);
+    border-bottom: 2px solid var(--color-1-formulario);
+  }
+  .mensaje_alerta_boton_rpa:hover,
+  .mensaje_alerta_boton_rpa:focus {
+    cursor: pointer;
+    }
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal esperar
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+#contenido_esperar {
+    background-color: #fefefe;
+    margin-top:  200px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 320px;
+    display: none;
+}
+#ajuste_elementos_esperar{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.ajuste_elementos_esperar>img{
+    width: 100px;
+    height: 100px;
+}
+  

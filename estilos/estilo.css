@@ -1,0 +1,54 @@
+@font-face{
+    font-family: "League_Spartan";
+    src : url("/fuente/League_Spartan/LeagueSpartan-VariableFont_wght.ttf") format("truetype");
+  }
+  :root {
+    --tamano-letra: 20px;
+    
+    --color-paguina-principal: #1f2f98;
+    --color-principal: #45c4c4;
+    --color-1-formulario: #787ff6;
+    --color-1-error: #e24444;
+    --color-selecionar: #7bd5f5;
+   
+  }
+  input,select,textarea{
+  outline: none;
+  appearance:none;
+  }
+  textarea {
+    resize: none;
+ }
+  *{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'League_Spartan';  
+  }
+  ::-ms-reveal {
+  display: none;
+  }
+  body{
+    display: inline-flexbox;
+    font-size: 18px;
+  }
+  div{
+    text-align: center; 
+    font-weight: bold;
+  }
+  header,.seccion_pp{
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-principal);
+    width: 100%;
+  }
+  .seccion_normal_pp{
+    background-color: white;
+    color:black;
+  }
+  .elementos_contenedores_pp{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    
+  }

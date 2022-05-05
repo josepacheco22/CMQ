@@ -1,0 +1,40 @@
+
+#label_indicador{
+    padding-top: 0;
+    padding-left: 35px;
+    font-size: 40px;
+    font-weight: 500;
+    width: 50%;
+    text-align: left;
+    word-spacing: 50px;
+    letter-spacing: 2px;
+}
+
+.info_creado_asignado_pp:nth-child(2)>.botones_auto{
+    justify-content: right;
+}
+.input_formulario_1_pp>.botones_auto>.boton_auto_restablecer{
+    margin-right: 5px;
+    width: 100px;
+}
+div.botones_auto_formulario{
+    border: 0;
+    display: flex;
+    justify-content: right;
+}
+div.botones_auto_formulario>button{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    color: white;
+    border-radius: 15px;
+    font-size: 17px;
+    width: 100px;
+    height: 30px;
+    
+}
+div.input_formulario_2_pp>div.botones_auto_formulario{
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    padding-right: 35px;
+}

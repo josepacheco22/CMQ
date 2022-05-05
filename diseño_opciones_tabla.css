@@ -1,0 +1,9 @@
+.iconos_tabla_accion{
+    width: 100px;
+}
+.iconos_tabla_accion>svg{
+    fill: white;
+}
+.iconos_tabla_accion:hover{
+    cursor: pointer;
+}

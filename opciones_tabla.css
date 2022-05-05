@@ -1,0 +1,80 @@
+
+  #titulo_tabla_pp{
+    margin: 30px 0 10px 0;
+    color: black;
+    align-items:flex-start;
+  }
+
+  #opciones_tabla_pp{
+    margin: 10px 0;
+    height: auto;
+    overflow: hidden;
+  }
+  #opciones_tabla_pp>*{
+    margin: 0 10px;
+  }
+  #opciones_tabla_pp>button{
+    width: 180px;
+    height: 33px;
+    border: 0;
+    color: white;
+    background-color: var(--color-paguina-principal);
+    border-radius: 10px;
+    font-size: 17px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #opciones_tabla_pp>button:hover{
+    cursor: pointer;
+  }
+  #opciones_tabla_pp>button>svg,#opciones_tabla_pp>button>svg>g{
+    width: 15px;
+    margin-right: 5px;
+    height: 15px;
+    fill: white;
+  }
+  #opciones_tabla_pp>button>svg>g{
+    width: 20px;
+    height: 20px;
+  }
+  #label_cantidad_registros{
+      color: black;
+  }
+  #opciones_tabla_pp>div>select{
+      color: black;
+    width: 55px;
+    height: 30px;
+    padding-left: 15px;
+    border-radius: 10px;
+    font-size: var(--tamano-letra);
+    border: 2px solid var(--color-paguina-principal);
+  }
+  
+  #contenido_tabla_pp{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    
+  }
+  .contenedor_input_boton_pp{
+    margin: 5px 10px;
+    border-radius: 10px;
+    background-color: white;
+    border:0;
+    padding: 0;
+    min-width: 120px;
+  }
+  .input_buscar_tabla_pp{
+    border: 0;
+    width: 80%;
+    height:  30px;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 18px;
+    padding: 0 10px;
+  }
+  .boton_borrar_pp:hover{
+  cursor: pointer;
+  }

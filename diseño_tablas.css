@@ -1,0 +1,53 @@
+
+
+table{
+    display: block;
+    border: 2px solid var(--color-1-formulario);
+    border-collapse: collapse;
+    width: 100%;
+    align-items:center;
+    text-align: center;
+  }
+  #numero_de_fila_pp{
+    padding: 0 10px;
+  }
+  #cabecera_tabla{
+    background-color:  var(--color-1-formulario);
+    height: auto;
+  }
+
+  th{
+    padding: 0 10pxs;
+    padding: 10px 0;
+    background-color: var(--color-1-formulario);
+    color: white;
+    font-size: 16px;
+  }
+  td{
+    padding: 7px 0;
+    color: white;
+    background-color: var(--color-paguina-principal);
+    font-size: 16px;
+    border-bottom: 2px solid var(--color-1-formulario);
+  }
+  .numero_de_fila{
+    padding: 0 20px;
+  }
+  .opciones{
+    width: 150px;
+  }
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+#fondo_opcines_pp{
+    background-color: var(--color-paguina-principal);
+  }
+  #fondo_opcines_pp>div>div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  .opciones_pp>label{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    }
+  .opciones_pp>label:hover{
+      cursor: pointer;
+    }
+  .icono_opciones_pp{
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+  }
+  .opciones_pp:hover,.paguina_actual_pp{
+    background-color: var(--color-selecionar);
+    color: var(--color-paguina-principal);
+  }

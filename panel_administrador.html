@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8"/>
+        <title>CONSULTORIO MÉDICO QUININDÉ</title>
+        
+        <script src="librerias/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <link  type="image/svg+xml" rel="icon" href="iconos/icono_pulso_corazon.svg">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div id="header_titulo_ap">
+                    <svg id="icono_prinipal_pa" xmlns="http://www.w3.org/2000/svg" class="bi bi-heart-pulse" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Zm8.252-6.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"/>
+                    </svg>
+                    <h2>CMQ: Panel Admnistrador</h2>
+                </div>
+                <ul id="opciones_perfil">
+                    <li><label>USUARIO :<label id="usuario_ingreso_pa"></label></label>
+                        <ul>
+                            <li id="registro_general_pa">REGISTRO GENERAL</li>
+                            <li id="cambio_contrasena_pa">CAMBIO CONTRASEÑA</button>
+                            <li id="cerrar_sesion_rp">CERRAR SESIÓN</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <div class="contenedores_pa">
+            <div class="ajuste_centro_contenedores_pa" id="titulo_lista_pa">
+                <h1>LISTA PERSONAL</h1>
+            </div>
+        </div>
+        <div class="contenedores_pa">  
+            <div class="ajuste_centro_contenedores_pa" id="titulo_lista_pa">
+                <button class="opciones_tabla_rp" id="borrar_borrartodo_rp">LIMPIAR TODO</button>
+                <div>
+                    <label>MAX</label>
+                    <select class="input_buscar_tabla_p" id="cantidad_filas_tabla_pa">
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+                <button class="opciones_tabla_rp" id="agregar_personal_rp">AGREGAR PERSONAL</button>
+            </div>
+        </div>
+        <div class="contenedores_pa">
+            <div class="ajuste_centro_contenedores_pa" id="contenedor_tabla_p">
+                <table class="default tabla_usuarios_pa">
+                    <tr>
+                        <th cope="col">#</th>
+                        <th>Habilitado
+                            <input checked class="input_buscar_tabla_p" type="checkbox" id="buscar_habilitado_rp">
+                        </th>
+                        <th>P/C
+                            <select class="input_buscar_tabla_p" id="buscar_tipo_doc_rp"> 
+                                <option value="cp" selected="selected">C/P</option> 
+                                <option value="Cedula">Cedula</option> 
+                                <option value="Pasaporte">Pasaporte</option> 
+                            </select>
+                        </th>
+                        <th>NumeroDoc
+                            <input class="input_buscar_tabla_p" type="text" id="buscar_numerodoc_rp" maxlength="20">
+                            <button class="boton_borrar_tabla_p" id="borrar_numerodoc_rp">LIMPIAR</button>
+                        </th>
+                        <th>Nombres
+                            <input class="input_buscar_tabla_p" type="text" id="buscar_nombres_rp">
+                            <button class="boton_borrar_tabla_p" id="borrar_nombres_rp">LIMPIAR</button>
+                        </th>
+                        <th>Apellidos
+                            <input class="input_buscar_tabla_p" type="text" id="buscar_apellidos_rp">
+                            <button class="boton_borrar_tabla_p" id="borrar_apellidos_rp">LIMPIAR</button>
+                        </th>
+                        <th>Cargo
+                            <input class="input_buscar_tabla_p" type="text" id="buscar_cargo_rp">
+                            <button class="boton_borrar_tabla_p" id="borrar_cargo_rp">LIMPIAR</button>
+                        </th>                     
+                        <th>Usuario
+                            <input class="input_buscar_tabla_p" type="text" id="buscar_usuario_rp">
+                            <button class="boton_borrar_tabla_p" id="borrar_usuario_rp">LIMPIAR</button>
+                        </th>
+                        <th colspan="2">Opciones
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    <tbody id="cuerpo_tabla">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MODAL REGISTRO PERSONAL
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div id="modal_rp" class="modal_rp">
+    <div id="modal_contenido_rp">
+        <div class ="modal_interior_formulario_rp"  id="modal_interior_superior_formulario_rp">
+            <label id="modal_titulo_rp">REGISTRO PERSONAL</label>
+            <button id="modal_boton_cerrar_superior_rp">
+                <svg id="modal_icono_cerrar_rp" xmlns="http://www.w3.org/2000/svg" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal_interior_formulario_rp" id="modal_interior_mensaje_error_rp">
+            <label class="modal_mensaje_rp" id="mensaje_error_usuario_rp"></label>
+            <label class="modal_mensaje_rp" id="mensaje_error_contrasena_rp"></label>
+        </div>
+        <div class="modal_interior_formulario_rp"  id="modal_interior_valores_formulario_rp">  
+            <label class="modal_label_formulario_rp" >TIPO DOCUMENTO</label>
+            <br/>
+            <select class="modal_input_formulario_rp input_lista_opciones_rp" id="tipo_documento_rp"> 
+                <option value="Cedula">Cedula</option> 
+                <option value="Pasaporte">Pasaporte</option> 
+            </select>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >NUMERO DOCUMENTO</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="text" id="numero_documento_rp" maxlength="10">
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" display="none" id="alerta_numero_documento_existe_rp">Numero de documento ya en uso</label>
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" display="none" id="alerta_numero_documento_requerido_rp">Numero documento requerido</label>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >NOMBRES</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="text" id="nombres_rp" maxlength="25">
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_nombres_rp">Nombre requerido.</label>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >APELLIDOS</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="text" id="apellidos_rp" maxlength="16">
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_apellidos_rp">Apellidos requerida</label>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >USUARIO</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="text" id="usuario_rp" maxlength="15">
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_usuario_existe_rp">Usuario ya en uso</label>
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_usuario_requerido_rp">Usuario requerido</label>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >CONTRASEÑA</label>
+            <br/>
+            <div class="grupo_input_rp">
+                <input class="modal_input_formulario_rp input_interno_icono_rp" type="password" id="contrasena_rp" minlength="8" maxlength="16">
+                <span id="icono_input_rp">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="estilo_icono_input_rp" id="visualizar_contrasena_rp" viewBox="0 0 16 16">
+                        <path id="bandera_ocultar_contrasena_rp" display="none" d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path id="bandera_mostrar_contrasena_rp" display="block" d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                      </svg>
+                </span>
+            </div>
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_contrasena_requerido_rp">Contraseña requerida</label>
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_contrasena_minimo_rp">Minimo 8 caracteres</label>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >CONFIRMAR CONTRASEÑA</label>
+            <br/>
+            <div class="grupo_input_rp">
+                <input class="modal_input_formulario_rp input_interno_icono_rp" type="password" id="confirmar_contrasena_rp" minlength="8" maxlength="16">
+                <span id="icono_input_rp">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="estilo_icono_input_rp" id="visualizar_confirmar_contrasena_rp" viewBox="0 0 16 16">
+                        <path id="bandera_ocultar_confirmar_contrasena_rp" display="none" d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path id="bandera_mostrar_confirmar_contrasena_rp" display="block" d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                      </svg>
+                </span>
+            </div>
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_confirmar_contrasena_requerido_rp">Contraseña requerida</label>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_confirmar_contrasena_no_coinciden_rp">Contraseñas no coinciden</label>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >SEXO</label>
+            <br/>
+            <select class="modal_input_formulario_rp input_lista_opciones_rp" id="sexo_rp"> 
+                <option value="" selected></option> 
+                <option value="hombre">Hombre</option> 
+                <option value="mujer">Mujer</option> 
+            </select>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >CORREO</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="email" id="correo_rp" maxlength="16">
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >TELEFONO</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="text" id="telefono_1_rp" maxlength="10">
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_telefono_1_rp" >Teléfono requerida</label>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >CONVENCIONAL</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="text" id="telefono_2_rp" maxlength="10">
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >FECHA NACIMIENTO</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="text" id="fecha_nacimiento_rp" maxlength="16">
+            <br/>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >CARGO</label>
+            <br/>
+            <select class="modal_input_formulario_rp input_lista_opciones_rp" id="cargo_rp"> 
+                <option value="" selected></option> 
+                <option value="Doctor">Doctor</option> 
+                <option value="Enfermeriar">Enfermeria</option> 
+            </select>
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_cargo_rp">Cargo requerida</label>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >ESPECIALIDAD</label>
+            <br/>
+            <select class="modal_input_formulario_rp input_lista_opciones_rp" id="especialidad_rp" disabled="disabled">
+                <option value="" selected="selected"></option>  
+                <option value="Medicina General" >Medicina General</option> 
+                <option value="Cardiologia">Cardiologia</option> 
+                <option value="Cirugía general">Cirugía general</option> 
+                <option value="Cirugía vascular">Cirugía vascular</option> 
+                <option value="Dermatología">Dermatología</option> 
+                <option value="Fisiatría">Fisiatría</option> 
+                <option value="Ginecología">Ginecología</option> 
+                <option value="Medicina Familiar">Medicina familiar</option>
+                <option value="Neurología">Neurología</option> 
+                <option value="Otorrinolaringologia">Otorrinolaringologia</option> 
+                <option value="Pediatría">Pediatría</option> 
+                <option value="Psicología">Psicología</option> 
+                <option value="Psiquiatría">Psiquiatría</option> 
+                <option value="Psicorehabilitación">Psicorehabilitación</option> 
+                <option value="Traumatología">Traumatología</option> 
+                <option value="Urología">Urología</option> 
+            </select>
+            <br/> <br/>
+            <label class="modal_label_formulario_rp" >FOTO</label>
+            <br/>
+            <input class="modal_input_formulario_rp" type="text" id="foto_rp" maxlength="16">
+            <br/>
+            <label class="modal_label_formulario_rp alerta_input_general_rp" id="alerta_general_rp">Por favor completar todos los campos obligatorios</label>
+        </div>
+        <div class ="modal_interior_formulario_rp" id="modal_interior_contenedor_botones_formulario_rp">
+            <button class="modal_interior_botones_formulario_rp" id="modal_ejecutar_aceptar_rp">ACEPTAR</button>
+            <button class="modal_interior_botones_formulario_rp" id="modal_ejecutar_cancelar_rp">CANCELAR</button>
+        </div>
+    </div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MODAL confirmar registro
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <div id="modal_contenido_confirmar_perder_rp">
+        <div class ="modal_interior_confirmar_perder_rp modal_interior_confirmar_perder_superior_rp" id="">
+            <label class="modal_mensaje_formulario_rp" >Seguro desea salir?:</label>
+        </div>
+        <div class ="modal_interior_confirmar_perder_rp modal_interior_confirmar_perder_botones_rp" id="">
+            <button class="modal_interior_botones_confimrar_rp" id="modal_boton_perder_cofirmar_rp">ACEPTAR</button>
+            <button class="modal_interior_botones_confimrar_rp" id="modal_boton_perder_cancelar_rp">CANCELAR</button>
+        </div>
+    </div>
+
+    <div id="modal_contenido_confirmar_rp">
+        <div class ="modal_interior_confirmar_registro_rp modal_interior_confirmar_registro_superior_rp" id="">
+            <label class="modal_mensaje_formulario_rp" >Confirmar registro?</label>
+        </div>
+        <div class ="modal_interior_confirmar_registro_rp modal_interior_confirmar_registro_mensaje_rp" id="">
+            <div class="informacion_label_1_rp">
+                <label class="modal_label_formulario_rp" >TIPO DOCUMENTO : </label>
+                <label class="modal_label_formulario_rp" >NUMERO DOCUMENTO : </label>
+                <label class="modal_label_formulario_rp" >NOMBRES : </label>
+                <label class="modal_label_formulario_rp" >APELLIDOS : </label>
+                <label class="modal_label_formulario_rp" >USUARIO : </label>
+                <label class="modal_label_formulario_rp" >CONTRASEÑA : </label>
+                <label class="modal_label_formulario_rp" >SEXO : </label>
+                <label class="modal_label_formulario_rp" >CORREO : </label>
+                <label class="modal_label_formulario_rp" >TELEFONO : </label>
+                <label class="modal_label_formulario_rp" >CONVENCIONAL : </label>
+                <label class="modal_label_formulario_rp" >FECHA NACIMIENTO : </label>
+                <label class="modal_label_formulario_rp" >CARGO : </label>
+                <label class="modal_label_formulario_rp" >ESPECIALIDAD : </label>
+            </div>
+            <div class="informacion_label_2_rp">                
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_tipo_documento" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_documento" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_nombres" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_apellidos" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_usuario" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_contrasena" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_sexo" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_correo" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_telefono" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_convencional" ></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_nacimiento"></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_cargo"></label>
+                <label class="modal_label_formulario_rp" id="label_confirmar_registro_especialidad"></label>
+            </div>
+        </div>
+        <div class ="modal_interior_confirmar_registro_rp modal_interior_confirmar_registro_botones_rp" id="">
+            <button class="modal_interior_botones_confimrar_rp" id="modal_boton_confirmar_cofirmar_rp">ACEPTAR</button>
+            <button class="modal_interior_botones_confimrar_rp" id="modal_boton_confirmar_cancelar_rp">CANCELAR</button>
+        </div>
+    </div>
+    <div id="modal_mensaje_alerta_rp">
+        <div class ="modal_interior_alerta_rp " id="modal_interior_alerta_botones_rp">
+            <label id="label_mensaje_alerta_superior_rp"></label>
+        </div>
+        <div class ="modal_interior_alerta_rp modal_interior_alerta_botones_rp" id="">
+            <button class="modal_mensaje_alerta_boton_rp" id="modal_boton_alerta_cofirmar_rp">ACEPTAR</button>
+        </div>
+    </div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MODAL confirmar perder formulario
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+   
+<!--
+<div id="modal_confirmar_perder_rp" class="modal_confirmar_rp">
+        <div class="modal_contenido_confirmar_rp">
+            <div class ="modal_interior_confirmar_registro_rp modal_interior_confirmar_registro_superior_rp" id="">
+                <label class="modal_mensaje_formulario_rp" >Desea salir? se perderan los siguientes datos:</label>
+            </div>
+            <div class ="modal_interior_confirmar_registro_rp modal_interior_confirmar_registro_mensaje_rp" id="">
+                <div class="informacion_label_1_rp">
+                    <label class="modal_label_formulario_rp" >TIPO DOCUMENTO : </label>
+                    <label class="modal_label_formulario_rp" >NUMERO DOCUMENTO : </label>
+                    <label class="modal_label_formulario_rp" >NOMBRES : </label>
+                    <label class="modal_label_formulario_rp" >APELLIDOS : </label>
+                    <label class="modal_label_formulario_rp" >USUARIO : </label>
+                    <label class="modal_label_formulario_rp" >CONTRASEÑA : </label>
+                    <label class="modal_label_formulario_rp" >SEXO : </label>
+                    <label class="modal_label_formulario_rp" >CORREO : </label>
+                    <label class="modal_label_formulario_rp" >TELEFONO : </label>
+                    <label class="modal_label_formulario_rp" >CONVENCIONAL : </label>
+                    <label class="modal_label_formulario_rp" >FECHA NACIMIENTO : </label>
+                    <label class="modal_label_formulario_rp" >CARGO : </label>
+                    <label class="modal_label_formulario_rp" >ESPECIALIDAD : </label>
+                </div>
+                <div class="informacion_label_2_rp">                
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_tipo_documento" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_documento" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_nombres" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_apellidos" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_usuario" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_contrasena" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_sexo" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_correo" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_telefono" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_convencional" ></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_nacimiento"></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_cargo"></label>
+                    <label class="modal_label_formulario_rp" id="label_confirmar_perder_especialidad"></label>
+                </div>
+            </div>
+            <div class ="modal_interior_confirmar_registro_rp modal_interior_confirmar_registro_botones_rp" id="">
+                <button class="modal_interior_botones_confimrar_rp" id="modal_boton_perder_cofirmar_rp">ACEPTAR</button>
+                <button class="modal_interior_botones_confimrar_rp" id="modal_boton_perder_cancelar_rp">CANCELAR</button>
+            </div>
+        </div>
+    <div>
+        -->
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MODAL registro con exito
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MODAL esperar
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <div id="modal_contenido_esperar">
+        <div class="modal_ajuste_elementos_esperar">
+            <img src="iconos/spinner.gif" alt="esperar"> 
+        </div>
+        <div class="modal_ajuste_elementos_esperar">
+            <label>Espere por favor...</label>
+        </div>
+    </div>
+<div>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MODAL esperar
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+
+
+    </body>
+    <link rel="stylesheet" href="panel_administrador.css" type="text/css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="librerias/jquery-ui.css">
+    <script src="librerias/jquery-3.6.0.js"></script>
+    <script src="librerias/jquery-ui.js"></script>
+    <script type="text/javascript" src="panel_administrador.js"></script>
+</html>

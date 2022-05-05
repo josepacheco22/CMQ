@@ -1,0 +1,633 @@
+@import 'estilo.css';
+/*@font-face{
+  font-family: "League_Spartan";
+  src : url("fuente/League_Spartan/LeagueSpartan-VariableFont_wght.ttf") format("truetype");
+}
+:root {
+  --tamano-letra: 18px;
+  
+  --color-paguina-principal: #1f2f98;
+  --color-principal: #45c4c4;
+  --color-1-formulario: #787ff6;
+  --color-1-error: #e24444;
+}
+input,select{
+outline: none;
+}
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'League_Spartan';  
+}
+::-ms-reveal {
+display: none;
+}*/
+body{
+  display: inline-flexbox;
+  font-size: 18px;
+}
+div{
+  text-align: center; 
+  font-weight: bold;
+}
+.ui-icon-circle-triangle-w{
+  
+  border-right: 10px solid var(--color-paguina-principal);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent; 
+}
+.ui-icon-circle-triangle-e{
+  width: 0;
+  height: 0;
+  border-left: 10px solid var(--color-paguina-principal);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent; 
+}
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+opcines de navegador
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+header{
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-principal);
+  width: 100%;
+  color: white;
+}
+nav{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  position: relative;
+  height: 50px;
+}
+
+#icono_prinipal_pa{
+  width: 30px;
+  height: 30px;
+  fill: white;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#header_titulo_ap{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+ul{
+  list-style: none;
+}
+#opciones_perfil>li{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 250px;
+}
+#opciones_perfil>li>ul{
+  display: none;
+}
+#opciones_perfil>li:hover{
+  background-color: var(--color-paguina-principal);
+  cursor: pointer;
+}
+#opciones_perfil>li:hover>ul{
+  margin-top: 200px;
+  display: block;
+  z-index: 2;
+}
+#opciones_perfil>li>ul>li{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-principal);
+  height: 50px;
+  width: 250px;
+}
+li>label{
+  position: absolute;
+}
+#opciones_perfil>li>ul>li:last-child{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#opciones_perfil>li>ul>li:hover{
+  background-color: var(--color-paguina-principal);
+  cursor: pointer;
+}
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+cuerpo de paguina
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.contenedores_pa{
+  display: flex;
+  justify-content: center;
+  
+}
+.ajuste_centro_contenedores_pa{
+  display:flex;
+  align-items: center;
+  justify-content: left;
+  width: 70%;
+  position: relative;
+  padding: 15px 0 5px 0;
+}
+#icono_buscar_pa{
+  width: 55px;
+  height: 40px;
+  padding: 8px 0 8px 8px;
+  fill: var(--color-paguina-principal);
+  border: 2px solid var(--color-1-formulario);
+  margin-left: 10px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-right: 0;
+}
+#input_buscar_pa{
+  border: 2px solid var(--color-1-formulario);
+  height: 40px;
+  width: 100%;
+  margin-right: 10px;
+  padding-left: 20px;
+  font-size: var(--tamano-letra);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+diseño tabla
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+#contenedor_tabla_p{
+  width: 100%;
+}
+.tabla_usuarios_pa
+{
+  border: 2px solid var(--color-1-formulario);
+  border-collapse: collapse;
+  width: 100%;
+  align-items:center;
+  text-align: center;
+}
+.tabla_usuarios_pa>caption
+{
+  padding-bottom: 10px;
+}
+th{
+  padding: 10px 0;
+  background-color: var(--color-1-formulario);
+  color: white;
+  font-size: 16px;
+}
+td{
+  padding: 7px 0;
+  color: white;
+  background-color: var(--color-paguina-principal);
+  font-size: 14px;
+  border-bottom: 2px solid var(--color-1-formulario);
+}
+.input_buscar_tabla_p{
+  height: 20px;
+  font-size: 14px;
+  border: 1px;
+  border-radius: 8px;
+  padding: 0 10px;
+  margin: 5px 2.5px;
+}
+.boton_borrar_tabla_p{
+  height: 25px;
+  width: 70px;
+  border: 1 solid var(--color-paguina-principal);
+  border-radius: 10px;
+}
+.boton_borrar_tabla_p:hover{
+  cursor: pointer;
+}
+#titulo_lista_pa{
+  justify-content: center;
+  align-items: center;
+}
+.opciones_tabla_rp{
+  margin: 0 10px;
+  background-color: var(--color-1-formulario);
+  height: 30px;
+  width: 150px;
+  color: white;
+  font-size: 15px;
+  border: 1px solid var(--color-1-formulario);
+  border-radius: 10px;
+  margin-right: 20px;
+}
+.opciones_tabla_rp:hover{
+  cursor: pointer;
+}
+#cantidad_filas_tabla_pa{
+  height: 25px;
+  border: 2px solid var(--color-1-formulario);
+}
+.tabla_contenedores_accion_rp{
+  padding: 0 10px;
+}
+.iconos_tabla_accion{
+  width: 19px;
+  height: 19px;
+  fill: white;
+}
+.iconos_tabla_accion:hover{
+  cursor: pointer;
+}
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+diseño tabla
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+#modal_rp {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+   /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(32, 32, 36); /* Fallback color */
+  background-color: rgba(41, 81, 87, 0.4); /* Black w/ opacity */
+}
+/* Modal Content */
+#modal_contenido_rp {
+  padding-top: 50px;
+  background-color: #fefefe;
+  margin-top: 10px;
+  padding: 0 10px;
+  border: 1px solid var(--color-1-formulario);
+  border-radius: 15px;
+  width: 500px;
+  display: none;
+}
+#modal_interior_superior_formulario_rp{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px 10px 5px;
+  border-bottom: 2px solid var(--color-1-formulario);
+}
+#modal_boton_cerrar_superior_rp {
+  color: #333333;
+  font-size: 40px;
+  font-weight: bold;
+}
+#modal_boton_cerrar_superior_rp{
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
+#modal_icono_cerrar_rp{
+  fill: var(--color-1-formulario);
+  width: 25px;
+  height: 25px;
+}
+#modal_boton_cerrar_superior_rp:hover,
+#modal_boton_cerrar_superior_rp:focus {
+  cursor: pointer;
+}
+#modal_titulo_rp{
+  font-size: 28px;
+  vertical-align:bottom;
+}
+.modal_interior_formulario_rp{
+  padding: 15px 0px;
+}
+
+#modal_interior_mensaje_error_rp{
+  justify-content: center;
+width: 100%;
+padding: 5px 10px 10px 5px;
+border: 2px solid var(--color-1-error);
+margin: 5px 0 -12px 0;
+display: none;
+}
+
+#modal_interior_valores_formulario_rp{
+  border-bottom: 2px solid var(--color-1-formulario);
+  padding: 0 15px 20px 15px;
+  justify-content: left;
+  overflow: hidden;
+
+}
+.modal_label_formulario_rp{
+  float:left;
+  padding-top: 25px;
+  padding-bottom: 8px;
+}
+
+.modal_mensaje_rp{
+color: var(--color-1-error);
+display: none;
+padding: 0;
+margin: 0;
+}
+.modal_mensaje_rp:before{
+  content: '⚠ ';
+  font-size: 20px;
+  font-family: 'Times New Roman';
+  color: var(--color-1-error);
+}
+.modal_input_formulario_rp{
+  float:left;
+  width: 100%;
+  height: 40px;
+  border: 2px solid var(--color-1-formulario);
+  border-radius: 19px;
+  font-size: var(--tamano-letra);
+  font-weight:lighter;
+  padding: 0 25px 0 25px;
+}
+
+.grupo_input_rp{
+  display: inline;
+}
+
+.input_interno_icono_rp{
+border-top-right-radius: 0;
+border-bottom-right-radius: 0;
+width: 85%;
+}
+.input_lista_opciones_rp{
+  padding-right: 50px;
+  appearance:none;
+  line-height: inherit;
+}
+
+#icono_input_rp{
+float:left;
+border: 2px solid var(--color-1-formulario);
+height: 40px;
+width: 15%;
+border-top-right-radius: 19px;
+border-bottom-right-radius: 19px;
+padding-top: 5px;
+border-left: 0;
+}
+.estilo_icono_input_rp{
+fill: var(--color-1-formulario);
+width: 25px;
+height: 25px;
+}
+.estilo_icono_input_rp:hover,
+.estilo_icono_input_rp:focus {
+cursor: pointer;
+}
+
+#modal_interior_contenedor_botones_formulario_rp{
+  padding: 23px 0 28px 0;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal_interior_botones_formulario_rp{
+  border: 0;
+  background-color: var(--color-1-formulario);
+  padding: 13px 10px;
+  width: 49.5%;
+  color: white;
+  border-radius: 8px;
+  font-size: var(--tamano-letra);
+}
+.modal_interior_botones_formulario_rp:hover,
+.modal_interior_botones_formulario_rp:focus {
+cursor: pointer;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal esperar
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/* Modal Content */
+#modal_contenido_esperar {
+  background-color: #fefefe;
+  margin-top:  200px;
+  padding: 0 10px 20px 10px;
+  border: 1px solid var(--color-1-formulario);
+  border-radius: 15px;
+  width: 320px;
+  display: none;
+}
+#modal_ajuste_elementos_esperar{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.modal_ajuste_elementos_esperar>img{
+  width: 100px;
+  height: 100px;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal confirmar registro formulario
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/* Modal Content */
+#modal_contenido_confirmar_rp {
+  background-color: #fefefe;
+  margin-top: 50px;
+  padding: 0 10px 20px 10px;
+  border: 1px solid var(--color-1-formulario);
+  border-radius: 15px;
+  width: 450px;
+  display: none;
+  font-size: 15px;
+}
+.modal_interior_confirmar_registro_mensaje_rp{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px 5px 10px;
+  border-top: 2px solid var(--color-1-formulario);
+  border-bottom: 2px solid var(--color-1-formulario);
+  float: right;
+  width: 100%;
+}
+.modal_interior_confirmar_registro_botones_rp{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px 10px 5px;
+  width: 100%;
+}
+.modal_interior_botones_confimrar_rp{
+  border: 0;
+  background-color: var(--color-1-formulario);
+  padding: 13px 10px;
+  width: 49.5%;
+  color: white;
+  border-radius: 8px;
+  font-size: var(--tamano-letra);
+}
+.modal_interior_botones_confimrar_rp:hover,
+.modal_interior_botones_confimrar_rp:focus {
+cursor: pointer;
+}
+.informacion_label_1_rp{
+  display: block;
+  justify-content: right;
+  width: 40%;
+}
+.informacion_label_1_rp>label{
+  padding: 5px 0;
+  float: right;
+  width: 100%;
+  text-align: right;
+  height: 26px;
+}
+.informacion_label_2_rp{
+  display: block;
+  width: 60%;
+  padding-left: 10px;
+}
+.informacion_label_2_rp>label{
+  padding: 5px 0;
+  float: left;
+  width: 100%;
+  text-align: left;
+  color: rgb(95, 95, 95);
+  height: 26px;
+}
+.modal_interior_confirmar_registro_superior_rp
+{
+  padding: 20px 0;
+}
+.modal_interior_confirmar_registro_superior_rp>label
+{
+  font-size: 20px;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal confirmar registro formulario
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+#modal_contenido_confirmar_perder_rp {
+  background-color: #fefefe;
+  margin-top: 50px;
+  padding: 0 10px 20px 10px;
+  border: 1px solid var(--color-1-formulario);
+  border-radius: 15px;
+  width: 450px;
+  display: none;
+  font-size: 15px;
+}  
+.modal_interior_confirmar_perder_botones_rp{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px 10px 5px;
+  width: 100%;
+}
+.modal_interior_botones_confimrar_rp{
+  border: 0;
+  background-color: var(--color-1-formulario);
+  padding: 13px 10px;
+  width: 49.5%;
+  color: white;
+  border-radius: 8px;
+  font-size: var(--tamano-letra);
+}
+.modal_interior_botones_confimrar_rp:hover,
+.modal_interior_botones_confimrar_rp:focus {
+cursor: pointer;
+}
+.modal_interior_confirmar_perder_superior_rp
+{
+  padding: 20px 0;
+}
+.modal_interior_confirmar_perder_superior_rp>label
+{
+  font-size: 20px;
+}
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal alerta
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+    #modal_mensaje_alerta_rp {
+      background-color: #fefefe;
+      margin-top: 50px;
+      padding: 0 10px 20px 10px;
+      border: 1px solid var(--color-1-formulario);
+      border-radius: 15px;
+      width: 450px;
+      display: none;
+      font-size: 15px;
+    }  
+    .modal_interior_alerta_rp{
+      display:flex;
+      justify-content: right;
+      align-items: center;
+      padding: 20px 10px 10px 5px;
+      width: 100%;
+    }
+    .modal_mensaje_alerta_boton_rp{
+      border: 0;
+      background-color: var(--color-1-formulario);
+      padding: 13px 10px;
+      width: 49.5%;
+      color: white;
+      border-radius: 8px;
+      font-size: var(--tamano-letra);
+    }
+    #modal_interior_alerta_botones_rp{
+      font-size: 20px;
+      padding: 20px 0;
+      justify-content: center;
+      margin-top: 30px;
+      border-top: 2px solid var(--color-1-formulario);
+      border-bottom: 2px solid var(--color-1-formulario);
+    }
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+alertas de input
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+.alerta_input_general_rp{
+  color: var(--color-1-error);
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
+  padding: 0;
+  padding-top: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+  justify-content: left;
+  display: none;
+}
+.alerta_input_general_rp:last-child::before{
+  content: "";
+}
+.alerta_input_general_rp:before{
+  content: '⚠';
+  font-size: 18px;
+  margin: 0;
+  font-family: 'Times New Roman';
+  color: var(--color-1-error);
+  margin-top: -5px;
+  
+}
+#alerta_general_rp{
+  margin-top: 20px;
+}
