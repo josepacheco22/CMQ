@@ -750,9 +750,6 @@ if($tipo=="vr")
     $usuario = $_POST["usuario"];
     $cantidad_filas = $_POST["cantidad_filas"];
 
-
-
-
     $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'0' AND h.`id_personal_asignado`= '$id_asignado' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     $i = 1;
@@ -995,7 +992,113 @@ if($tipo=="vr")
         echo "fallo";
     }
     
-}
+}else if($tipo=="bndpedp"){
+    $parametro = $_POST["parametro"];
+    $id_paciente = $_POST["id_paciente"];
+    $queryusuario = mysqli_query($conn,"SELECT `numero_documento` FROM `pacientes` WHERE `numero_documento` = '$parametro' AND `id` <> '$id_paciente';");
+    $numero_filas = mysqli_num_rows($queryusuario);
+    if ($numero_filas>=1){
+        echo "3px solid #e24444/1";
+    }else{
+        echo "3px solid #787ff6/0";
+    }
+}else if($tipo=="gedp"){
+    $id = $_POST["id_paciente"];
+    $tipo_documento = $_POST["tipo_documento"];
+    $numero_documento = $_POST["numero_documento"];
+    $nombre_1 = $_POST["nombre_1"];
+    $nombre_2 = $_POST["nombre_2"];
+    $apellido_1 = $_POST["apellido_1"];
+    $apellido_2 = $_POST["apellido_2"];
+    $sexo = $_POST["sexo"];
+    $correo = $_POST["correo"];
+    $telefono_1 = $_POST["telefono_1"];
+    $telefono_2 = $_POST["telefono_2"];
+    $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    $provincia = $_POST["provincia"];
+    $canton = $_POST["canton"];
+    $direccion = $_POST["direccion"];
+    $ocupacion = $_POST["ocupacion"];
+    $sql = "UPDATE `pacientes` SET `tipo_documento`='$tipo_documento',`numero_documento`='$numero_documento',`nombre_1`='$nombre_1',`nombre_2`='$nombre_2',`apellido_1`='$apellido_1',`apellido_2`='$apellido_2',`sexo`='$sexo',`correo`='$correo',`telefono_1`='$telefono_1',`telefono_2`='$telefono_2',`fecha_nacimiento`='$fecha_nacimiento',`provincia`='$provincia',`canton`='$canton',`direccion`='$direccion',`ocupacion`='$ocupacion' WHERE `id`='$id'";
+    if(mysqli_query($conn,$sql)){
+        echo "Registro con exitó";
+    }else{
+        echo "Fallo Registro";
+    }
+}else if($tipo=="thasarch"){
+    $id_asignado = $_POST["id_asignado"];
+    $id = $_POST["id"];
+    $fecha_consulta = $_POST["fecha_consulta"];
+    $primera_consulta = $_POST["primera_consulta"];
+    $cedula = $_POST["cedula"];
+    if($cedula==""){
+        $isnullorlike1 = "pa.`numero_documento` IS NULL OR pa.`numero_documento` LIKE '%%'";
+    }else{
+        $isnullorlike1 = "pa.`numero_documento` LIKE '%$cedula%'";
+    }
+    $nombre = $_POST["nombre"];
+    if($nombre==""){
+        $isnullorlike2 = "CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) IS NULL OR CONCAT(pa.`nombre_1`, ' ' , pa.`apellido_1`) LIKE '%$nombre%'";
+    }else{
+        $isnullorlike2 = "CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) LIKE '%$nombre%'";
+    }
+    $usuario = $_POST["usuario"];
+    $cantidad_filas = $_POST["cantidad_filas"];
+    //$query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'1' AND h.`id_personal_asignado`= '$id_asignado' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'1' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    $i = 1;
+    $ids = array();
+    if($numero_filas_consulta_tabla_personal_usuario >= 1)
+    {
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        {
+            $ids_tabla = str_pad((($fila_tabla_personal_usuario["id"])), 6, "0", STR_PAD_LEFT);
+            $ids_tabla = $ids_tabla[0].$ids_tabla[1].$ids_tabla[2]." ".$ids_tabla[3].$ids_tabla[4].$ids_tabla[5];
+            echo "<tr class='resultados_de_tablas' onmouseout='desresaltar(".($i-1).")' onmouseover='resaltar(".($i-1).")'>
+            <td class='fila_selecionada_".($i-1)." mouseover numero_de_fila_pp'>".$i."</td>
+            <td class='fila_selecionada_".($i-1)." id_historial_asignados'>".$ids_tabla."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["fecha_consulta"]."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["primera_consulta"]."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["numero_documento"]."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre"]."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre_usuario"]."</td>
+            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div onmouseout='desresaltar_editar(".($i-1).")' onmouseover='resaltar_editar(".($i-1).")' class='diseño_editar_".($i-1)." iconos_tabla_accion' onclick='accion_editar(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg'  width='16' height='16' class='diseño_editar_".($i-1)." bi bi-pencil' viewBox='0 0 16 16'>
+                        <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
+                    </svg>
+                    EDITAR
+                </div>
+            </td>
+            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div onmouseout='desresaltar_asignar(".($i-1).")' onmouseover='resaltar_asignar(".($i-1).")' class='diseño_asignar_".($i-1)." iconos_tabla_accion diseno_asignar' onclick='accion_asignar(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='diseño_asignar_".($i-1)." bi bi-person-bounding-box' viewBox='0 0 16 16'>
+                        <path d='M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z'/>
+                        <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z'/>
+                    </svg>
+                    ASIGNAR
+                </div>
+            </td>
+            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'>
+                <div onmouseout='desresaltar_eliminar(".($i-1).")' onmouseover='resaltar_eliminar(".($i-1).")'class='diseño_eliminar_".($i-1)." iconos_tabla_accion' onclick='accion_eliminar(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg'   width='16' height='16' class='diseño_eliminar_".($i-1)." n bi bi-trash-fill' viewBox='0 0 16 16'>
+                        <path d='M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z'/>
+                    </svg>
+                    ELIMINAR
+                </div>
+            </td>
+                        
+            </tr>";
+            array_push($ids,$fila_tabla_personal_usuario["id"]);
+            $i++;
+        }
+
+    }
+    echo "ids";
+    echo json_encode($ids);
+    
+}else
 
 
 

@@ -1,8 +1,10 @@
 
 
-table{
+/*table{*/
+  .tabla{
     display: block;
-    border: 2px solid var(--color-1-formulario);
+    /*border: 2px solid var(--color-1-formulario);*/
+    background-color: white;
     border-collapse: collapse;
     width: 100%;
     align-items:center;

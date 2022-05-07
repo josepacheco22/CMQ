@@ -6,3 +6,4 @@ var color_1_editar= "#0a5700";
 var color_1_archivar= "#243bbd";
 var color_paguina_principal= "#1f2f98";
 var color_1_abrir= "#f7c111";
+var color_1_asignar= "#243bbd";

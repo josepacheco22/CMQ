@@ -21,6 +21,15 @@ function desresaltar_archivar(numero){
     $('.diseño_archivar_'+numero).css('color', color_blanco);
     $('.diseño_archivar_'+numero).css('fill', color_blanco);
 }
+
+function resaltar_asignar(numero){
+    $('.diseño_asignar_'+numero).css('color', color_1_asignar);
+    $('.diseño_asignar_'+numero).css('fill', color_1_asignar);
+}
+function desresaltar_asignar(numero){
+    $('.diseño_asignar_'+numero).css('color', color_blanco);
+    $('.diseño_asignar_'+numero).css('fill', color_blanco);
+}
 function resaltar_eliminar(numero){
     $('.diseño_eliminar_'+numero).css('color', color_1_error);
     $('.diseño_eliminar_'+numero).css('fill', color_1_error);

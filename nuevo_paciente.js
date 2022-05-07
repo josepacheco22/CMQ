@@ -171,6 +171,7 @@ function guardar_nuevo_paciente(){
     }else{
         input_fecha_nacimiento_rpa.style.border= "3px solid #787ff6";
     }
+    var fecha_separada = input_fecha_nacimiento_rpa.value.split("-");
     /*
     if((input_fecha_nacimiento_rpa.value)==""||((input_fecha_nacimiento_rpa.value).length)<10) {
         bandera = "si";
