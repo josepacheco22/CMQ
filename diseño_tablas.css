@@ -38,6 +38,9 @@
   .opciones{
     width: 150px;
   }
+  td:hover,td:focus{
+  cursor: pointer;
+  }
 
 
   

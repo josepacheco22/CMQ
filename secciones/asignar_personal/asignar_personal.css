@@ -1,0 +1,70 @@
+#contenido_asignar_personal {
+    background-color: #fefefe;
+    margin-top: 50px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 650px;
+    width: auto;
+    display: none;
+    font-size: 15px;
+  }
+  .interior_confirmar_registro_mensaje_pp{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px 5px 10px;
+    border-top: 2px solid var(--color-1-formulario);
+    border-bottom: 2px solid var(--color-1-formulario);
+    float: right;
+    width: 100%;
+  }
+  .interior_confirmar_registro_botones_asignar_pp{
+    display:flex;
+    justify-content: right;
+    align-items:center;
+    padding: 20px 10px 10px 5px;
+    width: 100%;
+  }
+
+  #tabla_overflow{
+    min-height: 110px;
+    height: 200px;
+    max-height: 220px;
+    width: 100%;
+    border: 2px solid red;
+    overflow: auto;
+  }
+  .tabla_overflow>tr,.tabla_overflow>tbody{
+    width: 100%;
+    border: 2px solid red;
+  }
+  #numero_de_fila_asignar_pp{
+    padding: 0 25px;
+  }
+  .interior_botones_confimrar_asignar_pp{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    padding: 13px 10px;
+    width: 49.5%;
+    color: white;
+    border-radius: 8px;
+    font-size: var(--tamano-letra);
+  }
+  .interior_botones_confimrar_asignar_pp:first-child{
+    margin-right: 10px;
+  }
+  .interior_botones_confimrar_asignar_pp:hover,td:hover,td:focus,
+  .interior_botones_confimrar_asignar_pp:focus {
+  cursor: pointer;
+  }
+
+  .interior_confirmar_registro_superior_pp
+  {
+    padding: 20px 0;
+  }
+  .interior_confirmar_registro_superior_pp>label
+  {
+    font-size: 20px;
+  }
+

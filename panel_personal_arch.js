@@ -137,10 +137,6 @@ function accion_editar(id_editar){
     sessionStorage.setItem('id_historial', ids_tabla[id_editar]);
     window.open("editar_historial.html");
 }
-function accion_asignar(id_historial){
-    //sessionStorage.setItem('id_historial', ids_tabla[id_historial]);
-    //window.open("editar_historial.html");
-}
 
 document.getElementById("boton_alerta_cofirmar_pp").onclick = function(){
     document.getElementById("mensaje_alerta_pp").style.display = "none";

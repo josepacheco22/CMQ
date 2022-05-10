@@ -1098,7 +1098,31 @@ if($tipo=="vr")
     echo "ids";
     echo json_encode($ids);
     
-}else
+} if($tipo=="tbusasi"){
+    $nombres = $_POST["nombres"];
+    $usuario = $_POST["usuario"];
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) as `nombres`, u.`nombre_usuario` as `usuario` FROM `personal` p INNER JOIN `usuarios` u ON p.`id` = u.`id_personal`WHERE p.`habilitado` = 1 AND u.`habilitado`= 1 AND CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) LIKE '%$nombres%' AND u.`nombre_usuario` LIKE '%$usuario%';");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    $i = 1;
+    $ids = array();
+    if($numero_filas_consulta_tabla_personal_usuario >= 1)
+    {
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        {
+            echo "<tr class='resultados_de_tablas_user' onclick='seleccionar_id_personal(".($i-1).")'>
+            <td class='fila_selecionada_user_".($i-1)." numero_de_fila_pp'>".$i."</td>
+            <td class='fila_selecionada_user_".($i-1)."'>".$fila_tabla_personal_usuario["nombres"]."</td>
+            <td class='fila_selecionada_user_".($i-1)."'>".$fila_tabla_personal_usuario["usuario"]."</td>     
+            </tr>";
+            array_push($ids,$fila_tabla_personal_usuario["id"]);
+            $i++;
+        }
+
+    }
+    echo "ids";
+    echo json_encode($ids);
+    
+}
 
 
 
