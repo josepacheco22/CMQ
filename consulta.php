@@ -523,6 +523,8 @@ if($tipo=="vr")
             <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["creado"]."</label>
             <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["asignado"]."</label>";
         }
+    }else{
+        echo "Fallo";
     }
 }else if($tipo=="elipa"){
     $id = $_POST["id"];
@@ -1063,14 +1065,15 @@ if($tipo=="vr")
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["numero_documento"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre_usuario"]."</td>
-            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
-                <div onmouseout='desresaltar_editar(".($i-1).")' onmouseover='resaltar_editar(".($i-1).")' class='diseño_editar_".($i-1)." iconos_tabla_accion' onclick='accion_editar(".($i-1).")'>
-                    <svg xmlns='http://www.w3.org/2000/svg'  width='16' height='16' class='diseño_editar_".($i-1)." bi bi-pencil' viewBox='0 0 16 16'>
-                        <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
+            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div onmouseout='desresaltar_ver(".($i-1).")' onmouseover='resaltar_ver(".($i-1).")' class='diseño_ver_".($i-1)." iconos_tabla_accion' onclick='accion_ver(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='diseño_ver_".($i-1)." bi bi-eye' viewBox='0 0 16 16'>
+                        <path d='M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z'/>
+                        <path d='M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z'/>
                     </svg>
-                    EDITAR
+                    VER
                 </div>
-            </td>
+            </td>   
             <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
                 <div onmouseout='desresaltar_asignar(".($i-1).")' onmouseover='resaltar_asignar(".($i-1).")' class='diseño_asignar_".($i-1)." iconos_tabla_accion diseno_asignar' onclick='accion_asignar(".($i-1).")'>
                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='diseño_asignar_".($i-1)." bi bi-person-bounding-box' viewBox='0 0 16 16'>
@@ -1078,14 +1081,6 @@ if($tipo=="vr")
                         <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z'/>
                     </svg>
                     ASIGNAR
-                </div>
-            </td>
-            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'>
-                <div onmouseout='desresaltar_eliminar(".($i-1).")' onmouseover='resaltar_eliminar(".($i-1).")'class='diseño_eliminar_".($i-1)." iconos_tabla_accion' onclick='accion_eliminar(".($i-1).")'>
-                    <svg xmlns='http://www.w3.org/2000/svg'   width='16' height='16' class='diseño_eliminar_".($i-1)." n bi bi-trash-fill' viewBox='0 0 16 16'>
-                        <path d='M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z'/>
-                    </svg>
-                    ELIMINAR
                 </div>
             </td>
                         
@@ -1101,7 +1096,7 @@ if($tipo=="vr")
 } if($tipo=="tbusasi"){
     $nombres = $_POST["nombres"];
     $usuario = $_POST["usuario"];
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) as `nombres`, u.`nombre_usuario` as `usuario` FROM `personal` p INNER JOIN `usuarios` u ON p.`id` = u.`id_personal`WHERE p.`habilitado` = 1 AND u.`habilitado`= 1 AND CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) LIKE '%$nombres%' AND u.`nombre_usuario` LIKE '%$usuario%';");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT p.`id` AS `id`, CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) as `nombres`, u.`nombre_usuario` as `usuario` FROM `personal` p INNER JOIN `usuarios` u ON p.`id` = u.`id_personal`WHERE p.`habilitado` = 1 AND u.`habilitado`= 1 AND CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) LIKE '%$nombres%' AND u.`nombre_usuario` LIKE '%$usuario%';");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     $i = 1;
     $ids = array();
@@ -1122,10 +1117,282 @@ if($tipo=="vr")
     echo "ids";
     echo json_encode($ids);
     
+}else if($tipo=="asus"){
+    $id = $_POST["id_historial_seleccionado"];
+    $id_personal_asignado = $_POST["id_usuario"];
+    $sql = "UPDATE `historia_clinica` SET `id_personal_asignado`='$id_personal_asignado', `archivado`= b'0' WHERE `historia_clinica`.`id` = '$id';";
+    if(mysqli_query($conn,$sql)){
+        echo "exito";
+    }else{
+        echo "fallo";
+    }
+}else if($tipo=="dtshis"){
+    $id = $_POST["id"];
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT `tipo_documento`,`numero_documento`, CONCAT(`nombre_1`,' ',`nombre_2`) AS `nombres`, CONCAT(`apellido_1`,' ',`apellido_2`) AS `apellidos`, `sexo`, `fecha_nacimiento`,(SELECT u.`nombre_usuario` FROM `personal` p JOIN `usuarios` u ON p.`id` = u.`id_personal` WHERE p.`id` = `pacientes`.`id_personal_creado`) as `nombre_usuario`, `fecha_creacion` FROM `pacientes` WHERE `id`= '$id' AND `habilitado`= 1 LIMIT 1;");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    if($numero_filas_consulta_tabla_personal_usuario == 1)
+    {
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        {
+            echo "<label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["tipo_documento"]."</label>
+            <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["numero_documento"]."</label>
+            <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["nombres"]."</label>
+            <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["apellidos"]."</label>
+            <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["sexo"]."</label>
+            <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["fecha_nacimiento"]."</label>
+            <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["nombre_usuario"]."</label>
+            <label class='label_formulario_pp datos_volatiles_pp'>".$fila_tabla_personal_usuario["fecha_creacion"]."</label>";
+        }
+    }
+}else if($tipo=="dthiarch"){
+    $id = $_POST["id"];
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT  h.`fecha_consulta`, h.`peso`, h.`talla`, h.`pulso`, h.`presion_arterial`, h.`temperatura`, h.`frecuencia_respiratoria`, h.`primera_consulta`, h.`motivo_consulta`, h.`enfermedad_actual`, h.`revisin_sistemas`, h.`a_p_p`, h.`a_p_f`, h.`examen_fisico`, h.`impresión_diagnostica`, h.`examenes`, h.`diagnostico_definitivo`, h.`tratamiento`, h.`archivado`, h.`edad`, paci.`tipo_documento`, paci.`fecha_creacion`, paci.`numero_documento`, concat(paci.`nombre_1`,' ', paci.`nombre_2`) AS `nombre_paciente`, concat(paci.`apellido_1`,' ', paci.`apellido_2`) AS `apellido_paciente`, paci.`sexo`, paci.`correo`, paci.`telefono_1`, paci.`telefono_2`, paci.`fecha_nacimiento`, paci.`provincia`, paci.`canton`, paci.`direccion`, paci.`ocupacion`, concat (pc.`nombre_1`,' ', pc.`nombre_2`,' ', pc.`apellido_1`,' ', pc.`apellido_2`) AS `nombres_creado`, uc.`nombre_usuario` AS `usuario_creado`, concat (pa.`nombre_1`,' ', pa.`nombre_2`,' ', pa.`apellido_1`,' ', pa.`apellido_2`) AS `nombres_asignado`, ua.`nombre_usuario` AS `usuario_asignado` FROM `historia_clinica` h LEFT JOIN `pacientes` paci ON h.`id_paciente` = paci.`id` LEFT JOIN `personal` pc ON h.`id_personal_creado` = pc.`id` LEFT JOIN `usuarios` uc ON h.`id_personal_creado` = uc.`id_personal` LEFT JOIN `personal` pa ON h.`id_personal_asignado` = pa.`id` LEFT JOIN `usuarios` ua ON h.`id_personal_asignado` = ua.`id_personal` WHERE h.`id` = '$id';");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    if($numero_filas_consulta_tabla_personal_usuario == 1)
+    {
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        {
+            echo " 
+    <label class='datos_volatiles_ver_pp' >INFORMACION PACIENTE: </label>
+    <div class='datos_volatiles_ver_pp division_contenedor_N4'> 
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>TIPO DOCUMENTO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["tipo_documento"]."</label> 
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>N° DOCUMENTO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["numero_documento"]."</label> 
+            </div>
+        </div>
+        
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>NOMBRES:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["nombre_paciente"]."</label> 
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>APELLIDOS:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["apellido_paciente"]."</label> 
+            </div>
+        </div>
+        
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>SEXO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["sexo"]."</label>
+            </div>
+            <div class='informacion_ver_historial_N2'> 
+                <label class='tipo_de_dato_ver'>CORREO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["correo"]."</label> 
+            </div>
+        </div>
+        
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>TELEFONO PRINCIPAL:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["telefono_1"]."</label> 
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>TELEFONO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["telefono_2"]."</label> 
+            </div>
+        </div>
+        
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>FECHA NACIMIENTO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["fecha_nacimiento"]."</label>
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>EDAD:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["edad"]."</label>
+            </div>
+        </div>
+        
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>PROVINCIA:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["provincia"]."</label> 
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>CANTON:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["canton"]."</label> 
+            </div>
+        </div>
+    </div> 
+    <label class='datos_volatiles_ver_pp' >INFORMACION CONSULTA: </label>
+    <div class='datos_volatiles_ver_pp division_contenedor_N4'>  
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>FECHA CONSULTA:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["fecha_consulta"]."</label> 
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>PRIMERA CONSULTA:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["primera_consulta"]."</label>
+            </div>
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>PESO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["peso"]."</label> 
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>TALLA:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["talla"]."</label> 
+            </div>
+        </div>
+        
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>PULSO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["pulso"]."</label> 
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>PRESION ARTERIAL:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["presion_arterial"]."</label>
+            </div>
+        </div>
+        
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>TEMPERATURA:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["temperatura"]."</label> 
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>FRECUENCIA RESPIRATORIA:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["frecuencia_respiratoria"]."</label> 
+            </div>
+        </div>
+        
+        
+        
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>MOTIVO CONSULTA:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["motivo_consulta"]."</label> 
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>ENFERMEDAD ACTUAL:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["enfermedad_actual"]."</label>
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>REVISION SISTEMAS:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["revisin_sistemas"]."</label>
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>A.P.P.:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["a_p_p"]."</label>
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>A.P.F.:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["a_p_f"]."</label>
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>EXAMEN FISICO:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["examen_fisico"]."</label> 
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>IMPRESIÓN DIAGNOSTICA:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["impresión_diagnostica"]."</label>
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>EXAMENES:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["examenes"]."</label>
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>DIAGNOSTICO DEFINITIVO:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["diagnostico_definitivo"]."</label> 
+        </div>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N3'>
+            <label class='tipo_de_dato_ver'>TRATAMIENTO:</label>
+            <label class='dato_ver'>".$fila_tabla_personal_usuario["tratamiento"]."</label>
+        </div>
+    </div> 
+    <label class='datos_volatiles_ver_pp'>CREADO POR: </label>
+    <div class=' datos_volatiles_ver_pp division_contenedor_N4'>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>NOMBRES:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["nombres_creado"]."</label>
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>USUARIO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["usuario_creado"]."</label>
+            </div>
+        </div>
+    </div> 
+    <label class='datos_volatiles_ver_pp' >ULTIMO ASIGNADO: </label>
+    <div class=' datos_volatiles_ver_pp division_contenedor_N4'>
+        <div class='datos_volatiles_ver_pp informacion_ver_historial_N1'>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>NOMBRES:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["nombres_asignado"]."</label>
+            </div>
+            <div class='informacion_ver_historial_N2'>
+                <label class='tipo_de_dato_ver'>USUARIO:</label>
+                <label class='dato_ver'>".$fila_tabla_personal_usuario["usuario_asignado"]."</label>
+            </div>
+        </div>
+    </div>";
+        }
+    }else{
+        echo "Fallo";
+    }
+}else if($tipo=="dape")
+{
+    $id = $_POST["id"];
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT u.`nombre_usuario`, p.`tipo_documento`, p.`numero_documento`, p.`nombre_1`, p.`nombre_2`, p.`apellido_1`, p.`apellido_2`, p.`sexo`, p.`correo`, p.`telefono_1`, p.`telefono_2`, p.`fecha_nacimiento`, p.`cargo`, p.`especialidad`, p.`miniatura`, p.`foto` FROM `personal` p JOIN `usuarios` u ON p.`id` = u.`id_personal` WHERE p.`habilitado` = 1  AND  p.`id` = '$id';");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    if($numero_filas_consulta_tabla_personal_usuario == 1)
+    {
+        $personal = array();
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        {
+            $personal = [
+                "nombre_usuario" => $fila_tabla_personal_usuario["nombre_usuario"],
+                "tipo_documento" => $fila_tabla_personal_usuario["tipo_documento"],
+                "numero_documento" => $fila_tabla_personal_usuario["numero_documento"],
+                "nombre_1" => $fila_tabla_personal_usuario["nombre_1"],
+                "nombre_2" => $fila_tabla_personal_usuario["nombre_2"],
+                "apellido_1" => $fila_tabla_personal_usuario["apellido_1"],
+                "apellido_2" => $fila_tabla_personal_usuario["apellido_2"],
+                "sexo" => $fila_tabla_personal_usuario["sexo"],
+                "correo" => $fila_tabla_personal_usuario["correo"],
+                "telefono_1" => $fila_tabla_personal_usuario["telefono_1"],
+                "telefono_2" => $fila_tabla_personal_usuario["telefono_2"],
+                "fecha_nacimiento" => $fila_tabla_personal_usuario["fecha_nacimiento"],
+                "cargo" => $fila_tabla_personal_usuario["cargo"],
+                "especialidad" => $fila_tabla_personal_usuario["especialidad"],
+                "miniatura" => $fila_tabla_personal_usuario["miniatura"],
+                "foto" => $fila_tabla_personal_usuario["foto"]
+            ];
+        }
+        echo json_encode($personal);
+    }else{
+        echo "fallo";
+    }
+}else if($tipo=="gdpepp"){
+    $id = $_POST["id"];
+    $nombre_1 = $_POST["nombre_1"];
+    $nombre_2 = $_POST["nombre_2"];
+    $apellido_1 = $_POST["apellido_1"];
+    $apellido_2 = $_POST["apellido_2"];
+    $sexo = $_POST["sexo"];
+    $correo = $_POST["correo"];
+    $telefono_1 = $_POST["telefono_1"];
+    $telefono_2 = $_POST["telefono_2"];
+    $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    $miniatura = $_POST["miniatura"];
+    $foto = $_POST["foto"];
+
+    $sql = "UPDATE `personal` SET `nombre_1`='$nombre_1',`nombre_2`='$nombre_2',`apellido_1`='$apellido_1',`apellido_2`='$apellido_2',`sexo`='$sexo',`correo`='$correo',`telefono_1`='$telefono_1',`telefono_2`='$telefono_2',`fecha_nacimiento`='$fecha_nacimiento',`miniatura`='$miniatura',`foto`='$foto' WHERE `id`='$id';";
+    if(mysqli_query($conn,$sql)){
+        echo "Exito";
+    }else{
+        echo "Fallo";
+    }
 }
-
-
-
 
 $conn->close();
 

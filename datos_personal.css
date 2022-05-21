@@ -1,22 +1,99 @@
+@import '/estilos/estilo.css';
 
+
+select>option:disabled{
+  background: white;
+}
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    modal
+llenar formulario
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-  #modal_pp {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-     /* Location of the box */
-    left: 0; 
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(32, 32, 36); /* Fallback color */
-    background-color: rgba(41, 81, 87, 0.4); /* Black w/ opacity */
+  #contenido_general{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: var(--tamano-letra);
   }
+  #contenido_rpa{
+    width: 630px;
+    padding-bottom: 50px;
+  }
+  .interior_formulario_rpa{
+    width: 100%;
+    border: 2px solid var(--color-1-formulario);
+    border-radius: 15px;
+    display: block;
+    margin: 15px 0;
+  padding: 10px 10px 10px 0;
+
+  }
+.interior_formulario_titulo_rpa{
+    padding: 20px 0 10px 0;
+    
+}
+
+
+.interior_formulario_rpa>div{
+  display: flex;
+  margin: 10px 0;
+  
+}
+
+.label_formulario_rpa{
+  min-width: 300px;
+  height: 25px;
+  text-align: right;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.label_formulario_informacion_rpa{
+  width: 100%;
+  display: inline-block;
+  margin: 0 5px;
+  height: 25px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  color: var(--color-label-informacion);
+}
+
+
+.interior_botones_formulario_rpa{
+  border: 0;
+  background-color: var(--color-1-formulario);
+  padding: 5px 10px;
+  width: 210px;
+  color: white;
+  border-radius: 12px;
+  height: 40px;
+  font-size: calc(var(--tamano-letra) - 3px);
+  margin: 0 10px
+}
+.interior_botones_formulario_rpa:hover,
+  .interior_botones_formulario_rpa:focus {
+  cursor: pointer;
+  }
+  .contenedor_boton_rpa{
+    justify-content: end;
+  }
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 modal confirmar registro
@@ -28,7 +105,7 @@ modal confirmar registro
   padding: 0 10px 20px 10px;
   border: 1px solid var(--color-1-formulario);
   border-radius: 15px;
-  width: 450px;
+  width: 500px;
   display: none;
   font-size: 15px;
 }
@@ -89,11 +166,17 @@ cursor: pointer;
 }
 .interior_confirmar_registro_superior_pp
 {
+  border-top: 3px solid var(--color-1-formulario);
+  border-bottom: 3px solid var(--color-1-formulario);
+  margin: 30px 0 10px 0;
   padding: 20px 0;
 }
 .interior_confirmar_registro_superior_pp>label
 {
-  font-size: 20px;
+  font-size:  var(--tamano-letra);
+}
+#label_mensaje_alerta_pp{
+  font-size: var(--tamano-letra);
 }
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -138,26 +221,3 @@ modal alerta
 .mensaje_alerta_boton_pp:focus {
   cursor: pointer;
   }
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-modal esperar
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-#contenido_esperar_pp {
-  background-color: #fefefe;
-  margin-top:  200px;
-  padding: 0 10px 20px 10px;
-  border: 1px solid var(--color-1-formulario);
-  border-radius: 15px;
-  width: 320px;
-  display: none;
-}
-#ajuste_elementos_esperar_pp{
-  display:flex;
-  justify-content: center;
-  align-items: center;
-}
-.ajuste_elementos_esperar_pp>img{
-  width: 100px;
-  height: 100px;
-}

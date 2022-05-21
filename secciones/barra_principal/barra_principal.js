@@ -12,6 +12,10 @@ document.getElementById("cerrar_sesion_pp").onclick = function(){
 document.getElementById("usuario_ingreso_pp").innerHTML = " "+cookies_pagina["usuario"];
 
 
+document.getElementById("ver_perfil_pp").onclick = function(){
+    window.location.href = "datos_personal.html";
+}
+
 document.getElementById("header_titulo_pp").onclick = function(){
     window.location.href = "panel_personal.html";
 };

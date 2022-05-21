@@ -4,3 +4,5 @@ $("#contenido_confirmar_eliminar_paciente_pp").load( "secciones/eliminar_registr
 $("#contenido_confirmar_eliminar_historial_pp").load( "secciones/eliminar_registro_historial/eliminar_registro_historial.html" );
 $("#contenido_archivar_historial_pp").load( "secciones/archivar_registro/archivar_registro.html" );
 $("#contenido_asignar_personal").load( "secciones/asignar_personal/asignar_personal.html");
+$("#contenido_ver_historial").load( "secciones/ver_historial/ver_historial.html");
+$("#contenido_editar_infromacion_personal").load( "secciones/editar_informacion_personal/editar_informacion_personal.html");

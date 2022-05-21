@@ -35,7 +35,40 @@ function llenar_tabla_asignados() {
         }
     });
 };
-llenar_tabla_asignados();
+function llenar_tabla_con_esperar() {
+    var parametros_rp = {
+        "tipo": "thasarch",
+        "id_asignado": cookies_pagina["id_personal"],
+        "id": document.getElementById("buscar_numero_historial_pp").value,
+        "fecha_consulta": document.getElementById("buscar_fecha_consulta_pp").value,
+        "primera_consulta": document.getElementById("buscar_primera_consulta_pp").value,
+        "cedula": document.getElementById("buscar_numero_documento_pp").value,
+        "nombre": document.getElementById("buscar_nombre_paciente_pp").value,
+        "usuario": document.getElementById("buscar_creado_por_pp").value,
+        "cantidad_filas": document.getElementById("cantidad_filas_tabla_pp").value
+    };
+    
+    $.ajax({ 
+        data: parametros_rp,
+        url: "consulta.php", 
+        type: "POST",
+        beforeSend: function (){
+        },
+        success:function (response){
+            if(response!="")
+            {
+                var division_respuesta = response.split("ids");
+                $(".resultados_de_tablas").detach();
+                $("#cuerpo_tabla_pp").append(division_respuesta[0]);   
+                ids_tabla = JSON.parse(division_respuesta[1]); 
+                document.getElementById("contenido_esperar_pp").style.display = "none"; 
+                document.getElementById("modal_pp").style.display =  "none";
+            } 
+        }
+    });
+};
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_con_esperar();
 
 document.getElementById("cantidad_filas_tabla_pp").addEventListener('change', (event) => {
     llenar_tabla_asignados();
@@ -140,6 +173,6 @@ function accion_editar(id_editar){
 
 document.getElementById("boton_alerta_cofirmar_pp").onclick = function(){
     document.getElementById("mensaje_alerta_pp").style.display = "none";
-    document.getElementById("modal_pp").style.display =  "none";
-    llenar_tabla_asignados();
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_con_esperar();
 };

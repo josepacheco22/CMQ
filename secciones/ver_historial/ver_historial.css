@@ -1,0 +1,141 @@
+#contenido_ver_historial {
+    background-color: #fefefe;
+    margin-top: 20px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 800px;
+    display: none;
+    font-size: 15px;
+  }
+  .interior_confirmar_registro_ver_centro_pp{
+    display:initial;
+    justify-content: left;
+    padding: 5px 10px 5px 10px;
+    border-top: 2px solid var(--color-1-formulario);
+    border-bottom: 2px solid var(--color-1-formulario);
+    float: right;
+    width: 100%;
+    height: 450px;
+    overflow: auto;
+  }
+  .division_contenedor_N4{
+    border: 2px solid var(--color-1-formulario);
+    border-radius: 15px;
+    display: inline-block;
+    padding-top: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 5px;
+  }
+  .interior_confirmar_registro_ver_centro_pp>label{
+    padding: 0 25px;
+    width: 100%;
+    font-size: var(--tamano-letra);
+    display: block;
+    text-align: left;
+  }
+  .interior_confirmar_registro_ver_centro_pp>label:first-child{
+    margin-top: 15px;
+  }
+  .informacion_ver_historial_N1,.informacion_ver_historial_N3{
+
+    width: 100%;
+    float: left;
+    align-items: start;
+    margin-bottom: 15px;
+    
+  }
+  .informacion_ver_historial_N1{
+    display:flex;
+    justify-content: left;
+    
+  }
+  .informacion_ver_historial_N2{
+    width: 50%;
+    border: 0px solid purple;
+  }
+  .informacion_ver_historial_N2,.informacion_ver_historial_N3{
+    display: flex;
+    justify-content: left;
+  }
+
+  
+
+
+  .informacion_ver_historial_N2>label:first-child,.informacion_ver_historial_N3>label:first-child {
+    border: 0px solid purple;
+    width: 250px;
+    text-align: right;
+    
+  }
+  .informacion_ver_historial_N2>label:last-child,.informacion_ver_historial_N3>label:last-child {
+    color: rgb(87, 87, 87);
+    width: 100%;
+    text-align: left;
+    padding: 0 5px 0 5px;
+  }
+/*
+  <div class="informacion_ver_historial_N1">
+        <div class="informacion_ver_historial_N2">
+            <label class="tipo_de_dato_ver">nombres: </label>
+            <label class="dato_ver"> jose andres</label>
+        </div>30px
+        <div class="informacion_ver_historial_N2">
+            <label class="tipo_de_dato_ver">apellidos: </label>
+            <label class="dato_ver">pacheco zamora</label>
+        </div>
+    </div>
+    <div class="informacion_ver_historial_N3">
+        <label class="tipo_de_dato_ver"></label>
+        <label class="dato_ver"></label>
+    </div>
+*/
+  .interior_confirmar_registro_botones_ver_pp{
+    display:flex;
+    justify-content: right;
+    align-items:center;
+    padding: 20px 10px 10px 5px;
+    width: 100%;
+  }
+  .interior_botones_confimrar_ver_pp{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    padding: 13px 10px;
+    width: 49.5%;
+    color: white;
+    border-radius: 8px;
+    font-size: var(--tamano-letra);
+  }
+  .interior_botones_confimrar_ver_pp:hover,td:hover,td:focus,
+  .interior_botones_confimrar_ver_pp:focus {
+  cursor: pointer;
+  }
+
+  .interior_confirmar_registro_ver_superior_pp{
+    padding: 30px 15px 20px 0;
+
+  }
+  .interior_confirmar_registro_ver_superior_pp>label
+  {
+    padding-top: 10px;
+    font-size: calc( var(--tamano-letra) + 5px );
+  }
+  #contenido_ver_personal>div:nth-child(2){
+    justify-content: center;
+    border-bottom: 0;
+    margin: 0;
+    padding: 12px 0;
+  }
+
+  #boton_confirmar_cerrar_superior_ver_pp{
+    display: flex;
+    float: right;
+    fill: var(--color-1-formulario);
+    width: 30px;
+    height: 30px;
+    margin-top: -5px;
+  }
+  #boton_confirmar_cerrar_superior_ver_pp:hover,#boton_confirmar_cerrar_superior_ver_pp:focus {
+    cursor: pointer;
+  }
