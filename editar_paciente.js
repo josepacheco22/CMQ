@@ -20,7 +20,7 @@ function cargar_lista_canton(){
         };
         $.ajax({ 
             data: parametros_rp,
-            url: "consulta.php", 
+            url: "informacion_varia.php", 
             type: "POST",
             beforeSend: function (){
             },
@@ -110,16 +110,16 @@ $( function() {
 
 var existe_numero_documento ="0";
 function funcion_verificar_numero_documento(){
-    if(document.getElementById("input_numero_documento_rpa").value != datos_paciente["numero_documento"]){
-        if((document.getElementById("input_numero_documento_rpa").value)!=""){
+    if((document.getElementById("input_numero_documento_rpa").value.replaceAll("-", '')).replaceAll(" ","") != datos_paciente["numero_documento"]){
+        if(((document.getElementById("input_numero_documento_rpa").value.replaceAll("-", '')).replaceAll(" ",""))!=""){
             var parametros_rp = {
                 "tipo": "bndpedp",
-                "parametro": document.getElementById("input_numero_documento_rpa").value.replace("-", ''),
+                "parametro": (document.getElementById("input_numero_documento_rpa").value.replaceAll("-", '')).replaceAll(" ",""),
                 "id_paciente": id_paciente
             };
             $.ajax({ 
                 data: parametros_rp,
-                url: "consulta.php", 
+                url: "busqueda_rapida.php",
                 type: "POST",
                 beforeSend: function (){
                 },

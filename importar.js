@@ -1,8 +1,10 @@
-$("#barra_principal").load( "secciones/barra_principal/barra_principal.html" );
-$("#barra_navegacion").load( "secciones/barra_navegacion/barra_navegacion.html" );
-$("#contenido_confirmar_eliminar_paciente_pp").load( "secciones/eliminar_registro_paciente/eliminar_registro_paciente.html" );
-$("#contenido_confirmar_eliminar_historial_pp").load( "secciones/eliminar_registro_historial/eliminar_registro_historial.html" );
-$("#contenido_archivar_historial_pp").load( "secciones/archivar_registro/archivar_registro.html" );
-$("#contenido_asignar_personal").load( "secciones/asignar_personal/asignar_personal.html");
-$("#contenido_ver_historial").load( "secciones/ver_historial/ver_historial.html");
-$("#contenido_editar_infromacion_personal").load( "secciones/editar_informacion_personal/editar_informacion_personal.html");
+$("#barra_principal").load( "/secciones/barra_principal/barra_principal.html" );
+$("#barra_navegacion").load( "/secciones/barra_navegacion/barra_navegacion.html" );
+$("#contenido_confirmar_eliminar_paciente_pp").load( "/secciones/eliminar_registro_paciente/eliminar_registro_paciente.html" );
+$("#contenido_confirmar_eliminar_historial_pp").load( "/secciones/eliminar_registro_historial/eliminar_registro_historial.html" );
+$("#contenido_archivar_historial_pp").load( "/secciones/archivar_registro/archivar_registro.html" );
+$("#contenido_asignar_personal").load( "/secciones/asignar_personal/asignar_personal.html");
+$("#contenido_ver_historial").load( "/secciones/ver_historial/ver_historial.html");
+$("#contenido_editar_infromacion_personal").load( "/secciones/editar_informacion_personal/editar_informacion_personal.html");
+$("#nueva_contrasena").load( "/secciones/nueva_contrasena/nueva_contrasena.html");
+$("#nueva_contrasena_2").load( "/secciones/nueva_contrasena/nueva_contrasena_2.html");

@@ -154,7 +154,6 @@ modal_ejecutar_aceptar_ids.onclick = function(){
             url: "consulta.php", 
             type: "POST",
             beforeSend: function (){
-                console.log("procesando")
             },
             success:function (response){
                 if(response == "N")

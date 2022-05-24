@@ -1,5 +1,6 @@
 .iconos_tabla_accion{
     width: 100px;
+    display: contents;
 }
 .iconos_tabla_accion>svg{
     fill: white;

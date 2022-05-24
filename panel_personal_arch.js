@@ -67,6 +67,8 @@ function llenar_tabla_con_esperar() {
         }
     });
 };
+
+document.getElementById("modal_pp").style.display = "block";
 document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
 llenar_tabla_con_esperar();
 

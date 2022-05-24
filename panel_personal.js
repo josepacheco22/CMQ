@@ -6,6 +6,7 @@ nuevo historial
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 document.getElementById("agregar_historial_pp").onclick = function(){
     verificar_cookie();
+    sessionStorage.setItem("id_paciente", "");
     window.location.href = "nuevo_historial.html";
 };
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

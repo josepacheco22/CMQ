@@ -17,22 +17,27 @@ llenar formulario
   }
   #contenido_rpa{
     width: 630px;
-    padding-bottom: 50px;
+    
   }
   .interior_formulario_rpa{
     width: 100%;
     border: 2px solid var(--color-1-formulario);
     border-radius: 15px;
+    /*border-top-left-radius: 0;
+    border-top-right-radius: 0;*/
     display: block;
-    margin: 15px 0;
-  padding: 10px 10px 10px 0;
+    /*margin: 15px 0;*/
+    padding: 10px 10px 10px 0;
 
   }
-.interior_formulario_titulo_rpa{
-    padding: 20px 0 10px 0;
-    
-}
 
+
+  .interior_formulario_titulo_rpa{
+      padding: 20px 0 10px 0;
+  }
+#opcion_expandir_informacion_personal{
+  margin-bottom: 15px;
+}
 
 .interior_formulario_rpa>div{
   display: flex;
@@ -53,7 +58,8 @@ llenar formulario
   width: 100%;
   display: inline-block;
   margin: 0 5px;
-  height: 25px;
+  min-height: 25px;
+  text-align: initial;
   padding: 0 20px;
   display: flex;
   justify-content: left;
@@ -81,17 +87,79 @@ llenar formulario
     justify-content: end;
   }
 
+  #opcion_expandir_informacion_personal,#opcion_expandir_informacion_creado{
+    background-color: var(--color-1-formulario);
+    color:white;
+    fill: white;
+    /*margin-bottom: -15px;*/
+    display: flex;
+    justify-content: space-between;
+    border-radius: 15px;
+    /*border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;*/
+}
+.opcion_mostrar:hover,.opcion_mostrar:focus{
+  cursor: pointer;
+}
+#opcion_expandir_informacion_personal>svg,#opcion_expandir_informacion_creado>svg{
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  margin-right: 15px;
+  padding: 0;
+}
+#opcion_expandir_informacion_personal>label,#opcion_expandir_informacion_creado>label{
+    justify-content: start;
+    height: 30px;
+    align-items: flex-end;
+    font-size: calc(var(--tamano-letra) + 5px);
+    width: auto;
+    padding-left: 40px;
+  }  
+/*
+  #svg_ocultar_informacion_personal,#contenido_informacion_creacion,#contenido_informacion_personal,#svg_ocultar_informacion_creacion{
+    display: none;
+  }
+*/
+#contenido_informacion_personal{
+  margin-bottom: 15px;
+}
+#contenido_informacion_personal,#contenido_informacion_creacion{
+  display: none;
+}
 
+#navegador_datos_paciente{
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
 
-  
-
-
-
-
-  
-
-
-
+}
+#navegador_datos_paciente>div{
+  width: 50%;
+  color: white;
+  height: 50px;
+  border-radius: 15px;
+  display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#navegador_datos_paciente>div:first-child{
+ border-bottom-right-radius: 0;
+ border-top-right-radius: 0;
+ background: var(--color-1-formulario);
+}
+#navegador_datos_paciente>div:last-child{
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background: var(--color-principal);
+}
+#navegador_datos_paciente>div:hover,#navegador_datos_paciente>div>*:hover,#navegador_datos_paciente>div>*:focus,#navegador_datos_paciente>div:focus{
+ cursor: pointer;
+ 
+}
+#navegador_datos_paciente>div:hover,#navegador_datos_paciente>div>*:hover,#navegador_datos_paciente>div>*:focus,#navegador_datos_paciente>div:focus{
+  background: var(--color-1-formulario);
+}
 
 
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -183,7 +251,7 @@ cursor: pointer;
 modal alerta
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-#mensaje_alerta_pp,#contrasena_actual_incorrecta,#error_cambio_contrasena,#contrasena_cambiada {
+#mensaje_alerta_pp {
   background-color: #fefefe;
   margin-top: 50px;
   padding: 0 10px 20px 10px;
@@ -220,4 +288,23 @@ modal alerta
 .mensaje_alerta_boton_pp:hover,
 .mensaje_alerta_boton_pp:focus {
   cursor: pointer;
+  }
+  .ultimo_elemento{
+    margin-bottom: 100px;
+  }
+
+
+  .interior_formulario_tabla_rpa{
+    padding-bottom: 50px;
+    width: 100%;
+
+  }
+  .interior_formulario_tabla_rpa>table>{
+    width: 100%;
+  }
+  .tamano_numero_historial_tabla{
+    width: 14.3%;
+  }
+  #input_archivado{
+text-align: center;
   }

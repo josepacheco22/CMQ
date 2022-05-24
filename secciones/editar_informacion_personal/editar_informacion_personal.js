@@ -20,7 +20,6 @@ document.getElementById("editar_informacion_rpa").onclick = function(){
 
 document.getElementById("boton_confirmar_cancelar_editar_info_personal_pp").onclick = function(){
     llenar_informacion_editar_personal();
-    
     document.getElementById("contenido_editar_infromacion_personal").style.display = "none";
     document.getElementById("modal_pp").style.display =  "none"; 
 };

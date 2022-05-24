@@ -75,23 +75,26 @@ $(document).ready(function(){
 indicar creador
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-var parametros_rp = {
-    "tipo": "npcr",
-    "id": cookies_pagina["id_personal"]
-};  
-$.ajax({ 
-    data: parametros_rp,
-    url: "consulta.php", 
-    type: "POST",
-    beforeSend: function (){
-    },
-    success:function (response){
-        if(response!="")
-        {
-            document.getElementById("input_creado_por_pp").value = response+": "+cookies_pagina["usuario"];
-        } 
-    }
-});
+function datos_creador(){
+    var parametros_rp = {
+        "tipo": "npcr",
+        "id": cookies_pagina["id_personal"]
+    };  
+    $.ajax({ 
+        data: parametros_rp,
+        url: "consulta.php", 
+        type: "POST",
+        beforeSend: function (){
+        },
+        success:function (response){
+            if(response!="")
+            {
+                document.getElementById("input_creado_por_pp").value = response+": "+cookies_pagina["usuario"];
+            } 
+        }
+    });
+}
+
 var ids_personal_asignados = [];
 function llenar_lista_personal(){
     var parametros_rp = {
@@ -121,8 +124,13 @@ llenar_lista_personal();
 llenar tabla pacientes
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
 var ids_tabla = [];
 var paciente_seleccionado = "";
+
+
 function llenar_tabla_pp_pa() {
     $('td').css('background-color', '#1f2f98');
     document.getElementById("boton_aceptar_pp").hidden=true;
@@ -324,6 +332,10 @@ function buscar_datos_paciente() {
         }
     });
 };
+if(sessionStorage.getItem("id_paciente")!=""){
+    paciente_seleccionado = sessionStorage.getItem("id_paciente");
+    buscar_datos_paciente();
+}
 
 document.getElementById("formulario_auto_edad_pp").onclick = function(){
     if(paciente_seleccionado != "")

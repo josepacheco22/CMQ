@@ -36,7 +36,7 @@ $( function() {
         };
         $.ajax({ 
             data: parametros_rp,
-            url: "consulta.php", 
+            url: "informacion_varia.php", 
             type: "POST",
             beforeSend: function (){
             },
@@ -53,11 +53,11 @@ function funcion_verificar_numero_documento(){
     if((input_numero_documento_rpa.value)!=""){
         var parametros_rp = {
             "tipo": "bndp",
-            "parametro": input_numero_documento_rpa.value.replace("-", '')
+            "parametro": (input_numero_documento_rpa.value.replaceAll("-", '')).replaceAll(" ","")
         };
         $.ajax({ 
             data: parametros_rp,
-            url: "consulta.php", 
+            url: "busqueda_rapida.php", 
             type: "POST",
             beforeSend: function (){
             },

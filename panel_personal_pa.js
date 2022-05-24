@@ -92,6 +92,10 @@ document.getElementById("contenido_esperar_pp").style.display =  "inline-block";
 
 llenar_tabla_pp_pa_con_espera();
 
+function accion_abrir(numero){
+    sessionStorage.setItem('id_paciente', ids_tabla[numero]);
+    window.open("datos_paciente.html");
+}
 
 function accion_editar(numero){
     sessionStorage.setItem('id_paciente', ids_tabla[numero]);
@@ -153,6 +157,7 @@ document.getElementById("buscar_fecha_creado_pp").addEventListener('keyup', (eve
     llenar_tabla_pp_pa();
 });
 document.getElementById("boton_borrar_fecha_creado_pp").onclick = function(){
+    
     document.getElementById("buscar_fecha_creado_pp").value = "";
     llenar_tabla_pp_pa();
 };
