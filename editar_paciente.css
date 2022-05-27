@@ -1,0 +1,306 @@
+@import '/estilos/estilo.css';
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+llenar formulario
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  #contenido_general{
+    display: flex;
+    justify-content: center;
+  }
+  #contenido_rpa{
+    width: 55%;
+  }
+  #contenido_formulario_titulo{
+    padding: 25px 0 15px 0;
+  }
+  #contenido_formulario_formulario{
+    border: 3px solid var(--color-1-formulario);
+    border-radius: 20px;
+    padding: 20px 10px;
+    margin-bottom: 100px;
+  }
+  .contenedores_formulario{
+    margin: 8px 0;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+  }
+  .contenedor_boton_guardar{
+    justify-content: right;
+  }
+  .contenedor_boton_guardar:first-child{
+    justify-content: space-between;
+  }
+  .label_formulario{
+    width: 240px;
+    height: 35px;
+    text-align: end;
+    padding-right: 5px;
+    justify-content: right;
+    display: flex;
+    align-items: center;
+  }
+  .input_formulario{
+    width: 65%;
+    border: 3px solid var(--color-1-formulario);
+    border-radius: 20px;
+    height: 35px;
+    padding: 0 20px 0 20px;
+    font-size: calc(var(--tamano-letra) - 2px);
+  }
+  
+  .label_alerta{
+    color: var(--color-1-error);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: calc(var(--tamano-letra) - 8px);
+    padding-top: 2px;
+    display: none;
+  }
+  .label_alerta_general{
+    font-size: calc(var(--tamano-letra) - 2px);
+    margin: 18px 0 10px 0;
+    display: flex;
+    align-items: self-end;
+    display: none;
+  }
+  .label_alerta_general:before,.label_alerta_general:after{
+    padding: 0 8px;
+    content: '⚠';
+    font-size: calc(var(--tamano-letra) - 2px);
+    
+  }
+
+  .botones_guardar{
+    border: 0;
+  background-color: var(--color-1-formulario);
+  padding: 5px 10px;
+  width:  150px;
+  color: white;
+  border-radius: 12px;
+  height: 40px;
+  font-size: calc(var(--tamano-letra) - 3px);
+  }
+  .botones_guardar:hover,
+  .botones_guardar:focus {
+    cursor: pointer;
+    }
+
+  .input_con_alerta{
+    width: 65%;
+    display: inline-block;
+  }
+  .input_con_alerta>.input_formulario{
+    width: 100%;
+  }
+  #input_direccion_rpa{
+    padding: 15px 10px 0 15px;
+    height: 130px;
+  }
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal confirmar registro
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  #contenido_confirmar_rpa {
+    background-color: #fefefe;
+    margin-top: 50px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 450px;
+    display: none;
+    font-size: 15px;
+  }
+  .interior_confirmar_registro_mensaje_rpa{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px 5px 10px;
+    border-top: 2px solid var(--color-1-formulario);
+    border-bottom: 2px solid var(--color-1-formulario);
+    float: right;
+    width: 100%;
+
+
+  }
+  .interior_confirmar_registro_botones_rpa{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px 10px 5px;
+    width: 100%;
+  }
+  .interior_botones_confimrar_rpa{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    padding: 13px 10px;
+    width: 49.5%;
+    color: white;
+    border-radius: 8px;
+    font-size: var(--tamano-letra);
+  }
+  .interior_botones_confimrar_rpa:hover,
+  .interior_botones_confimrar_rpa:focus {
+  cursor: pointer;
+  }
+  .informacion_label_1_rpa{
+    display: block;
+    justify-content: right;
+    width: 40%;
+  }
+  .informacion_label_1_rpa>label{
+    padding: 5px 0;
+    float: right;
+    width: 100%;
+    text-align: right;
+    height: 26px;
+    display: flex;
+    justify-content: left;
+  }
+  .informacion_label_2_rpa{
+    display: block;
+    width: 60%;
+    padding-left: 10px;
+  }
+  .informacion_label_2_rpa>label{
+    padding: 5px 0;
+    float: left;
+    width: 100%;
+    text-align: left;
+    color: rgb(95, 95, 95);
+    height: 26px;
+  }
+  .interior_confirmar_registro_superior_rpa
+  {
+    padding: 20px 0;
+    border: 3px solid var(--color-1-formulario);
+    border-left: 0;
+    border-right: 0;
+    margin-top: 20px;
+    
+  }
+  .interior_confirmar_registro_superior_rpa>label
+  {
+    font-size: calc(var(--tamano-letra) + 5px );
+  }
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal alerta
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  #mensaje_alerta_rpa {
+    background-color: #fefefe;
+    margin-top: 50px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 450px;
+    display: none;
+    font-size: 15px;
+  }       
+  .interior_alerta_rpa{
+    display:flex;
+    justify-content: right;
+    align-items: center;
+    padding: 20px 10px 10px 5px;
+    width: 100%;
+  }
+  .mensaje_alerta_boton_rpa{
+    border: 0;
+    background-color: var(--color-1-formulario);
+    padding: 13px 10px;
+    width: 49.5%;
+    color: white;
+    border-radius: 8px;
+    font-size: var(--tamano-letra);
+  }
+  #interior_alerta_botones_rpa{
+    font-size: 20px;
+    padding: 20px 0;
+    justify-content: center;
+    margin-top: 30px;
+    border-top: 2px solid var(--color-1-formulario);
+    border-bottom: 2px solid var(--color-1-formulario);
+  }
+  .mensaje_alerta_boton_rpa:hover,
+  .mensaje_alerta_boton_rpa:focus {
+    cursor: pointer;
+    }
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal esperar
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+#contenido_esperar {
+    background-color: #fefefe;
+    margin-top:  200px;
+    padding: 0 10px 20px 10px;
+    border: 1px solid var(--color-1-formulario);
+    border-radius: 15px;
+    width: 320px;
+    display: none;
+}
+#ajuste_elementos_esperar{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.ajuste_elementos_esperar>img{
+    width: 100px;
+    height: 100px;
+}
+  /*
+@keyframes anim{
+  
+  0% {border-color: rgb(0, 8, 255);} 
+  5% {border-color: rgb(0, 25, 255);} 
+  10% {border-color: rgb(0, 50, 255);} 
+  15% {border-color: rgb(0, 75, 255);} 
+  20% {border-color: rgb(0, 100, 255);} 
+  25% {border-color: rgb(0, 125, 255);} 
+  30% {border-color: rgb(0, 150, 229);} 
+  35% {border-color: rgb(0, 175, 255);} 
+  40% {border-color: rgb(0, 200, 255);} 
+  45% {border-color: rgb(0, 225, 255);} 
+  50% {border-color: rgb(0, 255, 255);} 
+  55% {border-color: rgb(0, 255, 255);} 
+  60% {border-color: rgb(0, 225, 255);} 
+  65% {border-color: rgb(0, 175, 255);} 
+  70% {border-color: rgb(0, 150, 229);} 
+  75% {border-color: rgb(0, 125, 255);} 
+  80% {border-color: rgb(0, 100, 255);} 
+  85% {border-color: rgb(0, 75, 255);} 
+  90% {border-color: rgb(0, 50, 255);} 
+  95% {border-color: rgb(0, 25, 255);} 
+  100% {border-color: rgb(0, 0, 255);} 
+}*/
+
+/*
+#input_numero_documento_rpa:hover{
+
+  animation-name: anim;
+  animation-duration: 300ms;
+  animation-iteration-count: infinite;
+  
+  
+  -webkit-transition: 250ms linear;
+  transition: 250ms linear;
+  transition-property: width;
+  border-color: red;
+}*/
+
+.boton_restablecer{
+  fill: var(--color-paguina-principal);
+  width: 40px;
+  height: 40px;
+  margin: 0 20px 0 10px;
+}
+
+.boton_restablecer:hover,.boton_restablecer::after{
+  cursor: pointer;
+}

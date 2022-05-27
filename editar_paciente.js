@@ -1,3 +1,92 @@
+var id_paciente = sessionStorage.getItem('id_paciente');
+
+
+var datos_paciente = [];
+function listado_de_provincia_espera(){
+    if(document.getElementById("input_provincia_rpa").value == ""){
+        document.getElementById("input_canton_rpa").disabled = true;
+        $(".limpiar_select").detach();
+        document.getElementById("contenido_esperar").style.display = "none";
+        document.getElementById("modal_pp").style.display = "none";
+    }else
+    {
+        document.getElementById("input_canton_rpa").disabled = false;
+        var parametros_rp = {
+            "tipo": "pr",
+            "provincia": document.getElementById("input_provincia_rpa").value
+        };
+        $.ajax({ 
+            data: parametros_rp,
+            url: "informacion_varia.php", 
+            type: "POST",
+            beforeSend: function (){
+            },
+            success:function (response){
+                $(".limpiar_select").detach();
+                $("#input_canton_rpa").append(response);
+
+                if(datos_paciente["provincia"]!=""){
+                    document.getElementById("input_canton_rpa").value = datos_paciente["canton"];
+                }
+                document.getElementById("contenido_esperar").style.display = "none";
+                document.getElementById("modal_pp").style.display = "none";
+
+            }
+        });
+    }
+  }
+
+
+function extraer_datos_paciente_espera(){
+    var parametros_rp = {
+        "tipo": "exdpa",
+        "id": id_paciente
+    };
+    $.ajax({ 
+        data: parametros_rp,
+        url: "consulta.php", 
+        type: "POST",
+        beforeSend: function (){
+        },
+        success:function (response){
+            if(response!="")
+            {
+                if(response =="fallo"){
+                    window.close();
+                }else{
+                    datos_paciente = JSON.parse(response); 
+                    document.getElementById("input_tipo_documento_rpa").value = datos_paciente["tipo_documento"];
+                    if(datos_paciente["tipo_documento"]=="Cédula"&&datos_paciente["numero_documento"].length >= 10){
+                        datos_paciente["numero_documento"] = (datos_paciente["numero_documento"].substr(0, 9))+"-"+(datos_paciente["numero_documento"].substr(9, 1)); 
+                        document.getElementById("input_numero_documento_rpa").value = datos_paciente["numero_documento"];
+                    }
+                    else{
+                        document.getElementById("input_numero_documento_rpa").value = datos_paciente["numero_documento"];
+                    }
+                    document.getElementById("input_provincia_rpa").value = datos_paciente["provincia"];
+                    document.getElementById("input_nombre_1_rpa").value = datos_paciente["nombre_1"];
+                    document.getElementById("input_nombre_2_rpa").value = datos_paciente["nombre_2"];
+                    document.getElementById("input_apellido_1_rpa").value = datos_paciente["apellido_1"];
+                    document.getElementById("input_apellido_2_rpa").value = datos_paciente["apellido_2"];
+                    document.getElementById("input_sexo_rpa").value = datos_paciente["sexo"];
+                    document.getElementById("input_correo_rpa").value = datos_paciente["correo"];
+                    document.getElementById("input_telefono_1_rpa").value = datos_paciente["telefono_1"];
+                    document.getElementById("input_telefono_2_rpa").value = datos_paciente["telefono_2"];
+                    document.getElementById("input_fecha_nacimiento_rpa").value = datos_paciente["fecha_nacimiento"];
+                    document.getElementById("input_direccion_rpa").value = datos_paciente["direccion"];
+                    document.getElementById("input_ocupacion_rpa").value = datos_paciente["ocupacion"];
+                    listado_de_provincia_espera();
+                }
+            }
+        }
+    });
+}
+document.getElementById("modal_pp").style.display = "block";
+document.getElementById("contenido_esperar").style.display = "inline-block";
+extraer_datos_paciente_espera();
+
+
+
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 automatico formulario
@@ -22,8 +111,8 @@ $( function() {
   var input_provincia_rpa = document.getElementById("input_provincia_rpa");
 
 
-
-function listado_de_provincia(){
+  input_provincia_rpa.addEventListener('change', (event) => {
+    verificar_cookie();
     if(input_provincia_rpa.value == ""){
         input_canton_rpa.disabled = true;
         $(".limpiar_select").detach();
@@ -46,9 +135,6 @@ function listado_de_provincia(){
             }
         });
     }
-  }
-input_provincia_rpa.addEventListener('change', (event) => {
-    listado_de_provincia();
 });
 
 var input_numero_documento_rpa = document.getElementById("input_numero_documento_rpa");
@@ -58,7 +144,7 @@ function funcion_verificar_numero_documento(){
     var parametros_rp = {
         "tipo": "bndp",
         "parametro":  document.getElementById("input_numero_documento_rpa").value,
-        "id_paciente": ""
+        "id_paciente": id_paciente
     };
     $.ajax({ 
         data: parametros_rp,
@@ -178,7 +264,7 @@ function funcion_verificar_numero_documento_guardar(){
     var parametros_rp = {
         "tipo": "bndp",
         "parametro":  document.getElementById("input_numero_documento_rpa").value,
-        "id_paciente": ""
+        "id_paciente": id_paciente
     };
     $.ajax({ 
         data: parametros_rp,
@@ -538,6 +624,57 @@ function regresar_inputs_normalidad_rp(){
 document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
     document.getElementById("contenido_confirmar_rpa").style.display = "none";
     document.getElementById("contenido_esperar").style.display = "inline-block";
+    
+    fecha_actual = new Date();
+    var parametros_rp = {
+        "tipo": "gedp", //"tipo": "rpa",
+        "id_paciente": id_paciente,
+        "tipo_documento": document.getElementById("input_tipo_documento_rpa").value,
+        "numero_documento": document.getElementById("input_numero_documento_rpa").value.replace("-", ""),
+        "nombre_1": document.getElementById("input_nombre_1_rpa").value,
+        "nombre_2": document.getElementById("input_nombre_2_rpa").value,
+        "apellido_1": document.getElementById("input_apellido_1_rpa").value,
+        "apellido_2": document.getElementById("input_apellido_2_rpa").value,
+        "sexo": document.getElementById("input_sexo_rpa").value,
+        "correo": document.getElementById("input_correo_rpa").value,
+        "telefono_1": document.getElementById("input_telefono_1_rpa").value,
+        "telefono_2": document.getElementById("input_telefono_2_rpa").value,
+        "fecha_nacimiento": document.getElementById("input_fecha_nacimiento_rpa").value,
+        "provincia": document.getElementById("input_provincia_rpa").value,
+        "canton": document.getElementById("input_canton_rpa").value,
+        "direccion": document.getElementById("input_direccion_rpa").value,
+        "ocupacion": document.getElementById("input_ocupacion_rpa").value 
+    };
+    
+    $.ajax({ 
+        data: parametros_rp,
+        url: "consulta.php", 
+        type: "POST",
+        beforeSend: function (){
+            
+        },
+        success:function (response){
+            document.getElementById("contenido_esperar").style.display =  "none";
+            document.getElementById("label_mensaje_alerta_superior_rpa").innerHTML=response;
+            if(response == "Registro con exitó")
+            {
+                registro = "exito";
+            }else{
+                registro = "";
+            }
+            document.getElementById("mensaje_alerta_rpa").style.display = "inline-block"; 
+        },
+        error : function(xhr, status) {
+            document.getElementById("contenido_esperar").style.display =  "none";
+            document.getElementById("label_mensaje_alerta_superior_rpa").innerHTML="Error, No fue posible conectarse a la base de datos.";
+            document.getElementById("mensaje_alerta_rpa").style.display = "inline-block";
+        }
+    });
+};
+/*
+document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
+    document.getElementById("contenido_confirmar_rpa").style.display = "none";
+    document.getElementById("contenido_esperar").style.display = "inline-block";
     fecha_actual = new Date();
     var parametros_rp = {
         "tipo": "rpa",
@@ -578,7 +715,61 @@ document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
         }
     });
 };
-
+*/
 document.getElementById("ejecutar_borrar_todo_rpa").onclick = function(){
     regresar_inputs_normalidad_rp();
+};
+
+document.getElementById("restablecer_tipo_documento").onclick = function(){
+    document.getElementById("input_tipo_documento_rpa").value = datos_paciente["tipo_documento"];
+};
+document.getElementById("restablecer_numero_documento").onclick = function(){
+    document.getElementById("input_numero_documento_rpa").value = datos_paciente["numero_documento"];
+};
+document.getElementById("restablecer_nombre_1").onclick = function(){
+    document.getElementById("input_nombre_1_rpa").value = datos_paciente["nombre_1"];
+};
+document.getElementById("restablecer_nombre_2").onclick = function(){
+    document.getElementById("input_nombre_2_rpa").value = datos_paciente["nombre_2"];
+};
+document.getElementById("restablecer_apellido_1").onclick = function(){
+    document.getElementById("input_apellido_1_rpa").value = datos_paciente["apellido_1"];
+};
+document.getElementById("restablecer_apellido_2").onclick = function(){
+    document.getElementById("input_apellido_2_rpa").value = datos_paciente["apellido_2"];
+};
+document.getElementById("restablecer_sexo").onclick = function(){
+    document.getElementById("input_sexo_rpa").value = datos_paciente["sexo"];
+};
+document.getElementById("restablecer_correo").onclick = function(){
+    document.getElementById("input_correo_rpa").value = datos_paciente["correo"];
+};
+document.getElementById("restablecer_telefono_1").onclick = function(){
+    document.getElementById("input_telefono_1_rpa").value = datos_paciente["telefono_1"];
+};
+document.getElementById("restablecer_telefono_2").onclick = function(){
+    document.getElementById("input_telefono_2_rpa").value = datos_paciente["telefono_2"];
+};
+document.getElementById("restablecer_fecha_nacimiento").onclick = function(){
+    document.getElementById("input_fecha_nacimiento_rpa").value = datos_paciente["fecha_nacimiento"];
+};
+document.getElementById("restablecer_ocupacion").onclick = function(){
+    document.getElementById("input_ocupacion_rpa").value = datos_paciente["ocupacion"];
+};
+document.getElementById("restablecer_direccion").onclick = function(){
+    document.getElementById("input_direccion_rpa").value = datos_paciente["direccion"];
+};
+
+
+document.getElementById("restablecer_provincia").onclick = function(){
+    document.getElementById("input_provincia_rpa").value = datos_paciente["provincia"];
+    document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar").style.display = "inline-block";
+    listado_de_provincia_espera();
+};
+document.getElementById("restablecer_canton").onclick = function(){
+    document.getElementById("input_provincia_rpa").value = datos_paciente["provincia"];
+    document.getElementById("contenido_esperar").style.display = "block";
+                document.getElementById("modal_pp").style.display = "inline-block";
+    listado_de_provincia_espera();
 };

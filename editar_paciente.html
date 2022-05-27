@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8"/>
+        <title>CMQ</title>
+        <script src="librerias/jquery-3.6.0.min.js" type="text/javascript"></script>
+        <link  type="image/svg+xml" rel="icon" href="iconos/icono_pulso_corazon.svg">
+    </head>
+    <body>
+        <div id="barra_principal">
+        </div>
+        <div id="contenido_general">
+            <div id="contenido_rpa">
+                <div id="contenido_formulario_titulo">
+                    <h2>Editar Paciente</h2>
+                </div>
+                <div id="contenido_formulario_formulario">
+                    <div class ="contenedores_formulario contenedor_boton_guardar">
+                        <button class="botones_guardar" id="ejecutar_borrar_todo_rpa">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
+                                <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
+                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
+                                </g>
+                            </svg>
+                            LIMPIAR TODO</button>
+                        <button class="botones_guardar" id="ejecutar_guardar_rpa">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
+                                </polyline>
+                            </svg>
+                            GUARDAR</button>
+                    </div>
+                    <label class="label_alerta label_alerta_general" id="alerta_general_rpa">POR FAVOR COMPLETAR TODOS LOS CAMPOS OBLIGATORIOS</label>
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >TIPO DOCUMENTO:</label>
+                        <select class="input_formulario input_lista_opciones_rpa" id="input_tipo_documento_rpa"> 
+                            <option value="Cédula">Cédula</option> 
+                            <option value="Pasaporte">Pasaporte</option> 
+                        </select>
+                        <svg id="restablecer_tipo_documento" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*NÚMERO DOCUMENTO:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_numero_documento_rpa" maxlength="10">
+                            <label class="label_alerta" id="alerta_numero_documento_rpa">NÚMERO DE DOCUMENTO YA UTILIZADO</label>
+                            <label class="label_alerta" id="alerta_numero_documento_2_rpa">CAMPO REQUERIDO</label>
+                        </div>
+                        <svg id="restablecer_numero_documento" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*PRIMER NOMBRE:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_nombre_1_rpa" maxlength="25">
+                            <label class="label_alerta" id="alerta_nombre_1_rpa">CAMPO REQUERIDO</label>
+                        </div>
+                        <svg id="restablecer_nombre_1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div> 
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >SEGUNDO NOMBRES:</label>
+                        <input class="input_formulario" type="text" id="input_nombre_2_rpa" maxlength="25">
+                        <svg id="restablecer_nombre_2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*PRIMER APELLIDOS:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_apellido_1_rpa" maxlength="16">
+                            <label class="label_alerta" id="alerta_apellido_1_rpa">CAMPO REQUERIDO</label>
+                        </div>
+                        <svg id="restablecer_apellido_1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >SEGUNDO APELLIDOS:</label>
+                        <input class="input_formulario" type="text" id="input_apellido_2_rpa" maxlength="16">
+                        <svg id="restablecer_apellido_2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>   
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*SEXO:</label>
+                        <div class ="input_con_alerta">
+                            <select class="input_formulario input_lista_opciones_rpa" id="input_sexo_rpa"> 
+                                <option value="" selected></option> 
+                                <option value="Hombre">Hombre</option> 
+                                <option value="Mujer">Mujer</option> 
+                            </select>
+                            <label class="label_alerta" id="alerta_sexo_rpa">CAMPO REQUERIDO</label>
+                        </div>
+                        <svg id="restablecer_sexo" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >CORREO:</label>
+                        <input class="input_formulario" type="email" id="input_correo_rpa" maxlength="35">
+                        <svg id="restablecer_correo" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*TELÉFONO:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_telefono_1_rpa" maxlength="15">
+                            <label class="label_alerta" id="alerta_telefono_1_rpa">TELÉFONO DEBE CONTENER MÍNIMO 10 NÚMEROS</label>
+                        </div>
+                        <svg id="restablecer_telefono_1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >CONVENCIONAL:</label>
+                        <input class="input_formulario" type="text" id="input_telefono_2_rpa" maxlength="11">
+                        <svg id="restablecer_telefono_2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*FECHA NACIMIENTO:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" id="input_fecha_nacimiento_rpa" maxlength="10">
+                            <label class="label_alerta" id="alerta_fecha_nacimiento_rpa">FECHA NACIMIENTO NO VALIDA</label>
+                        </div>
+                        <svg id="restablecer_fecha_nacimiento" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div> 
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >OCUPACION:</label>
+                        <input class="input_formulario" type="text" id="input_ocupacion_rpa" maxlength="16">
+                        <svg id="restablecer_ocupacion" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >PROVINCIA:</label>
+                        <select class="input_formulario" id="input_provincia_rpa"> 
+                            <option value="" selected></option> 
+                            <option value="Esmeraldas">Esmeraldas</option>
+                            <option value="Azuay">Azuay</option>
+                            <option value="Bolívar">Bolívar</option>
+                            <option value="Cañar">Cañar</option>
+                            <option value="Carchi">Carchi</option>
+                            <option value="Chimborazo">Chimborazo</option>
+                            <option value="Cotopaxi">Cotopaxi</option>
+                            <option value="El Oro">El Oro</option>
+                            <option value="Galápagos">Galápagos</option>
+                            <option value="Guayas">Guayas</option>
+                            <option value="Imbabura">Imbabura</option>
+                            <option value="Loja">Loja</option>
+                            <option value="Los Rios">Los Rios</option>
+                            <option value="Manabí">Manabí</option>
+                            <option value="Morona Santiago">Morona Santiago</option>
+                            <option value="Napo">Napo</option>
+                            <option value="Orellana">Orellana</option>
+                            <option value="Pastaza">Pastaza</option>
+                            <option value="Pichincha">Pichincha</option>
+                            <option value="Santa Elena">Santa Elena</option>
+                            <option value="Santo Domingo de los Tsáchilas">Santo Domingo de los Tsáchilas</option>
+                            <option value="Sucumbíos">Sucumbíos</option>
+                            <option value="Tungurahua">Tungurahua</option>
+                            <option value="Zamora Chinchipe">Zamora Chinchipe</option>
+                        </select>
+                        <svg id="restablecer_provincia" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >CANTON:</label>
+                        <select class="input_formulario input_lista_opciones_rpa" id="input_canton_rpa" disabled="disabled"> 
+                        </select>
+                        <svg id="restablecer_canton" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >DIRECCION:</label>
+                        <textarea class="input_formulario" type="text" id="input_direccion_rpa" maxlength="200"></textarea>
+                        <svg id="restablecer_direccion" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="boton_restablecer bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </div>  
+                    <div class ="contenedores_formulario contenedor_boton_guardar">
+                        <button class="botones_guardar" id="ejecutar_guardar_inferior_rpa">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
+                                </polyline>
+                            </svg>
+                            GUARDAR
+                        </button>
+                    </div> 
+                </div>
+            </div>
+        </div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal confirmar registro y esperar
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <div id="modal_pp" class="modal_pp">
+        <div id="contenido_confirmar_rpa">
+            <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_superior_rpa" id="">
+                <label class="mensaje_formulario_rpa" >CONFIRMAR REGISTRO?</label>
+            </div>
+            <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_botones_rpa" id="">
+                <button class="interior_botones_confimrar_rpa" id="boton_confirmar_cofirmar_rpa">ACEPTAR</button>
+                <button class="interior_botones_confimrar_rpa" id="boton_confirmar_cancelar_rpa">CANCELAR</button>
+            </div>
+        </div>
+
+
+
+        <div id="contenido_esperar">
+            <div class="ajuste_elementos_esperar">
+                <img src="iconos/spinner.gif" alt="esperar"> 
+            </div>
+            <div class="ajuste_elementos_esperar">
+                <label>Espere por favor...</label>
+            </div>
+        </div>
+        <div id="mensaje_alerta_rpa">
+            <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_superior_rpa" id="interior_alerta_botones_rpa">
+                <label  class="mensaje_formulario_rpa" id="label_mensaje_alerta_superior_rpa">USUARIO REGISTRADO CON EXITO</label>
+            </div>
+            <div class ="interior_alerta_rpa interior_alerta_botones_rpa" id="">
+                <button class="mensaje_alerta_boton_rpa" id="boton_alerta_cofirmar_rpa">ACEPTAR</button>
+            </div>
+        </div>
+    </div>
+
+
+    </body>
+
+    <script type="text/javascript" src="importar.js"></script>
+    <script type="text/javascript" src="verificar_datos.js"></script>
+    <link rel="stylesheet" href="estilos/estilo.css" type="text/css">
+    <script type="text/javascript" src="estilos/estilo.js"></script>
+    <link rel="stylesheet" href="diseño_tablas.css" type="text/css">
+    <link rel="stylesheet" href="opciones_tabla.css" type="text/css">
+    <link rel="stylesheet" href="diseño_opciones_tabla.css" type="text/css">
+    <script type="text/javascript" src="diseño_opciones_tabla.js"></script>
+    <link rel="stylesheet" href="estilos/modal_general.css" type="text/css">
+
+    <link rel="stylesheet" href="editar_paciente.css" type="text/css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="librerias/jquery-3.6.0.js"></script>
+    <script src="librerias/jquery-ui.js"></script>
+    <link rel="stylesheet" href="librerias/jquery-ui-1.13.1/jquery-ui-1.13.1/jquery-ui.css">
+    <script src="librerias/igorescobar-jQuery-Mask-Plugin-535b4e4/jquery.mask.js"></script>
+    <script type="text/javascript" src="editar_paciente.js"></script>
+</html>
