@@ -6,115 +6,101 @@ llenar formulario
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
   #contenido_general{
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      font-size: var(--tamano-letra);
+    display: flex;
+    justify-content: center;
   }
   #contenido_rpa{
-    width: 600px;
-    padding-bottom: 50px;
+    width: 50%;
   }
-  .interior_formulario_rpa{
-    width: 100%;
+  #contenido_formulario_titulo{
+    padding: 25px 0 15px 0;
   }
-.interior_formulario_rpa:first-child{
-    padding: 20px 0 10px 0;
-}
-.interior_formulario_rpa>div{
-    float: left;
-    width: 100%;
-    /*min-width: 371.688px;*/
-    min-height: 68px;
-    padding: 5px 5px;
-}
-.contenedor_boton_guardar_rpa{
-    width: 100%;
-    display: flex;
-    justify-content:flex-end;
-    align-items: center;
-    padding-bottom: 0;
-    margin-top: 20px;
-    height: auto;
-}
-  .label_formulario_rpa{
-    width: 100%;
-    float:left;
-    text-align: left;
-    padding-left: 25px;
-  }
-  .input_formulario_rpa{
-    font-size: var(--tamano-letra);
+  #contenido_formulario_formulario{
     border: 3px solid var(--color-1-formulario);
     border-radius: 20px;
-    height: 50px;
+    padding: 20px 10px;
+    margin-bottom: 100px;
+  }
+  .contenedores_formulario{
+    margin: 8px 0;
     width: 100%;
-    padding: 5px 30px;
+    display: flex;
+    justify-content: left;
   }
-  .alerta_input_general_rpa{
-    text-align: center;
-    color: var(--color-1-error);
-    display: none;
+  .contenedor_boton_guardar{
+    justify-content: right;
   }
-  .alerta_input_general_rpa:before,.alerta_input_general_rpa:after{
-    padding: 0 5px;
-    content: '⚠';
-    font-size: 18px;
-    margin: 0;
-    font-family: 'Times New Roman';
-    color: var(--color-1-error);
-    margin-top: -5px;
-    
+  .contenedor_boton_guardar:first-child{
+    justify-content: space-between;
   }
-  .interior_botones_formulario_rpa{
-    border: 0;
-    background-color: var(--color-1-formulario);
-    padding: 5px 10px;
-    width: 210px;
-    color: white;
-    border-radius: 12px;
-    height: 40px;
-    font-size: calc(var(--tamano-letra) - 3px);
+  .label_formulario{
+    width: 240px;
+    height: 35px;
+    text-align: end;
+    padding-right: 5px;
+    justify-content: right;
+    display: flex;
+    align-items: center;
   }
-  .ultimo_contenedor{
-    margin-top: 0;
-  }
-  .interior_botones_formulario_rpa:hover,
-  .interior_botones_formulario_rpa:focus {
-  cursor: pointer;
-  }
-  #contenedor_alerta_general{
-    display: none;
-    margin: 20px 20px;
-    padding-bottom: 15px;
-    width: auto;
-  }
-  .alerta_general{
-    display: block;
+  .input_formulario{
+    width: 65%;
+    border: 3px solid var(--color-1-formulario);
+    border-radius: 20px;
+    height: 35px;
+    padding: 0 20px 0 20px;
+    font-size: calc(var(--tamano-letra) - 2px);
   }
   
+  .label_alerta{
+    color: var(--color-1-error);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: calc(var(--tamano-letra) - 8px);
+    padding-top: 2px;
+    display: none;
+  }
+  .label_alerta_general{
+    font-size: calc(var(--tamano-letra) - 2px);
+    margin: 18px 0 10px 0;
+    display: flex;
+    align-items: self-end;
+    display: none;
+  }
+  .label_alerta_general:before,.label_alerta_general:after{
+    padding: 0 8px;
+    content: '⚠';
+    font-size: calc(var(--tamano-letra) - 2px);
+    
+  }
+
+  .botones_guardar{
+    border: 0;
+  background-color: var(--color-1-formulario);
+  padding: 5px 10px;
+  width:  150px;
+  color: white;
+  border-radius: 12px;
+  height: 40px;
+  font-size: calc(var(--tamano-letra) - 3px);
+  }
+  .botones_guardar:hover,
+  .botones_guardar:focus {
+    cursor: pointer;
+    }
+
+  .input_con_alerta{
+    width: 65%;
+    display: inline-block;
+  }
+  .input_con_alerta>.input_formulario{
+    width: 100%;
+  }
   #input_direccion_rpa{
-    padding-top: 10px;
-    height: 100px;
+    padding: 15px 10px 0 15px;
+    height: 130px;
   }
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    modal
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-  #modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-     /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(32, 32, 36); /* Fallback color */
-    background-color: rgba(41, 81, 87, 0.4); /* Black w/ opacity */
-  }
+
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 modal confirmar registro
@@ -139,6 +125,8 @@ modal confirmar registro
     border-bottom: 2px solid var(--color-1-formulario);
     float: right;
     width: 100%;
+
+
   }
   .interior_confirmar_registro_botones_rpa{
     display:flex;
@@ -171,6 +159,8 @@ modal confirmar registro
     width: 100%;
     text-align: right;
     height: 26px;
+    display: flex;
+    justify-content: left;
   }
   .informacion_label_2_rpa{
     display: block;
@@ -188,10 +178,15 @@ modal confirmar registro
   .interior_confirmar_registro_superior_rpa
   {
     padding: 20px 0;
+    border: 3px solid var(--color-1-formulario);
+    border-left: 0;
+    border-right: 0;
+    margin-top: 20px;
+    
   }
   .interior_confirmar_registro_superior_rpa>label
   {
-    font-size: 20px;
+    font-size: calc(var(--tamano-letra) + 5px );
   }
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -259,4 +254,42 @@ modal esperar
     width: 100px;
     height: 100px;
 }
+  /*
+@keyframes anim{
   
+  0% {border-color: rgb(0, 8, 255);} 
+  5% {border-color: rgb(0, 25, 255);} 
+  10% {border-color: rgb(0, 50, 255);} 
+  15% {border-color: rgb(0, 75, 255);} 
+  20% {border-color: rgb(0, 100, 255);} 
+  25% {border-color: rgb(0, 125, 255);} 
+  30% {border-color: rgb(0, 150, 229);} 
+  35% {border-color: rgb(0, 175, 255);} 
+  40% {border-color: rgb(0, 200, 255);} 
+  45% {border-color: rgb(0, 225, 255);} 
+  50% {border-color: rgb(0, 255, 255);} 
+  55% {border-color: rgb(0, 255, 255);} 
+  60% {border-color: rgb(0, 225, 255);} 
+  65% {border-color: rgb(0, 175, 255);} 
+  70% {border-color: rgb(0, 150, 229);} 
+  75% {border-color: rgb(0, 125, 255);} 
+  80% {border-color: rgb(0, 100, 255);} 
+  85% {border-color: rgb(0, 75, 255);} 
+  90% {border-color: rgb(0, 50, 255);} 
+  95% {border-color: rgb(0, 25, 255);} 
+  100% {border-color: rgb(0, 0, 255);} 
+}*/
+
+/*
+#input_numero_documento_rpa:hover{
+
+  animation-name: anim;
+  animation-duration: 300ms;
+  animation-iteration-count: infinite;
+  
+  
+  -webkit-transition: 250ms linear;
+  transition: 250ms linear;
+  transition-property: width;
+  border-color: red;
+}*/

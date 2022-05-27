@@ -9,106 +9,106 @@
     <body>
         <div id="barra_principal">
         </div>
-
         <div id="contenido_general">
             <div id="contenido_rpa">
-                <div class="interior_formulario_rpa"  id="titulo_formulario_rpa"> 
-                        <h2>Nuevo Paciente</h2>
+                <div id="contenido_formulario_titulo">
+                    <h2>Nuevo Paciente</h2>
                 </div>
-                <div class="contenedor_boton_guardar_rpa">
-                    <button class="interior_botones_formulario_rpa" id="ejecutar_guardar_rpa">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
-                            </polyline>
-                        </svg>
-                        GUARDAR</button>
-                </div>
-                <div class ="interior_formulario_rpa " id="contenedor_alerta_general">
-                    <label class="label_formulario_rpa alerta_input_general_rpa alerta_general " id="alerta_general_rpa">Por favor completar todos los campos obligatorios</label>
-                </div>
-                <div class="interior_formulario_rpa"  id="valores_formulario_rpa">  
-                    <div>
-                        <label class="label_formulario_rpa" >TIPO DOCUMENTO</label>
-                        <br/>
-                        <select class="input_formulario_rpa input_lista_opciones_rpa" id="input_tipo_documento_rpa"> 
+                <div id="contenido_formulario_formulario">
+                    <div class ="contenedores_formulario contenedor_boton_guardar">
+                        <button class="botones_guardar" id="ejecutar_borrar_todo_rpa">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
+                                <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
+                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
+                                </g>
+                            </svg>
+                            LIMPIAR TODO</button>
+                        <button class="botones_guardar" id="ejecutar_guardar_rpa">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
+                                </polyline>
+                            </svg>
+                            GUARDAR</button>
+                    </div>
+                    <label class="label_alerta label_alerta_general" id="alerta_general_rpa">POR FAVOR COMPLETAR TODOS LOS CAMPOS OBLIGATORIOS</label>
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >TIPO DOCUMENTO:</label>
+                        <select class="input_formulario input_lista_opciones_rpa" id="input_tipo_documento_rpa"> 
                             <option value="Cédula">Cédula</option> 
                             <option value="Pasaporte">Pasaporte</option> 
                         </select>
                     </div>
-                    <div>
-                        <label class="label_formulario_rpa" >*NÚMERO DOCUMENTO</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="text" id="input_numero_documento_rpa" maxlength="10">
-                        <label class="label_formulario_rpa alerta_input_general_rpa" id="alerta_numero_documento_rpa">Número de documento ya utilizado</label>
-                        <label class="label_formulario_rpa alerta_input_general_rpa" id="alerta_numero_documento_2_rpa">Campo Requerido</label>
-
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*NÚMERO DOCUMENTO:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_numero_documento_rpa" maxlength="10">
+                            <label class="label_alerta" id="alerta_numero_documento_rpa">NÚMERO DE DOCUMENTO YA UTILIZADO</label>
+                            <label class="label_alerta" id="alerta_numero_documento_2_rpa">CAMPO REQUERIDO</label>
+                        </div>
                     </div>
-                    <div>
-                        <label class="label_formulario_rpa" >*PRIMER NOMBRE</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="text" id="input_nombre_1_rpa" maxlength="25">
-                        <br/>
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >SEGUNDO NOMBRES</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="text" id="input_nombre_2_rpa" maxlength="25">
-                        <br/>
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >*PRIMER APELLIDOS</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="text" id="input_apellido_1_rpa" maxlength="16">
-                        <br/>
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >SEGUNDO APELLIDOS</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="text" id="input_apellido_2_rpa" maxlength="16">
-                        <br/>
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >*SEXO</label>
-                        <br/>
-                        <select class="input_formulario_rpa input_lista_opciones_rpa" id="input_sexo_rpa"> 
-                            <option value="" selected></option> 
-                            <option value="Hombre">Hombre</option> 
-                            <option value="Mujer">Mujer</option> 
-                        </select>
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >CORREO</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="email" id="input_correo_rpa" maxlength="35">
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >*TELÉFONO</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="text" id="input_telefono_1_rpa" maxlength="15">
-                        <label class="label_formulario_rpa alerta_input_general_rpa" id="alerta_telefono_1_rpa">Teléfono debe contener mínimo 10 números</label>
-
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >CONVENCIONAL</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="text" id="input_telefono_2_rpa" maxlength="11">
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >*FECHA NACIMIENTO</label>
-                        <br/>
-                        <input class="input_formulario_rpa" id="input_fecha_nacimiento_rpa" maxlength="10">
-                        <label class="label_formulario_rpa alerta_input_general_rpa" id="alerta_fecha_nacimiento_rpa">Validar fecha nacimiento</label>
-
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >OCUPACION</label>
-                        <br/>
-                        <input class="input_formulario_rpa" type="text" id="input_ocupacion_rpa" maxlength="16">
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >PROVINCIA</label>
-                        <br/>
-                        <select class="input_formulario_rpa input_lista_opciones_rpa" id="input_provincia_rpa"> 
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*PRIMER NOMBRE:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_nombre_1_rpa" maxlength="25">
+                            <label class="label_alerta" id="alerta_nombre_1_rpa">CAMPO REQUERIDO</label>
+                        </div>
+                    </div> 
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >SEGUNDO NOMBRES:</label>
+                        <input class="input_formulario" type="text" id="input_nombre_2_rpa" maxlength="25">
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*PRIMER APELLIDOS:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_apellido_1_rpa" maxlength="16">
+                            <label class="label_alerta" id="alerta_apellido_1_rpa">CAMPO REQUERIDO</label>
+                        </div>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >SEGUNDO APELLIDOS:</label>
+                        <input class="input_formulario" type="text" id="input_apellido_2_rpa" maxlength="16">
+                    </div>   
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*SEXO:</label>
+                        <div class ="input_con_alerta">
+                            <select class="input_formulario input_lista_opciones_rpa" id="input_sexo_rpa"> 
+                                <option value="" selected></option> 
+                                <option value="Hombre">Hombre</option> 
+                                <option value="Mujer">Mujer</option> 
+                            </select>
+                            <label class="label_alerta" id="alerta_sexo_rpa">CAMPO REQUERIDO</label>
+                        </div>
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >CORREO:</label>
+                        <input class="input_formulario" type="email" id="input_correo_rpa" maxlength="35">
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*TELÉFONO:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_telefono_1_rpa" maxlength="15">
+                            <label class="label_alerta" id="alerta_telefono_1_rpa">TELÉFONO DEBE CONTENER MÍNIMO 10 NÚMEROS</label>
+                        </div>
+                    </div>  
+                    
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >CONVENCIONAL:</label>
+                        <input class="input_formulario" type="text" id="input_telefono_2_rpa" maxlength="11">
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*FECHA NACIMIENTO:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" id="input_fecha_nacimiento_rpa" maxlength="10">
+                            <label class="label_alerta" id="alerta_fecha_nacimiento_rpa">FECHA NACIMIENTO NO VALIDA</label>
+                        </div>
+                    </div> 
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >OCUPACION:</label>
+                        <input class="input_formulario" type="text" id="input_ocupacion_rpa" maxlength="16">
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >PROVINCIA:</label>
+                        <select class="input_formulario" id="input_provincia_rpa"> 
                             <option value="" selected></option> 
                             <option value="Esmeraldas">Esmeraldas</option>
                             <option value="Azuay">Azuay</option>
@@ -135,27 +135,25 @@
                             <option value="Tungurahua">Tungurahua</option>
                             <option value="Zamora Chinchipe">Zamora Chinchipe</option>
                         </select>
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >CANTON</label>
-                        <br/>
-                        <select class="input_formulario_rpa input_lista_opciones_rpa" id="input_canton_rpa" disabled="disabled"> 
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >CANTON:</label>
+                        <select class="input_formulario input_lista_opciones_rpa" id="input_canton_rpa" disabled="disabled"> 
                         </select>
-                    </div>
-                    <div>
-                        <label class="label_formulario_rpa" >DIRECCION</label>
-                        <br/>
-                        <textarea class="input_formulario_rpa" type="text" id="input_direccion_rpa" maxlength="200"></textarea>
-                    </div>
-                    <div class="contenedor_boton_guardar_rpa ultimo_contenedor">
-                        <button class="interior_botones_formulario_rpa" id="ejecutar_guardar_inferior_rpa">
+                    </div>  
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >DIRECCION:</label>
+                        <textarea class="input_formulario" type="text" id="input_direccion_rpa" maxlength="200"></textarea>
+                    </div>  
+                    <div class ="contenedores_formulario contenedor_boton_guardar">
+                        <button class="botones_guardar" id="ejecutar_guardar_inferior_rpa">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
                                 <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
                                 </polyline>
                             </svg>
                             GUARDAR
                         </button>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -164,65 +162,36 @@
 modal confirmar registro y esperar
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<div id="modal" class="modal">
-    <div id="contenido_confirmar_rpa">
-        <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_superior_rpa" id="">
-            <label class="mensaje_formulario_rpa" >Confirmar registro?</label>
-        </div>
-        <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_mensaje_rpa" id="">
-            <div class="informacion_label_1_rpa">
-                <label class="label_formulario_rpa" >TIPO DOCUMENTO : </label>
-                <label class="label_formulario_rpa" >NÚMERO DOCUMENTO : </label>
-                <label class="label_formulario_rpa" >NOMBRES : </label>
-                <label class="label_formulario_rpa" >APELLIDOS : </label>
-                <label class="label_formulario_rpa" >SEXO : </label>
-                <label class="label_formulario_rpa" >CORREO : </label>
-                <label class="label_formulario_rpa" >TELÉFONO : </label>
-                <label class="label_formulario_rpa" >CONVENCIONAL : </label>
-                <label class="label_formulario_rpa" >FECHA NACIMIENTO : </label>
-                <label class="label_formulario_rpa" >OCUPACION : </label>
-                <label class="label_formulario_rpa" >PROVINCIA : </label>
-                <label class="label_formulario_rpa" >CANTON : </label>
-                <label class="label_formulario_rpa" >DIRECCION : </label>
+    <div id="modal_pp" class="modal_pp">
+        <div id="contenido_confirmar_rpa">
+            <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_superior_rpa" id="">
+                <label class="mensaje_formulario_rpa" >CONFIRMAR REGISTRO?</label>
             </div>
-            <div class="informacion_label_2_rpa">                
-                <label class="label_formulario_rpa" id="label_confirmar_registro_tipo_documento"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_numero_documento"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_nombres"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_apellidos"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_sexo"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_correo"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_telefono"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_convencional"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_fecha_nacimiento"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_ocupacion"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_provincia"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_canton"></label>
-                <label class="label_formulario_rpa" id="label_confirmar_registro_direccion"></label>
+            <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_botones_rpa" id="">
+                <button class="interior_botones_confimrar_rpa" id="boton_confirmar_cofirmar_rpa">ACEPTAR</button>
+                <button class="interior_botones_confimrar_rpa" id="boton_confirmar_cancelar_rpa">CANCELAR</button>
             </div>
         </div>
-        <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_botones_rpa" id="">
-            <button class="interior_botones_confimrar_rpa" id="boton_confirmar_cofirmar_rpa">ACEPTAR</button>
-            <button class="interior_botones_confimrar_rpa" id="boton_confirmar_cancelar_rpa">CANCELAR</button>
+
+
+
+        <div id="contenido_esperar">
+            <div class="ajuste_elementos_esperar">
+                <img src="iconos/spinner.gif" alt="esperar"> 
+            </div>
+            <div class="ajuste_elementos_esperar">
+                <label>Espere por favor...</label>
+            </div>
+        </div>
+        <div id="mensaje_alerta_rpa">
+            <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_superior_rpa" id="interior_alerta_botones_rpa">
+                <label  class="mensaje_formulario_rpa" id="label_mensaje_alerta_superior_rpa">USUARIO REGISTRADO CON EXITO</label>
+            </div>
+            <div class ="interior_alerta_rpa interior_alerta_botones_rpa" id="">
+                <button class="mensaje_alerta_boton_rpa" id="boton_alerta_cofirmar_rpa">ACEPTAR</button>
+            </div>
         </div>
     </div>
-    <div id="contenido_esperar">
-        <div class="ajuste_elementos_esperar">
-            <img src="iconos/spinner.gif" alt="esperar"> 
-        </div>
-        <div class="ajuste_elementos_esperar">
-            <label>Espere por favor...</label>
-        </div>
-    </div>
-    <div id="mensaje_alerta_rpa">
-        <div class ="interior_alerta_rpa " id="interior_alerta_botones_rpa">
-            <label id="label_mensaje_alerta_superior_rpa">usuario registrado con exito </label>
-        </div>
-        <div class ="interior_alerta_rpa interior_alerta_botones_rpa" id="">
-            <button class="mensaje_alerta_boton_rpa" id="boton_alerta_cofirmar_rpa">ACEPTAR</button>
-        </div>
-    </div>
-<div>
 
 
     </body>
@@ -235,8 +204,7 @@ modal confirmar registro y esperar
     <link rel="stylesheet" href="opciones_tabla.css" type="text/css">
     <link rel="stylesheet" href="diseño_opciones_tabla.css" type="text/css">
     <script type="text/javascript" src="diseño_opciones_tabla.js"></script>
-
-
+    <link rel="stylesheet" href="estilos/modal_general.css" type="text/css">
 
     <link rel="stylesheet" href="nuevo_paciente.css" type="text/css">
     <link rel="stylesheet" href="/resources/demos/style.css">

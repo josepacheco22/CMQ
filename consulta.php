@@ -161,9 +161,9 @@ if($tipo=="vr")
     $ocupacion = $_POST["ocupacion"];
     $query_registro_usuario = mysqli_query($conn,"INSERT INTO `pacientes`(`id`, `tipo_documento`, `habilitado`, `id_personal_creado`, `fecha_creacion`, `numero_documento`, `nombre_1`, `nombre_2`, `apellido_1`, `apellido_2`, `sexo`, `correo`, `telefono_1`, `telefono_2`, `fecha_nacimiento`, `provincia`, `canton`, `direccion`, `ocupacion`) VALUES (uuid(), '$tipo_documento', 1, '$id_personal_creado', '$fecha_creacion', '$numero_documento', '$nombre_1', '$nombre_2', '$apellido_1', '$apellido_2', '$sexo', '$correo', '$telefono_1', '$telefono_2', '$fecha_nacimiento', '$provincia', '$canton', '$direccion', '$ocupacion')");
     if(($conn->affected_rows)==1){
-        echo "Registro con exitó";
+        echo "REGISTRO CON EXITO";
     }else{
-        echo "Fallo Registro";
+        echo "FALLO REGISTRO";
     }
 }else if($tipo=="tpa"){
     $habilitado = "1";

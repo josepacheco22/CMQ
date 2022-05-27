@@ -2,10 +2,17 @@
     font-family: "League_Spartan";
     src : url("/fuente/League_Spartan/LeagueSpartan-VariableFont_wght.ttf") format("truetype");
   }
+  @keyframes anim{
+  
+    0% {border-color: rgb(179, 255, 0);}
+    50% {border-color: rgb(0, 255, 179);} 
+    100% {border-color: rgb(132, 0, 255);} 
+  }
   :root {
     --tamano-letra: 20px;
     
     --color-paguina-principal: #1f2f98;
+    --color-paguina-principal-opacidad: #00d9ff;
     --color-principal: #45c4c4;
     --color-1-formulario: #787ff6;
     --color-1-error: #e24444;

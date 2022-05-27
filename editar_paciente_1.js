@@ -109,11 +109,35 @@ $( function() {
 
 
 var existe_numero_documento ="0";
+
 function funcion_verificar_numero_documento(){
-    if((document.getElementById("input_numero_documento_rpa").value.replaceAll("-", '')).replaceAll(" ","") != datos_paciente["numero_documento"]){
+    var parametros_rp = {
+        "tipo": "bndp",
+        "parametro":  document.getElementById("input_numero_documento_rpa").value,
+        "id_paciente": id_paciente
+    };
+    $.ajax({ 
+        data: parametros_rp,
+        url: "busqueda_rapida.php", 
+        type: "POST",
+        beforeSend: function (){
+        },
+        success:function (response){
+            if(response=="1"){
+                document.getElementById("alerta_numero_documento_rpa").style.display = "block";
+                document.getElementById("input_numero_documento_rpa").style.border= "3px solid #e24444";
+                existe_numero_documento ="1";
+            }else{
+                document.getElementById("alerta_numero_documento_rpa").style.display = "none";
+                document.getElementById("input_numero_documento_rpa").style.border= "3px solid #787ff6";
+                existe_numero_documento ="0";
+            }            
+        }
+    });
+    /*if((document.getElementById("input_numero_documento_rpa").value.replaceAll("-", '')).replaceAll(" ","") != datos_paciente["numero_documento"]){
         if(((document.getElementById("input_numero_documento_rpa").value.replaceAll("-", '')).replaceAll(" ",""))!=""){
             var parametros_rp = {
-                "tipo": "bndpedp",
+                "tipo": "bndp",
                 "parametro": (document.getElementById("input_numero_documento_rpa").value.replaceAll("-", '')).replaceAll(" ",""),
                 "id_paciente": id_paciente
             };
@@ -142,7 +166,7 @@ function funcion_verificar_numero_documento(){
             document.getElementById("alerta_numero_documento_rpa").style.display = "none";
             existe_numero_documento ="0";
         }
-    }
+    }*/
 };
 document.getElementById("input_numero_documento_rpa").addEventListener('keyup', (event) => {
     funcion_verificar_numero_documento();  
