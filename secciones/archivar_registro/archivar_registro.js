@@ -14,7 +14,9 @@ document.getElementById("boton_confirmar_cancelar_archivar_pp").onclick = functi
 function archivar_paciente(id_a_archivar) {
     var parametros_rp = {
         "tipo": "archhis",
-        "id": id_a_archivar
+        "id": id_a_archivar,
+        "id_creado_usuario": cookies_pagina["id_personal"],
+        "creado_usuario":  cookies_pagina["usuario"]
     };
     $.ajax({ 
         data: parametros_rp,

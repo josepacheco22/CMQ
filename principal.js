@@ -36,7 +36,7 @@ var modal_ejecutar_aceptar_ids  = document.getElementById("modal_ejecutar_acepta
 
 var usuario_ids = document.getElementById("usuario_ids");
 var contrasena_ids = document.getElementById("contrasena_ids");
-var recordar_sesion_ids = document.getElementById("recordar_sesion_ids");
+//var recordar_sesion_ids = document.getElementById("recordar_sesion_ids");
 
 var mensaje_error_usuario_ids = document.getElementById("mensaje_error_usuario_ids");
 var mensaje_error_contrasena_ids = document.getElementById("mensaje_error_contrasena_ids");
@@ -68,7 +68,7 @@ function regresar_labels_normalidad() {
     modal_ids.style.display = "none";
     document.getElementById("usuario_ids").value = "";
     document.getElementById("contrasena_ids").value = "";
-    recordar_sesion_ids.checked = false;
+    /*recordar_sesion_ids.checked = false;*/
     bandera_mostrar_contrasena_ids.setAttribute("display","none");
     verificar_visualizador_contraseña_ids();
     campos_normalidad_ids();
@@ -112,6 +112,9 @@ function alerta_usaurio_no_encontrado(){
     contrasena_ids.style.borderColor= color_1_error;
     mensaje_error_contrasena_ids.style.display = "none";  
     modal_interior_mensaje_error_ids.style.display = "block";
+    
+    document.getElementById("modal_contenido_ids").style.display = "inline-block";
+    document.getElementById("contenido_esperar_pp").style.display = "none";
 }
 
 modal_ejecutar_aceptar_ids.onclick = function(){
@@ -144,6 +147,8 @@ modal_ejecutar_aceptar_ids.onclick = function(){
     }else{
         var var_usuario_ids = usuario_ids.value;
         var var_contrasena_ids =contrasena_ids.value;
+        document.getElementById("modal_contenido_ids").style.display = "none";
+        document.getElementById("contenido_esperar_pp").style.display = "inline-block";
         var parametros_ids = {
             "tipo": "vr",
             "usuario": usuario_ids.value,
@@ -172,10 +177,10 @@ modal_ejecutar_aceptar_ids.onclick = function(){
                         document.cookie = "id_personal="+resultado_consulta[0];
                         document.cookie = "permisos="+resultado_consulta[1];
                         document.cookie = "max-age=";
-                        if(document.getElementById('recordar_sesion_ids').checked)
+                        /*if(document.getElementById('recordar_sesion_ids').checked)
                         {
                             document.cookie = "max-age="+(30*24*60*60);
-                        }
+                        }*/
                         if(resultado_consulta[1]=="2")
                         {
                             window.location.href = "panel_administrador.html";
@@ -190,5 +195,6 @@ modal_ejecutar_aceptar_ids.onclick = function(){
         });
     }
 }
+
 
 

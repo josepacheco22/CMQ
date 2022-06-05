@@ -126,7 +126,7 @@ MODAL INGRESAR E INICIAR SESION
 
 #modal_interior_valores_formulario_ids{
     border-bottom: 2px solid var(--color-1-formulario);
-    padding: 0 15px 20px 15px;
+    padding: 0 15px 40px 15px;
     justify-content: left;
     overflow: hidden;
 
@@ -246,5 +246,27 @@ input[type=checkbox]:checked+.modal_label_formulario_checkbox_ids:before{
 .modal_interior_botones_formulario_ids:focus {
   cursor: pointer;
 }
-
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+modal esperar
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+#contenido_esperar_pp {
+  background-color: #fefefe;
+  margin-top:  200px;
+  padding: 0 10px 20px 10px;
+  border: 1px solid var(--color-1-formulario);
+  border-radius: 15px;
+  width: 320px;
+  display: none;
+}
+#ajuste_elementos_esperar_pp{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.ajuste_elementos_esperar_pp>img{
+  width: 100px;
+  height: 100px;
+}
 

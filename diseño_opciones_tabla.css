@@ -1,6 +1,13 @@
 .iconos_tabla_accion{
-    width: 100px;
-    display: contents;
+    /*width: 100px;
+    display: inline-table;*/
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+.iconos_tabla_accion>svg{
+    margin-right: 5px;
 }
 .iconos_tabla_accion>svg{
     fill: white;

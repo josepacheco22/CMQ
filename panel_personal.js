@@ -7,7 +7,7 @@ nuevo historial
 document.getElementById("agregar_historial_pp").onclick = function(){
     verificar_cookie();
     sessionStorage.setItem("id_paciente", "");
-    window.location.href = "nuevo_historial.html";
+    window.open("nuevo_historial.html");
 };
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -82,7 +82,9 @@ document.getElementById("contenido_esperar_pp").style.display = "inline-block";
 llenar_tabla_asignados_con_espera();
 
 document.getElementById("cantidad_filas_tabla_pp").addEventListener('change', (event) => {
-    llenar_tabla_asignados();
+    document.getElementById("modal_pp").style.display =  "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_asignados_con_espera();
 });
 document.getElementById("buscar_numero_historial_pp").addEventListener('keyup', (event) => {
     llenar_tabla_asignados();
@@ -104,7 +106,9 @@ document.getElementById("buscar_creado_por_pp").addEventListener('keyup', (event
 });
 
 document.getElementById("actualizar_pp").onclick = function(){
-    llenar_tabla_asignados();
+    document.getElementById("modal_pp").style.display =  "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_asignados_con_espera();
 };
 
 document.getElementById("borrar_borrar_todo_pp").onclick = function(){
@@ -114,32 +118,46 @@ document.getElementById("borrar_borrar_todo_pp").onclick = function(){
     document.getElementById("buscar_primera_consulta_pp").value = "";
     document.getElementById("buscar_fecha_consulta_pp").value = "";
     document.getElementById("buscar_numero_historial_pp").value = "";
-    llenar_tabla_asignados();
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_asignados_con_espera();
 };
 
 document.getElementById("boton_borrar_creado_por_pp").onclick = function(){
 document.getElementById("buscar_creado_por_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display =  "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_asignados_con_espera();
 };
 document.getElementById("boton_borrar_nombre_paciente_pp").onclick = function(){
 document.getElementById("buscar_nombre_paciente_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display =  "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_asignados_con_espera();
 };
 document.getElementById("boton_borrar_numero_documento_pp").onclick = function(){
 document.getElementById("buscar_numero_documento_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display =  "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_asignados_con_espera();
 };
 document.getElementById("boton_borrar_primera_consulta_pp").onclick = function(){
 document.getElementById("buscar_primera_consulta_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display =  "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_asignados_con_espera();
 };
 document.getElementById("boton_borrar_fecha_consulta_pp").onclick = function(){
 document.getElementById("buscar_fecha_consulta_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display =  "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_asignados_con_espera();
 };
 document.getElementById("boton_borrar_numero_historial_pp").onclick = function(){
 document.getElementById("buscar_numero_historial_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display =  "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_asignados_con_espera();
 };
 $(document).ready(function(){
     $('#buscar_fecha_consulta_pp').mask('####-##-##')

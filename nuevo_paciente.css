@@ -293,3 +293,23 @@ modal esperar
   transition-property: width;
   border-color: red;
 }*/
+
+
+
+
+.boton_restablecer{
+  fill: var(--color-paguina-principal);
+  width: 40px;
+  height: 40px;
+  margin: 0 20px 0 10px;
+}
+
+.boton_restablecer:hover,.boton_restablecer::after{
+  cursor: pointer;
+}
+.boton_restablecer>g {
+  width: 15px;
+  margin-right: 5px;
+  height: 15px;
+  fill: var(--color-paguina-principal);
+}

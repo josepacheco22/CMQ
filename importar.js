@@ -8,3 +8,5 @@ $("#contenido_ver_historial").load( "/secciones/ver_historial/ver_historial.html
 $("#contenido_editar_infromacion_personal").load( "/secciones/editar_informacion_personal/editar_informacion_personal.html");
 $("#nueva_contrasena").load( "/secciones/nueva_contrasena/nueva_contrasena.html");
 $("#nueva_contrasena_2").load( "/secciones/nueva_contrasena/nueva_contrasena_2.html");
+$("#barra_principal_admin").load( "/secciones/barra_principal_admin/barra_principal_admin.html" );
+$("#barra_navegacion_admin").load( "/secciones/barra_navegacion_admin/barra_navegacion_admin.html" );

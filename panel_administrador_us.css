@@ -1,0 +1,21 @@
+
+
+ #opciones_tabla_pp>#boton_nuevo_administrador{
+  width: 230px;
+}
+
+#cabecera_tabla_pp>th{
+  width: 1%;
+}
+#contenido_tabla_pp{
+  margin-top: 10px;
+  width: 50%;
+  border: 3px solid var(--color-1-formulario);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--color-1-formulario);
+}
+
+.input_buscar_tabla_centro{
+  text-align: center;
+}

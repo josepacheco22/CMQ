@@ -112,7 +112,6 @@ $( function() {
 
 
   input_provincia_rpa.addEventListener('change', (event) => {
-    verificar_cookie();
     if(input_provincia_rpa.value == ""){
         input_canton_rpa.disabled = true;
         $(".limpiar_select").detach();
@@ -174,39 +173,6 @@ function funcion_verificar_numero_documento(){
             }            
         }
     });
-
-    
-    /*if((input_numero_documento_rpa.value)!=""){
-        var parametros_rp = {
-            "tipo": "bndp",
-            "parametro": (input_numero_documento_rpa.value.replaceAll("-", '')).replaceAll(" ",""),
-            "id_paciente": id_paciente
-        };
-        $.ajax({ 
-            data: parametros_rp,
-            url: "busqueda_rapida.php", 
-            type: "POST",
-            beforeSend: function (){
-            },
-            success:function (response){
-                var division_respuesta = response.split("/");
-                input_numero_documento_rpa.style.border= division_respuesta[0];
-                existe_numero_documento = division_respuesta[1];
-                if(existe_numero_documento=="1")
-                {
-                    document.getElementById("alerta_numero_documento_rpa").style.display = "block";
-
-                }else{
-                    document.getElementById("alerta_numero_documento_rpa").style.display = "none";
-                }
-                
-            }
-        });
-    }else{
-        input_numero_documento_rpa.style.border= "3px solid #787ff6";
-        document.getElementById("alerta_numero_documento_rpa").style.display = "none";
-        existe_numero_documento ="0";
-    }*/
 };
 
 
@@ -218,9 +184,6 @@ $( "#input_numero_documento_rpa").blur(function() {
     document.getElementById("alerta_numero_documento_2_rpa").style.display = "none";
     document.getElementById("alerta_numero_documento_rpa").style.display = "none";
     funcion_verificar_numero_documento();
-    
-
-    // tu codigo ajax va dentro de esta function...
 });
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -237,7 +200,7 @@ $(document).ready(function(){
     $('#input_numero_documento_rpa').mask('#########-#')
 });
 $(document).ready(function(){
-    $('#input_telefono_2_rpa').mask('###-###-###')
+    $('#input_telefono_2_rpa').mask('###-###-####')
 });
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -769,7 +732,31 @@ document.getElementById("restablecer_provincia").onclick = function(){
 };
 document.getElementById("restablecer_canton").onclick = function(){
     document.getElementById("input_provincia_rpa").value = datos_paciente["provincia"];
-    document.getElementById("contenido_esperar").style.display = "block";
-                document.getElementById("modal_pp").style.display = "inline-block";
+    document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar").style.display = "inline-block";
+    listado_de_provincia_espera();
+};
+
+document.getElementById("ejecutar_restablecer_rpa").onclick = function(){
+    regresar_inputs_normalidad_rp();
+    document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar").style.display = "inline-block";
+
+    document.getElementById("input_tipo_documento_rpa").value = datos_paciente["tipo_documento"];
+    document.getElementById("input_numero_documento_rpa").value = datos_paciente["numero_documento"];
+    document.getElementById("input_nombre_1_rpa").value = datos_paciente["nombre_1"];
+    document.getElementById("input_nombre_2_rpa").value = datos_paciente["nombre_2"];
+    document.getElementById("input_apellido_1_rpa").value = datos_paciente["apellido_1"];
+    document.getElementById("input_apellido_2_rpa").value = datos_paciente["apellido_2"];
+    document.getElementById("input_sexo_rpa").value = datos_paciente["sexo"];
+    document.getElementById("input_correo_rpa").value = datos_paciente["correo"];
+    document.getElementById("input_telefono_1_rpa").value = datos_paciente["telefono_1"];
+    document.getElementById("input_telefono_2_rpa").value = datos_paciente["telefono_2"];
+    document.getElementById("input_fecha_nacimiento_rpa").value = datos_paciente["fecha_nacimiento"];
+    document.getElementById("input_direccion_rpa").value = datos_paciente["direccion"];
+    document.getElementById("input_ocupacion_rpa").value = datos_paciente["ocupacion"];
+
+    
+    document.getElementById("input_provincia_rpa").value = datos_paciente["provincia"];
     listado_de_provincia_espera();
 };

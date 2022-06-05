@@ -34,7 +34,18 @@ MODAL INICIAR SESION
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <div id="modal_ids" class="modal_ids">
-            <div class="modal_contenido_ids">
+
+
+            <div id="contenido_esperar_pp">
+                <div class="ajuste_elementos_esperar_pp">
+                    <img src="iconos/spinner.gif" alt="esperar"> 
+                </div>
+                <div class="ajuste_elementos_esperar_pp">
+                    <label>Espere por favor...</label>
+                </div>
+            </div>
+
+            <div class="modal_contenido_ids" id="modal_contenido_ids">
                 <div class ="modal_interior_formulario_ids"  id="modal_interior_superior_formulario_ids">
                     <label id="modal_titulo_ids">INICIAR SESIÓN</label>
                     <button id="modal_boton_cerrar_superior_ids">
@@ -64,9 +75,11 @@ MODAL INICIAR SESION
                               </svg>
                         </span>
                     </div>
+                <!--
                     <br/>
                     <input class="modal_input_formulario_checkbox_recordar_sesion_ids" type="checkbox" id="recordar_sesion_ids">
                     <label class="modal_label_formulario_ids modal_label_formulario_checkbox_ids" for="recordar_sesion_ids">RECORDAR SESIÓN </label>
+                -->
                 </div>
                 <div class ="modal_interior_formulario_ids" id="modal_interior_contenedor_botones_formulario_ids">
                     <button class="modal_interior_botones_formulario_ids" id="modal_ejecutar_aceptar_ids">ACEPTAR</button>

@@ -73,7 +73,9 @@ document.getElementById("contenido_esperar_pp").style.display = "inline-block";
 llenar_tabla_con_esperar();
 
 document.getElementById("cantidad_filas_tabla_pp").addEventListener('change', (event) => {
-    llenar_tabla_asignados();
+    document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar();
 });
 document.getElementById("buscar_numero_historial_pp").addEventListener('keyup', (event) => {
     llenar_tabla_asignados();
@@ -95,7 +97,9 @@ document.getElementById("buscar_creado_por_pp").addEventListener('keyup', (event
 });
 
 document.getElementById("actualizar_pp").onclick = function(){
-    llenar_tabla_asignados();
+    document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar();
 };
 
 document.getElementById("borrar_borrar_todo_pp").onclick = function(){
@@ -105,32 +109,46 @@ document.getElementById("borrar_borrar_todo_pp").onclick = function(){
     document.getElementById("buscar_primera_consulta_pp").value = "";
     document.getElementById("buscar_fecha_consulta_pp").value = "";
     document.getElementById("buscar_numero_historial_pp").value = "";
-    llenar_tabla_asignados();
+    document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar();
 };
 
 document.getElementById("boton_borrar_creado_por_pp").onclick = function(){
 document.getElementById("buscar_creado_por_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar();
 };
 document.getElementById("boton_borrar_nombre_paciente_pp").onclick = function(){
 document.getElementById("buscar_nombre_paciente_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar();
 };
 document.getElementById("boton_borrar_numero_documento_pp").onclick = function(){
 document.getElementById("buscar_numero_documento_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar();
 };
 document.getElementById("boton_borrar_primera_consulta_pp").onclick = function(){
 document.getElementById("buscar_primera_consulta_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar();
 };
 document.getElementById("boton_borrar_fecha_consulta_pp").onclick = function(){
 document.getElementById("buscar_fecha_consulta_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar();
 };
 document.getElementById("boton_borrar_numero_historial_pp").onclick = function(){
 document.getElementById("buscar_numero_historial_pp").value = "";
-llenar_tabla_asignados();
+document.getElementById("modal_pp").style.display = "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+llenar_tabla_con_esperar();
 };
 $(document).ready(function(){
     $('#buscar_fecha_consulta_pp').mask('####-##-##')
@@ -177,4 +195,205 @@ document.getElementById("boton_alerta_cofirmar_pp").onclick = function(){
     document.getElementById("mensaje_alerta_pp").style.display = "none";
     document.getElementById("contenido_esperar_pp").style.display = "inline-block";
     llenar_tabla_con_esperar();
+};
+
+
+function mostrar_tabla_1(){
+    document.getElementById("navegador_datos_paciente_2").style.background = "var(--color-principal)";
+    document.getElementById("navegador_datos_paciente_1").style.background = "var(--color-1-formulario)";
+    document.getElementById("navegador_datos_paciente_1").onmouseenter =function(){this.style.background="var(--color-1-formulario)"};
+    document.getElementById("navegador_datos_paciente_1").onmouseleave =function(){this.style.background="var(--color-1-formulario)"};
+    document.getElementById("navegador_datos_paciente_2").onmouseenter =function(){this.style.background="var(--color-1-formulario)"};
+    document.getElementById("navegador_datos_paciente_2").onmouseleave =function(){this.style.background="var(--color-principal)"};
+
+
+
+    document.getElementById("seccion_2_1").style.display = "none";
+    document.getElementById("seccion_2_2").style.display = "none";
+    document.getElementById("seccion_2_3").style.display = "none";
+
+    document.getElementById("seccion_1_1").style.display = "flex";
+    document.getElementById("seccion_1_2").style.display = "flex";
+    document.getElementById("seccion_1_3").style.display = "flex";
+    $(".resultados_de_tablas").detach();
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block"; 
+    llenar_tabla_con_esperar(); 
+}
+
+function mostrar_tabla_2(){
+    document.getElementById("navegador_datos_paciente_1").style.background = "var(--color-principal)";
+    document.getElementById("navegador_datos_paciente_2").style.background = "var(--color-1-formulario)";
+    document.getElementById("navegador_datos_paciente_2").onmouseenter =function(){this.style.background="var(--color-1-formulario)"};
+    document.getElementById("navegador_datos_paciente_2").onmouseleave =function(){this.style.background="var(--color-1-formulario)"};
+    document.getElementById("navegador_datos_paciente_1").onmouseenter =function(){this.style.background="var(--color-1-formulario)"};
+    document.getElementById("navegador_datos_paciente_1").onmouseleave =function(){this.style.background="var(--color-principal)"};
+
+
+    document.getElementById("seccion_1_1").style.display = "none";
+    document.getElementById("seccion_1_2").style.display = "none";
+    document.getElementById("seccion_1_3").style.display = "none";
+
+
+    document.getElementById("seccion_2_1").style.display = "flex";
+    document.getElementById("seccion_2_2").style.display = "flex";
+    document.getElementById("seccion_2_3").style.display = "flex";
+    $(".resultados_de_tablas").detach();
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+    
+}
+
+
+
+
+
+
+document.getElementById("cantidad_filas_desc").addEventListener('change', (event) => {
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("borrar_borrar_todo_desc").onclick = function(){
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+document.getElementById("id_desc").value = "";
+document.getElementById("fecha_creacion_desc").value = "";
+document.getElementById("id_h_desc").value = "";
+document.getElementById("fecha_consulta_h_desc").value = "";
+document.getElementById("creado_usuario_desc").value = "";
+document.getElementById("numero_documento_paci_desc").value = "";
+document.getElementById("nombres_desc").value = "";
+    llenar_tabla_desc_con_esperar();
+};
+document.getElementById("actualizar_desc").onclick = function(){
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+};
+
+
+
+document.getElementById("boton_borrar_id_desc").onclick = function(){
+document.getElementById("id_desc").value = "";
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+};
+document.getElementById("boton_borrar_fecha_creacion_desc").onclick = function(){
+document.getElementById("fecha_creacion_desc").value = "";
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+};
+document.getElementById("boton_borrar_id_h_desc").onclick = function(){
+document.getElementById("id_h_desc").value = "";
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+};
+document.getElementById("boton_borrar_fecha_consulta_h_desc").onclick = function(){
+document.getElementById("fecha_consulta_h_desc").value = "";
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+};
+document.getElementById("boton_borrar_creado_usuario_desc").onclick = function(){
+document.getElementById("creado_usuario_desc").value = "";
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+};
+document.getElementById("boton_borrar_numero_documento_paci_desc").onclick = function(){
+document.getElementById("numero_documento_paci_desc").value = "";
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+llenar_tabla_desc_con_esperar();
+
+};
+document.getElementById("boton_borrar_nombres_desc").onclick = function(){
+document.getElementById("nombres_desc").value = "";
+    document.getElementById("modal_pp").style.display =  "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    llenar_tabla_desc_con_esperar();
+};
+
+
+document.getElementById("id_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("fecha_creacion_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("id_h_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("fecha_consulta_h_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("creado_usuario_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("numero_documento_paci_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("nombres_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+
+
+document.getElementById("id_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("fecha_creacion_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("id_h_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("fecha_consulta_h_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("creado_usuario_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("numero_documento_paci_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+document.getElementById("nombres_desc").addEventListener('keyup', (event) => {
+    llenar_tabla_desc_con_esperar();
+});
+
+function llenar_tabla_desc_con_esperar() {
+    var parametros_rp = {
+        "tipo": "tarchdesca",
+        "id": document.getElementById("id_desc").value,
+        "fecha_creacion": document.getElementById("fecha_creacion_desc").value,
+        "id_h": document.getElementById("id_h_desc").value,
+        "fecha_consulta_h": document.getElementById("fecha_consulta_h_desc").value,
+        "creado_usuario": document.getElementById("creado_usuario_desc").value,
+        "cantidad_filas": document.getElementById("cantidad_filas_desc").value,
+        "numero_documento_paci": document.getElementById("numero_documento_paci_desc").value,
+        "nombres": document.getElementById("nombres_desc").value
+    };
+    
+    $.ajax({ 
+        data: parametros_rp,
+        url: "consulta.php", 
+        type: "POST",
+        beforeSend: function (){
+        },
+        success:function (response){
+            if(response!="")
+            {
+                var division_respuesta = response.split("ids");
+                $(".resultados_de_tablas").detach();
+                $("#cuerpo_tabla_desc_pp").append(division_respuesta[0]);   
+                ids_tabla = JSON.parse(division_respuesta[1]); 
+                document.getElementById("contenido_esperar_pp").style.display = "none"; 
+                document.getElementById("modal_pp").style.display =  "none";
+            } 
+        }
+    });
 };

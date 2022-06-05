@@ -10,7 +10,7 @@ llenar formulario
     justify-content: center;
   }
   #contenido_rpa{
-    width: 650px;
+    width: 55%;
   }
   #contenido_formulario_titulo{
     padding: 25px 0 15px 0;
@@ -304,3 +304,23 @@ modal esperar
 .boton_restablecer:hover,.boton_restablecer::after{
   cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

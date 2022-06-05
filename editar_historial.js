@@ -500,6 +500,8 @@ function guardar_historial_editado(archivo_si_no) {
         "tipo": "edthis",
         "id": id_historial_clinica,
         "id_paciente": paciente_seleccionado,
+        "id_creado_usuario": cookies_pagina["id_personal"],
+        "creado_usuario":  cookies_pagina["usuario"],
         "archivado": archivo_si_no,
         "edad":document.getElementById("input_edad_pp").value,
         "id_personal_creado": personal_creado,

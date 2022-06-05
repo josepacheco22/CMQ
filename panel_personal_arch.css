@@ -1,4 +1,22 @@
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    modal
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  #modal_pp {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+     /* Location of the box */
+    left: 0; 
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(32, 32, 36); /* Fallback color */
+    background-color: rgba(41, 81, 87, 0.4); /* Black w/ opacity */
+  }
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 modal confirmar registro
@@ -144,116 +162,45 @@ modal esperar
   height: 100px;
 }
 
-.input_sin_borrar{
-  width: auto;
-  padding: 0 10PX;
-  text-align: center;
-  border-radius: 10PX;
-}
-
-#boton_nuevo_administrador{
-  width: 230px;
-}
 
 
 
 
 
-
-
-
-
-
-
-#confirmar_cambio_contrasena{
- width: 570px;
-}
-
-#contenido_formulario_formulario{
-  border: 3px solid var(--color-1-formulario);
-  border-radius: 20px;
-  padding: 20px 10px;
-  margin-bottom: 100px;
-}
-.contenedores_formulario{
-  margin: 8px 0;
+#navegador_datos_paciente{
+  margin-top: 10px;
   width: 100%;
   display: flex;
-  justify-content: left;
+
 }
-.label_formulario{
-  width: 230px;
-  height: 35px;
-  text-align: end;
-  padding-right: 5px;
-  justify-content: right;
+#navegador_datos_paciente>div{
+  width: 50%;
+  color: white;
+  height: 50px;
+  border-radius: 15px;
   display: flex;
-  align-items: center;
-
-  font-size: var(--tamano-letra);
+    align-items: center;
+    justify-content: space-around;
 }
-.input_formulario{
-  width: 65%;
-  border: 3px solid var(--color-1-formulario);
-  border-radius: 20px;
-  height: 35px;
-  padding: 0 20px 0 30px;
-  font-size: calc(var(--tamano-letra) - 2px);
+#navegador_datos_paciente>div:first-child{
+ border-bottom-right-radius: 0;
+ border-top-right-radius: 0;
+ background: var(--color-1-formulario);
+}
+#navegador_datos_paciente>div:last-child{
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  background: var(--color-principal);
+}
+#navegador_datos_paciente>div:hover,#navegador_datos_paciente>div>*:hover,#navegador_datos_paciente>div>*:focus,#navegador_datos_paciente>div:focus{
+ cursor: pointer;
+ 
+}
+#navegador_datos_paciente>div:hover,#navegador_datos_paciente>div>*:hover,#navegador_datos_paciente>div>*:focus,#navegador_datos_paciente>div:focus{
+  background: var(--color-1-formulario);
 }
 
-.label_alerta{
-  color: var(--color-1-error);
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  font-size: calc(var(--tamano-letra) - 8px);
-  padding-top: 2px;
+#seccion_2_1,#seccion_2_2,#seccion_2_3
+{
   display: none;
-}
-.label_alerta_general{
-  font-size: calc(var(--tamano-letra) - 2px);
-  margin: -5px 0 10px 0;
-  display: flex;
-  align-items: self-end;
-  display: none;
-}
-.label_alerta_general:before,.label_alerta_general:after{
-  padding: 0 8px;
-  content: '⚠';
-  font-size: calc(var(--tamano-letra) - 2px);
-  
-}
-.input_con_alerta{
-  width: 65%;
-  display: inline-block;
-}
-.input_con_alerta>.input_formulario{
-  width: 100%;
-}
-#input_direccion_rpa{
-  padding: 15px 10px 0 15px;
-  height: 130px;
-}
-
-.boton_restablecer{
-  fill: var(--color-paguina-principal);
-  width: 40px;
-  height: 40px;
-  margin: 0 20px 0 10px;
-}
-
-.boton_restablecer:hover,.boton_restablecer::after{
-  cursor: pointer;
-}
-.boton_restablecer>g {
-  width: 15px;
-  margin-right: 5px;
-  height: 15px;
-  fill: var(--color-paguina-principal);
-}
-#mostrar_contrasena_2,#mostrar_contrasena_1{
-  display: none;
-}
-.boton_opcion_mostrar_contrasena{
-  margin: 0 9px 0 5px;
 }

@@ -1,4 +1,6 @@
 
+
+
   #titulo_tabla_pp{
     margin: 30px 0 10px 0;
     color: black;
@@ -78,3 +80,8 @@
   .boton_borrar_pp:hover{
   cursor: pointer;
   }
+
+  .contenedor_input_boton_solo_pp{
+    min-width: 10px;
+  }
+ 

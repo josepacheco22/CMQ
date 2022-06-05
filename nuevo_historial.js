@@ -409,6 +409,8 @@ function guardar_historial(archivo) {
     var parametros_rp = {
         "tipo": "rhis",
         "id_paciente": paciente_seleccionado,
+        "id_creado_usuario": cookies_pagina["id_personal"],
+        "creado_usuario":  cookies_pagina["usuario"],
         "archivado": archivo,
         "edad":document.getElementById("input_edad_pp").value,
         "id_personal_creado": cookies_pagina["id_personal"],

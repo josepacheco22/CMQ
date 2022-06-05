@@ -7,101 +7,179 @@
         <link  type="image/svg+xml" rel="icon" href="iconos/icono_pulso_corazon.svg">
     </head>
     <body>
-        <div id="barra_principal">
+        <div id="barra_principal_admin">
         </div>
         <div id="contenido_general">
             <div id="contenido_rpa">
                 <div id="contenido_formulario_titulo">
-                    <h2>Nuevo Paciente</h2>
+                    <h2>Nuevo Personal</h2>
                 </div>
                 <div id="contenido_formulario_formulario">
                     <div class ="contenedores_formulario contenedor_boton_guardar">
-                        <button class="botones_guardar" id="ejecutar_borrar_todo_rpa">
+                        <div>
+
+                       
+                        <button class="botones_guardar" id="ejecutar_restablecer">
                             <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
                                 <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                                 <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                                 </g>
                             </svg>
-                            LIMPIAR TODO</button>
-                        <button class="botones_guardar" id="ejecutar_guardar_rpa">
+                        BORRAR TODO</button>
+                        </div>
+                        <button class="botones_guardar" id="ejecutar_guardar">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
                                 <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
                                 </polyline>
                             </svg>
                             GUARDAR</button>
                     </div>
-                    <label class="label_alerta label_alerta_general" id="alerta_general_rpa">POR FAVOR COMPLETAR TODOS LOS CAMPOS OBLIGATORIOS</label>
+                    <label class="label_alerta label_alerta_general" id="alerta_general">POR FAVOR COMPLETAR TODOS LOS CAMPOS OBLIGATORIOS</label>
                     <div class ="contenedores_formulario">
-                        <label class="label_formulario" >TIPO DOCUMENTO:</label>
-                        <select class="input_formulario input_lista_opciones_rpa" id="input_tipo_documento_rpa"> 
-                            <option value="Cédula">Cédula</option> 
-                            <option value="Pasaporte">Pasaporte</option> 
-                        </select>
-                        <svg id="restablecer_tipo_documento" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
+                        <label class="label_formulario" >*HABILITADO:</label>
+                        <div class ="input_con_alerta " >
+                            <label class="content-input" >
+                                <input class="diseño_checkox" checked="true" type="checkbox" name="Vehiculo" id="input_habilitado" value="autopista"><i></i>
+                            </label>
+                        </div>
+                        <svg id="restablecer_habilitado" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
+                        </svg>
+                    </div>
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*TIPO DOCUMENTO:</label>
+                        
+                        <div class ="input_con_alerta">
+                            <select class="input_formulario input_lista_opciones_rpa" id="input_tipo_documento"> 
+                                <option value="Cédula">Cédula</option> 
+                                <option value="Pasaporte">Pasaporte</option> 
+                            </select>
+                        </div>
+                        <svg id="restablecer_tipo_documento" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
+                                <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
+                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
+                                </g>
                         </svg>
                     </div>
                     <div class ="contenedores_formulario">
                         <label class="label_formulario" >*NÚMERO DOCUMENTO:</label>
                         <div class ="input_con_alerta">
-                            <input class="input_formulario" type="text" id="input_numero_documento_rpa" maxlength="10">
-                            <label class="label_alerta" id="alerta_numero_documento_rpa">NÚMERO DE DOCUMENTO YA UTILIZADO</label>
-                            <label class="label_alerta" id="alerta_numero_documento_2_rpa">CAMPO REQUERIDO</label>
+                            <input class="input_formulario" type="text" id="input_numero_documento" maxlength="10">
+                            <label class="label_alerta" id="alerta_numero_documento">NÚMERO DE DOCUMENTO YA UTILIZADO</label>
+                            <label class="label_alerta" id="alerta_numero_documento_2">CAMPO REQUERIDO - MINIMO 10 CARACTERES</label>
                         </div>
                         <svg id="restablecer_numero_documento" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>
                     <div class ="contenedores_formulario">
-                        <label class="label_formulario" >*PRIMER NOMBRE:</label>
+                        <label class="label_formulario" >*USUARIO:</label>
                         <div class ="input_con_alerta">
-                            <input class="input_formulario" type="text" id="input_nombre_1_rpa" maxlength="25">
+                            <input class="input_formulario" type="text" id="input_usuario" maxlength="10">
+                            <label class="label_alerta" id="alerta_usuario">USUARIO YA UTILIZADO</label>
+                            <label class="label_alerta" id="alerta_usuario_2">CAMPO REQUERIDO - MINIMO 4 CARACTERES</label>
+                        </div>
+                        <svg id="restablecer_usuario" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
+                            <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
+                            <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
+                            </g>
+                    </svg>
+                    </div>
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*CONTRASEÑA:</label>
+                        <div class ="input_con_alerta contenedor_contrasena">
+                            <input class="input_formulario" type="password" id="input_contrasena_1" maxlength="16">
+                            <label class="label_alerta" id="alerta_contrasena_1">CAMPO REQUERIDO - MINIMO 8 CARACTERES</label>
+                        </div>
+                        <svg id="ocultar_contrasena_1"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="boton_restablecer boton_opcion_mostrar_contrasena bi bi-eye-slash" viewBox="0 0 16 16">
+                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                          </svg>
+                        <svg id="mostrar_contrasena_1"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="boton_restablecer boton_opcion_mostrar_contrasena bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                          </svg>
+                        <svg id="restablecer_contrasena_1" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
+                            <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
+                            <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
+                            </g>
+                    </svg>
+                    </div>
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >*CONFIRMAR:</label>
+                        <div class ="input_con_alerta contenedor_contrasena">
+                            <input class="input_formulario" type="password" id="input_contrasena_2" maxlength="16">
+                            <label class="label_alerta" id="alerta_contrasena_2">NO COINCIDE CONTRASEÑA</label>
+                        </div>
+                        <svg id="ocultar_contrasena_2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="boton_restablecer boton_opcion_mostrar_contrasena bi bi-eye-slash" viewBox="0 0 16 16">
+                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                          </svg>
+                        <svg id="mostrar_contrasena_2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="boton_restablecer boton_opcion_mostrar_contrasena bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                          </svg>
+                          <svg id="restablecer_contrasena_2" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
+                            <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
+                            <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
+                            </g>
+                    </svg>
+                    </div>
+                    
+
+
+                    <div class ="contenedores_formulario">
+                        <label class="label_formulario" >PRIMER NOMBRE:</label>
+                        <div class ="input_con_alerta">
+                            <input class="input_formulario" type="text" id="input_nombre_1" maxlength="25">
                             <label class="label_alerta" id="alerta_nombre_1_rpa">CAMPO REQUERIDO</label>
                         </div>
                         <svg id="restablecer_nombre_1" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div> 
                     <div class ="contenedores_formulario">
                         <label class="label_formulario" >SEGUNDO NOMBRES:</label>
-                        <input class="input_formulario" type="text" id="input_nombre_2_rpa" maxlength="25">
+                        <input class="input_formulario" type="text" id="input_nombre_2" maxlength="25">
                         <svg id="restablecer_nombre_2" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>  
                     <div class ="contenedores_formulario">
-                        <label class="label_formulario" >*PRIMER APELLIDOS:</label>
+                        <label class="label_formulario" >PRIMER APELLIDOS:</label>
                         <div class ="input_con_alerta">
-                            <input class="input_formulario" type="text" id="input_apellido_1_rpa" maxlength="16">
+                            <input class="input_formulario" type="text" id="input_apellido_1" maxlength="16">
                             <label class="label_alerta" id="alerta_apellido_1_rpa">CAMPO REQUERIDO</label>
                         </div>
                         <svg id="restablecer_apellido_1" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>  
                     <div class ="contenedores_formulario">
                         <label class="label_formulario" >SEGUNDO APELLIDOS:</label>
-                        <input class="input_formulario" type="text" id="input_apellido_2_rpa" maxlength="16">
+                        <input class="input_formulario" type="text" id="input_apellido_2" maxlength="16">
                         <svg id="restablecer_apellido_2" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>   
                     <div class ="contenedores_formulario">
-                        <label class="label_formulario" >*SEXO:</label>
+                        <label class="label_formulario" >SEXO:</label>
                         <div class ="input_con_alerta">
-                            <select class="input_formulario input_lista_opciones_rpa" id="input_sexo_rpa"> 
+                            <select class="input_formulario input_lista_opciones_rpa" id="input_sexo"> 
                                 <option value="" selected></option> 
                                 <option value="Hombre">Hombre</option> 
                                 <option value="Mujer">Mujer</option> 
@@ -112,116 +190,109 @@
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>  
                     <div class ="contenedores_formulario">
                         <label class="label_formulario" >CORREO:</label>
-                        <input class="input_formulario" type="email" id="input_correo_rpa" maxlength="35">
+                        <input class="input_formulario" type="email" id="input_correo" maxlength="35">
                         <svg id="restablecer_correo" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>  
                     <div class ="contenedores_formulario">
-                        <label class="label_formulario" >*TELÉFONO:</label>
+                        <label class="label_formulario" >TELÉFONO:</label>
                         <div class ="input_con_alerta">
-                            <input class="input_formulario" type="text" id="input_telefono_1_rpa" maxlength="15">
+                            <input class="input_formulario" type="text" id="input_telefono_1" maxlength="15">
                             <label class="label_alerta" id="alerta_telefono_1_rpa">TELÉFONO DEBE CONTENER MÍNIMO 10 NÚMEROS</label>
                         </div>
                         <svg id="restablecer_telefono_1" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>  
                     
                     <div class ="contenedores_formulario">
                         <label class="label_formulario" >CONVENCIONAL:</label>
-                        <input class="input_formulario" type="text" id="input_telefono_2_rpa" maxlength="11">
-                        <svg id="restablecer_convencional" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
+                        <input class="input_formulario" type="text" id="input_telefono_2" maxlength="11">
+                        <svg id="restablecer_telefono_2" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>  
                     <div class ="contenedores_formulario">
-                        <label class="label_formulario" >*FECHA NACIMIENTO:</label>
+                        <label class="label_formulario" >FECHA NACIMIENTO:</label>
                         <div class ="input_con_alerta">
-                            <input class="input_formulario" id="input_fecha_nacimiento_rpa" maxlength="10">
-                            <label class="label_alerta" id="alerta_fecha_nacimiento_rpa">FECHA NACIMIENTO NO VALIDA</label>
+                            <input class="input_formulario" id="input_fecha_nacimiento" maxlength="10">
+                            <label class="label_alerta" id="alerta_fecha_nacimiento">FECHA NACIMIENTO NO VALIDA</label>
                         </div>
                         <svg id="restablecer_fecha_nacimiento" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
-                    </div> 
+                    </svg>
+                    </div>
+                    
+                    
+
+
+
+
                     <div class ="contenedores_formulario">
-                        <label class="label_formulario" >OCUPACION:</label>
-                        <input class="input_formulario" type="text" id="input_ocupacion_rpa" maxlength="16">
-                        <svg id="restablecer_ocupacion" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
+                        <label class="label_formulario" >CARGO:</label>
+                        <div class ="input_con_alerta">
+                            <select class="input_formulario" id="input_cargo"> 
+                                <option value="" selected></option>
+                                <option value="Doctor">Doctor</option> 
+                                <option value="Enfermeria">Enfermer@</option> 
+                            </select>
+                        </div>
+                        <svg id="restablecer_cargo" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
-                    </div>  
+                    </svg>
+                    </div>   
                     <div class ="contenedores_formulario">
-                        <label class="label_formulario" >PROVINCIA:</label>
-                        <select class="input_formulario" id="input_provincia_rpa"> 
-                            <option value="" selected></option> 
-                            <option value="Esmeraldas">Esmeraldas</option>
-                            <option value="Azuay">Azuay</option>
-                            <option value="Bolívar">Bolívar</option>
-                            <option value="Cañar">Cañar</option>
-                            <option value="Carchi">Carchi</option>
-                            <option value="Chimborazo">Chimborazo</option>
-                            <option value="Cotopaxi">Cotopaxi</option>
-                            <option value="El Oro">El Oro</option>
-                            <option value="Galápagos">Galápagos</option>
-                            <option value="Guayas">Guayas</option>
-                            <option value="Imbabura">Imbabura</option>
-                            <option value="Loja">Loja</option>
-                            <option value="Los Rios">Los Rios</option>
-                            <option value="Manabí">Manabí</option>
-                            <option value="Morona Santiago">Morona Santiago</option>
-                            <option value="Napo">Napo</option>
-                            <option value="Orellana">Orellana</option>
-                            <option value="Pastaza">Pastaza</option>
-                            <option value="Pichincha">Pichincha</option>
-                            <option value="Santa Elena">Santa Elena</option>
-                            <option value="Santo Domingo de los Tsáchilas">Santo Domingo de los Tsáchilas</option>
-                            <option value="Sucumbíos">Sucumbíos</option>
-                            <option value="Tungurahua">Tungurahua</option>
-                            <option value="Zamora Chinchipe">Zamora Chinchipe</option>
-                        </select>
-                        <svg id="restablecer_provincia" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
+                        <label class="label_formulario" >ESPECIALIDAD:</label>
+                        <div class ="input_con_alerta">
+                            <select class="input_formulario" id="input_especialidad"> 
+                                <option value="" selected></option>   
+                                <option value="Medicina General" >Medicina General</option> 
+                                <option value="Cardiologia">Cardiologia</option> 
+                                <option value="Cirugía general">Cirugía general</option> 
+                                <option value="Cirugía vascular">Cirugía vascular</option> 
+                                <option value="Dermatología">Dermatología</option> 
+                                <option value="Fisiatría">Fisiatría</option> 
+                                <option value="Ginecología">Ginecología</option> 
+                                <option value="Medicina Familiar">Medicina familiar</option>
+                                <option value="Neurología">Neurología</option> 
+                                <option value="Otorrinolaringologia">Otorrinolaringologia</option> 
+                                <option value="Pediatría">Pediatría</option> 
+                                <option value="Psicología">Psicología</option> 
+                                <option value="Psiquiatría">Psiquiatría</option> 
+                                <option value="Psicorehabilitación">Psicorehabilitación</option> 
+                                <option value="Traumatología">Traumatología</option> 
+                                <option value="Urología">Urología</option> 
+                            </select>
+                        </div>
+                        
+                        <svg id="restablecer_especialidad" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
                             <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
                             </g>
-                        </svg>
+                    </svg>
                     </div>  
-                    <div class ="contenedores_formulario">
-                        <label class="label_formulario" >CANTON:</label>
-                        <select class="input_formulario input_lista_opciones_rpa" id="input_canton_rpa" disabled="disabled"> 
-                        </select>
-                        <svg id="restablecer_canton" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
-                            <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
-                            <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                            </g>
-                        </svg>
-                    </div>  
-                    <div class ="contenedores_formulario">
-                        <label class="label_formulario" >DIRECCION:</label>
-                        <textarea class="input_formulario" type="text" id="input_direccion_rpa" maxlength="200"></textarea>
-                        <svg id="restablecer_direccion" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" class="boton_restablecer " preserveAspectRatio="xMidYMid meet">
-                            <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
-                            <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                            </g>
-                        </svg>
-                    </div>  
+                    
+                    
+
+
+
                     <div class ="contenedores_formulario contenedor_boton_guardar">
-                        <button class="botones_guardar" id="ejecutar_guardar_inferior_rpa">
+                        <button class="botones_guardar" id="ejecutar_guardar_inferior">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
                                 <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
                                 </polyline>
@@ -258,34 +329,57 @@ modal confirmar registro y esperar
                 <label>Espere por favor...</label>
             </div>
         </div>
-        <div id="mensaje_alerta_rpa">
-            <div class ="interior_confirmar_registro_rpa interior_confirmar_registro_superior_rpa" id="interior_alerta_botones_rpa">
-                <label  class="mensaje_formulario_rpa" id="label_mensaje_alerta_superior_rpa">USUARIO REGISTRADO CON EXITO</label>
+        
+        <div id="confirmar_guardado" class="diseno_confirmar">
+            <div class ="interior_confirmar_registro_pp interior_confirmar_registro_superior_pp" id="">
+                <label class="mensaje_formulario_pp" >GUARDAR LOS CAMBIOS?</label>
             </div>
-            <div class ="interior_alerta_rpa interior_alerta_botones_rpa" id="">
-                <button class="mensaje_alerta_boton_rpa" id="boton_alerta_cofirmar_rpa">ACEPTAR</button>
+            <div class ="interior_confirmar_registro_pp interior_confirmar_registro_botones_pp" id="">
+                <button class="interior_botones_confimrar_pp" id="boton_confirmar_aceptar_pp">ACEPTAR</button>
+                <button class="interior_botones_confimrar_pp" id="boton_confirmar_cancelar_pp">CANCELAR</button>
             </div>
         </div>
+        
+        <div id="mensaje_alerta" class="diseno_confirmar">
+            <div class ="interior_confirmar_registro_pp interior_confirmar_registro_superior_pp" id="">
+                <label  class="mensaje_formulario_rpa" id="label_mensaje_alerta_superior_rpa"></label>
+            </div>
+            <div class ="interior_confirmar_registro_pp interior_confirmar_registro_botones_pp" id="">
+                <button class="interior_botones_confimrar_pp" id="boton_alerta_aceptar_pp">ACEPTAR</button>
+            </div>
+        </div>
+
+
+
+
+
+
+        
+
+
+
     </div>
 
 
     </body>
 
     <script type="text/javascript" src="importar.js"></script>
-    <script type="text/javascript" src="verificar_datos.js"></script>
+    <script type="text/javascript" src="verificar_datos_2.js"></script>
     <link rel="stylesheet" href="estilos/estilo.css" type="text/css">
+    <link rel="stylesheet" href="diseno_checkbox.css" type="text/css">
     <script type="text/javascript" src="estilos/estilo.js"></script>
     <link rel="stylesheet" href="diseño_tablas.css" type="text/css">
     <link rel="stylesheet" href="opciones_tabla.css" type="text/css">
     <link rel="stylesheet" href="diseño_opciones_tabla.css" type="text/css">
     <script type="text/javascript" src="diseño_opciones_tabla.js"></script>
     <link rel="stylesheet" href="estilos/modal_general.css" type="text/css">
+    <link rel="stylesheet" href="diseno_confirmar.css" type="text/css">
 
-    <link rel="stylesheet" href="nuevo_paciente.css" type="text/css">
+    <link rel="stylesheet" href="nuevo_personal.css" type="text/css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="librerias/jquery-3.6.0.js"></script>
     <script src="librerias/jquery-ui.js"></script>
     <link rel="stylesheet" href="librerias/jquery-ui-1.13.1/jquery-ui-1.13.1/jquery-ui.css">
     <script src="librerias/igorescobar-jQuery-Mask-Plugin-535b4e4/jquery.mask.js"></script>
-    <script type="text/javascript" src="nuevo_paciente.js"></script>
+    <script type="text/javascript" src="nuevo_personal.js"></script>
 </html>

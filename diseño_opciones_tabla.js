@@ -5,6 +5,7 @@ function desresaltar(numero){
     $('.fila_selecionada_'+numero).css('background-color', '#1f2f98');
 }
 
+
 function resaltar_editar(numero){
     $('.diseño_editar_'+numero).css('color', color_1_editar);
     $('.diseño_editar_'+numero).css('fill', color_1_editar);
@@ -13,6 +14,22 @@ function desresaltar_editar(numero){
     $('.diseño_editar_'+numero).css('color', color_blanco);
     $('.diseño_editar_'+numero).css('fill', color_blanco);
 }
+function resaltar_descargar(numero){
+    $('.diseño_descargar_'+numero).css('color', color_1_descargar);
+    $('.diseño_descargar_'+numero).css('fill', color_1_descargar);
+}
+function desresaltar_descargar(numero){
+    $('.diseño_descargar_'+numero).css('color', color_blanco);
+    $('.diseño_descargar_'+numero).css('fill', color_blanco);
+}
+function resaltar_pass(numero){
+    $('.diseño_pass_'+numero).css('color', color_1_pass);
+    $('.diseño_pass_'+numero).css('fill', color_1_pass);
+}
+function desresaltar_pass(numero){
+    $('.diseño_pass_'+numero).css('color', color_blanco);
+    $('.diseño_pass_'+numero).css('fill', color_blanco);
+}  
 function resaltar_archivar(numero){
     $('.diseño_archivar_'+numero).css('color', color_1_archivar);
     $('.diseño_archivar_'+numero).css('fill', color_1_archivar);
