@@ -3,7 +3,8 @@
     display: inline-table;*/
     width: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    /*justify-content: space-between;*/
     padding: 0 5px;
 }
 .iconos_tabla_accion>svg{

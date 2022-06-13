@@ -1,5 +1,8 @@
 var ids_tabla = [];
 function llenar_tabla_personal_con_espera() {
+  $('th').css({"animation-name": "indicar_buscar"});
+  $('th').css({"animationDuration": "600ms"});
+  $('th').css({"animationIterationCount": "infinite"});
     var parametros_rp = {
         "tipo": "tppad",
         "habilitado": document.getElementById("buscar_habilitado").value,
@@ -25,6 +28,7 @@ function llenar_tabla_personal_con_espera() {
                 ids_tabla = JSON.parse(division_respuesta[1]); 
                 document.getElementById("contenido_esperar_pp").style.display = "none"; 
                 document.getElementById("modal_pp").style.display =  "none";
+                $('th').css({"animation-name": "none"});
             } 
         }
     });

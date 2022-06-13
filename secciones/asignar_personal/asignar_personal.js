@@ -2,6 +2,11 @@ var id_historial_seleccionado = "";
 var id_personal_seleccionado = "";
 var ids_tabla_user = [];
 function llenar_tabla_de_usuarios() {
+  $('th').css({"animation-name": "indicar_buscar"});
+  $('th').css({"animationDuration": "600ms"});
+  $('th').css({"animationIterationCount": "infinite"});
+  /*$(".resultados_de_tablas_user").detach();
+  $(".datos_volatiles_pp").detach();*/
     document.getElementById("boton_confirmar_cofirmar_asignar_pp").hidden=true;
     var parametros_rp = {
         "tipo": "tbusasi",
@@ -23,12 +28,18 @@ function llenar_tabla_de_usuarios() {
                 ids_tabla_user = JSON.parse(division_respuesta[1]); 
                 $(".datos_volatiles_pp").detach();
                 $("#informacion_de_historial_pp").append(response); 
+                $('th').css({"animation-name": "none"});
             }
                 
         }
     });
 }
 function llenar_tabla_de_usuarios_con_esperar() {
+  $('th').css({"animation-name": "indicar_buscar"});
+  $('th').css({"animationDuration": "600ms"});
+  $('th').css({"animationIterationCount": "infinite"});
+  /*$(".resultados_de_tablas_user").detach();
+  $(".datos_volatiles_pp").detach();*/
     document.getElementById("boton_confirmar_cofirmar_asignar_pp").hidden=true;
     var parametros_rp = {
         "tipo": "tbusasi",
@@ -52,6 +63,7 @@ function llenar_tabla_de_usuarios_con_esperar() {
                 $("#informacion_de_historial_pp").append(response); 
                 document.getElementById("contenido_asignar_personal").style.display = "inline-block";
                 document.getElementById("contenido_esperar_pp").style.display = "none";
+                $('th').css({"animation-name": "none"});
             }
                 
         }

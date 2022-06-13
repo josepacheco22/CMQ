@@ -132,9 +132,6 @@ $( "#input_numero_documento_rpa").blur(function() {
     document.getElementById("alerta_numero_documento_2_rpa").style.display = "none";
     document.getElementById("alerta_numero_documento_rpa").style.display = "none";
     funcion_verificar_numero_documento();
-    
-
-    // tu codigo ajax va dentro de esta function...
 });
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -582,3 +579,92 @@ document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
 document.getElementById("ejecutar_borrar_todo_rpa").onclick = function(){
     regresar_inputs_normalidad_rp();
 };
+
+
+
+
+
+
+
+document.getElementById("restablecer_tipo_documento").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_tipo_documento_rpa").options.item(0).selected = 'selected';
+};
+document.getElementById("restablecer_numero_documento").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_numero_documento_rpa").style.animationName = "none";
+    document.getElementById("alerta_numero_documento_rpa").style.display = "none";
+    document.getElementById("alerta_numero_documento_2_rpa").style.display = "none";
+    document.getElementById("input_numero_documento_rpa").style.border= "3px solid "+color_1_formulario;
+                
+    document.getElementById("input_numero_documento_rpa").value="";
+};
+document.getElementById("restablecer_nombre_1").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("alerta_nombre_1_rpa").style.display = "none";
+    document.getElementById("input_nombre_1_rpa").style.border= "3px solid "+color_1_formulario;
+    document.getElementById("input_nombre_1_rpa").value="";
+};
+document.getElementById("restablecer_nombre_2").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_nombre_2_rpa").value="";
+};
+document.getElementById("restablecer_apellido_1").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("alerta_apellido_1_rpa").style.display = "none";
+    document.getElementById("input_apellido_1_rpa").style.border= "3px solid "+color_1_formulario;
+    document.getElementById("input_apellido_1_rpa").value="";
+};
+document.getElementById("restablecer_apellido_2").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_apellido_2_rpa").value="";
+};
+document.getElementById("restablecer_sexo").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("alerta_sexo_rpa").style.display = "none";
+    document.getElementById("input_sexo_rpa").style.border= "3px solid "+color_1_formulario;
+    document.getElementById("input_sexo_rpa").options.item(0).selected = 'selected';
+};
+document.getElementById("restablecer_correo").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_correo_rpa").value="";
+};
+document.getElementById("restablecer_telefono_1").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("alerta_telefono_1_rpa").style.display = "none";
+    document.getElementById("input_telefono_1_rpa").style.border= "3px solid "+color_1_formulario;
+    document.getElementById("input_telefono_1_rpa").value="";
+};
+document.getElementById("restablecer_convencional").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_telefono_2_rpa").value="";
+};
+document.getElementById("restablecer_fecha_nacimiento").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("alerta_fecha_nacimiento_rpa").style.display = "none";
+    document.getElementById("input_fecha_nacimiento_rpa").style.border= "3px solid "+color_1_formulario;
+    document.getElementById("input_fecha_nacimiento_rpa").value="";
+};
+document.getElementById("restablecer_ocupacion").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_ocupacion_rpa").value="";
+};
+document.getElementById("restablecer_provincia").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_provincia_rpa").options.item(0).selected = 'selected';
+    $(".limpiar_select").detach();
+    document.getElementById("input_canton_rpa").disabled = true;
+};
+document.getElementById("restablecer_canton").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_provincia_rpa").options.item(0).selected = 'selected';
+    $(".limpiar_select").detach();
+    document.getElementById("input_canton_rpa").disabled = true;
+};
+document.getElementById("restablecer_direccion").onclick = function(){
+    document.getElementById("alerta_general_rpa").style.display = "none";
+    document.getElementById("input_direccion_rpa").value="";
+};
+
+
+

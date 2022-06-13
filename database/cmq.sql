@@ -1,176 +1,271 @@
-/*
- Navicat Premium Data Transfer
+-- ----------------------------------------------------------------------------
+-- MySQL Workbench Migration
+-- Migrated Schemata: cmq
+-- Source Schemata: cmq
+-- Created: Sun Jun 12 23:10:02 2022
+-- ----------------------------------------------------------------------------
 
- Source Server         : JAPZ
- Source Server Type    : MySQL
- Source Server Version : 100424
- Source Host           : 192.168.1.26:3306
- Source Schema         : cmq
+SET FOREIGN_KEY_CHECKS = 0;;
 
- Target Server Type    : MySQL
- Target Server Version : 100424
- File Encoding         : 65001
+-- ----------------------------------------------------------------------------
+-- Schema cmq
+-- ----------------------------------------------------------------------------
+DROP SCHEMA IF EXISTS `cmq` ;
+CREATE SCHEMA IF NOT EXISTS `cmq` ;
 
- Date: 05/05/2022 17:48:11
-*/
+-- ----------------------------------------------------------------------------
+-- Table cmq.historia_archivado
+-- ----------------------------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `cmq`.`historia_archivado` (
+  `id` INT(10) NOT NULL AUTO_INCREMENT ,
+  `fecha_creacion` DATE NULL DEFAULT NULL ,
+  `id_creado_usuario` VARCHAR(60) NULL DEFAULT NULL ,
+  `creado_usuario` VARCHAR(50) NULL DEFAULT NULL ,
+  `id_h` INT(6) NULL DEFAULT NULL ,
+  `fecha_consulta_h` DATE NULL DEFAULT NULL ,
+  `peso_h` INT(11) NULL DEFAULT NULL ,
+  `talla_h` INT(11) NULL DEFAULT NULL ,
+  `pulso_h` INT(11) NULL DEFAULT NULL ,
+  `presion_arterial_h` VARCHAR(10) NULL DEFAULT NULL ,
+  `temperatura_h` INT(11) NULL DEFAULT NULL ,
+  `frecuencia_respiratoria_h` VARCHAR(10) NULL DEFAULT NULL ,
+  `primera_consulta_h` DATE NULL DEFAULT NULL ,
+  `motivo_consulta_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `enfermedad_actual_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `revisin_sistemas_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `a_p_p_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `a_p_f_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `examen_fisico_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `impresión_diagnostica_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `examenes_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `diagnostico_definitivo_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `tratamiento_h` VARCHAR(200) NULL DEFAULT NULL ,
+  `archivado_h` BIT(1) NULL DEFAULT NULL ,
+  `edad_h` VARCHAR(10) NULL DEFAULT NULL ,
+  `id_paci` VARCHAR(60) NULL DEFAULT NULL ,
+  `tipo_documento_paci` VARCHAR(15) NULL DEFAULT NULL ,
+  `fecha_creacion_paci` DATE NULL DEFAULT NULL ,
+  `numero_documento_paci` VARCHAR(15) NULL DEFAULT NULL ,
+  `nombre_1_paci` VARCHAR(50) NULL DEFAULT NULL ,
+  `nombre_2_paci` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_1_paci` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_2_paci` VARCHAR(50) NULL DEFAULT NULL ,
+  `sexo_paci` VARCHAR(10) NULL DEFAULT NULL ,
+  `correo_paci` VARCHAR(50) NULL DEFAULT NULL ,
+  `telefono_1_paci` VARCHAR(25) NULL DEFAULT NULL ,
+  `telefono_2_paci` VARCHAR(25) NULL DEFAULT NULL ,
+  `fecha_nacimiento_paci` DATE NULL DEFAULT NULL ,
+  `provincia_paci` VARCHAR(25) NULL DEFAULT NULL ,
+  `canton_paci` VARCHAR(25) NULL DEFAULT NULL ,
+  `direccion_paci` VARCHAR(200) NULL DEFAULT NULL ,
+  `ocupacion_paci` VARCHAR(50) NULL DEFAULT NULL ,
+  `id_pcpaci` VARCHAR(60) NULL DEFAULT NULL ,
+  `tipo_documento_pcpaci` VARCHAR(15) NULL DEFAULT NULL ,
+  `numero_documento_pcpaci` VARCHAR(10) NULL DEFAULT NULL ,
+  `nombre_1_pcpaci` VARCHAR(50) NULL DEFAULT NULL ,
+  `nombre_2_pcpaci` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_1_pcpaci` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_2_pcpaci` VARCHAR(50) NULL DEFAULT NULL ,
+  `sexo_pcpaci` VARCHAR(10) NULL DEFAULT NULL ,
+  `correo_pcpaci` VARCHAR(50) NULL DEFAULT NULL ,
+  `telefono_1_pcpaci` VARCHAR(25) NULL DEFAULT NULL ,
+  `telefono_2_pcpaci` VARCHAR(25) NULL DEFAULT NULL ,
+  `fecha_nacimiento_pcpaci` DATE NULL DEFAULT NULL ,
+  `cargo_pcpaci` VARCHAR(200) NULL DEFAULT NULL ,
+  `especialidad_pcpaci` VARCHAR(50) NULL DEFAULT NULL ,
+  `miniatura_pcpaci` VARCHAR(200) NULL DEFAULT NULL ,
+  `foto_pcpaci` VARCHAR(200) NULL DEFAULT NULL ,
+  `nombre_usuario_pcpaci` VARCHAR(60) NULL DEFAULT NULL ,
+  `permisos_pcpaci` INT(11) NULL DEFAULT NULL ,
+  `id_pc` VARCHAR(60) NULL DEFAULT NULL ,
+  `tipo_documento_pc` VARCHAR(15) NULL DEFAULT NULL ,
+  `numero_documento_pc` VARCHAR(10) NULL DEFAULT NULL ,
+  `nombre_1_pc` VARCHAR(50) NULL DEFAULT NULL ,
+  `nombre_2_pc` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_1_pc` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_2_pc` VARCHAR(50) NULL DEFAULT NULL ,
+  `sexo_pc` VARCHAR(10) NULL DEFAULT NULL ,
+  `correo_pc` VARCHAR(50) NULL DEFAULT NULL ,
+  `telefono_1_pc` VARCHAR(25) NULL DEFAULT NULL ,
+  `telefono_2_pc` VARCHAR(25) NULL DEFAULT NULL ,
+  `fecha_nacimiento_pc` DATE NULL DEFAULT NULL ,
+  `cargo_pc` VARCHAR(200) NULL DEFAULT NULL ,
+  `especialidad_pc` VARCHAR(50) NULL DEFAULT NULL ,
+  `miniatura_pc` VARCHAR(200) NULL DEFAULT NULL ,
+  `foto_pc` VARCHAR(200) NULL DEFAULT NULL ,
+  `nombre_usuario_upc` VARCHAR(60) NULL DEFAULT NULL ,
+  `permisos_upc` INT(11) NULL DEFAULT NULL ,
+  `id_pa` VARCHAR(60) NULL DEFAULT NULL ,
+  `tipo_documento_pa` VARCHAR(15) NULL DEFAULT NULL ,
+  `numero_documento_pa` VARCHAR(10) NULL DEFAULT NULL ,
+  `nombre_1_pa` VARCHAR(50) NULL DEFAULT NULL ,
+  `nombre_2_pa` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_1_pa` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_2_pa` VARCHAR(50) NULL DEFAULT NULL ,
+  `sexo_pa` VARCHAR(10) NULL DEFAULT NULL ,
+  `correo_pa` VARCHAR(50) NULL DEFAULT NULL ,
+  `telefono_1_pa` VARCHAR(25) NULL DEFAULT NULL ,
+  `telefono_2_pa` VARCHAR(25) NULL DEFAULT NULL ,
+  `fecha_nacimiento_pa` DATE NULL DEFAULT NULL ,
+  `cargo_pa` VARCHAR(200) NULL DEFAULT NULL ,
+  `especialidad_pa` VARCHAR(50) NULL DEFAULT NULL ,
+  `miniatura_pa` VARCHAR(200) NULL DEFAULT NULL ,
+  `foto_pa` VARCHAR(200) NULL DEFAULT NULL ,
+  `nombre_usuario_upa` VARCHAR(60) NULL DEFAULT NULL ,
+  `permisos_upa` INT(11) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 19
+DEFAULT CHARACTER SET = utf8mb4;
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+-- ----------------------------------------------------------------------------
+-- Table cmq.historia_clinica
+-- ----------------------------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `cmq`.`historia_clinica` (
+  `id` INT(6) NOT NULL AUTO_INCREMENT ,
+  `habilitado` BIT(1) NULL DEFAULT NULL ,
+  `id_paciente` VARCHAR(60) NULL DEFAULT NULL ,
+  `id_personal_creado` VARCHAR(60) NULL DEFAULT NULL ,
+  `id_personal_asignado` VARCHAR(60) NULL DEFAULT NULL ,
+  `fecha_consulta` DATE NULL DEFAULT NULL ,
+  `peso` INT(11) NULL DEFAULT NULL ,
+  `talla` INT(11) NULL DEFAULT NULL ,
+  `pulso` INT(11) NULL DEFAULT NULL ,
+  `presion_arterial` VARCHAR(10) NULL DEFAULT NULL ,
+  `temperatura` INT(11) NULL DEFAULT NULL ,
+  `frecuencia_respiratoria` VARCHAR(10) NULL DEFAULT NULL ,
+  `primera_consulta` DATE NULL DEFAULT NULL ,
+  `motivo_consulta` VARCHAR(200) NULL DEFAULT NULL ,
+  `enfermedad_actual` VARCHAR(200) NULL DEFAULT NULL ,
+  `revisin_sistemas` VARCHAR(200) NULL DEFAULT NULL ,
+  `a_p_p` VARCHAR(200) NULL DEFAULT NULL ,
+  `a_p_f` VARCHAR(200) NULL DEFAULT NULL ,
+  `examen_fisico` VARCHAR(200) NULL DEFAULT NULL ,
+  `impresión_diagnostica` VARCHAR(200) NULL DEFAULT NULL ,
+  `examenes` VARCHAR(200) NULL DEFAULT NULL ,
+  `diagnostico_definitivo` VARCHAR(200) NULL DEFAULT NULL ,
+  `tratamiento` VARCHAR(200) NULL DEFAULT NULL ,
+  `archivado` BIT(1) NULL DEFAULT NULL ,
+  `edad` VARCHAR(10) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `id_paciente` (`id_paciente` ASC) ,
+  INDEX `id_personal_creado` (`id_personal_creado` ASC) ,
+  INDEX `id_personal_asignado` (`id_personal_asignado` ASC) ,
+  CONSTRAINT `historia_clinica_ibfk_1`
+    FOREIGN KEY (`id_paciente` )
+    REFERENCES `cmq`.`pacientes` (`id` ),
+  CONSTRAINT `historia_clinica_ibfk_2`
+    FOREIGN KEY (`id_personal_creado` )
+    REFERENCES `cmq`.`personal` (`id` ),
+  CONSTRAINT `historia_clinica_ibfk_3`
+    FOREIGN KEY (`id_personal_asignado` )
+    REFERENCES `cmq`.`personal` (`id` ))
+ENGINE = InnoDB
+AUTO_INCREMENT = 44
+DEFAULT CHARACTER SET = utf8mb4;
 
--- ----------------------------
--- Table structure for historia_clinica
--- ----------------------------
-CREATE TABLE `historia_clinica`  (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `habilitado` bit(1) NULL DEFAULT NULL,
-  `id_paciente` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `id_personal_creado` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `id_personal_asignado` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `fecha_consulta` date NULL DEFAULT NULL,
-  `peso` int(11) NULL DEFAULT NULL,
-  `talla` int(11) NULL DEFAULT NULL,
-  `pulso` int(11) NULL DEFAULT NULL,
-  `presion_arterial` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `temperatura` int(11) NULL DEFAULT NULL,
-  `frecuencia_respiratoria` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `primera_consulta` date NULL DEFAULT NULL,
-  `motivo_consulta` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `enfermedad_actual` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `revisin_sistemas` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `a_p_p` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `a_p_f` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `examen_fisico` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `impresión_diagnostica` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `examenes` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `diagnostico_definitivo` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `tratamiento` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `archivado` bit(1) NULL DEFAULT NULL,
-  `edad` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `id_paciente`(`id_paciente`) USING BTREE,
-  INDEX `id_personal_creado`(`id_personal_creado`) USING BTREE,
-  INDEX `id_personal_asignado`(`id_personal_asignado`) USING BTREE,
-  CONSTRAINT `historia_clinica_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `historia_clinica_ibfk_2` FOREIGN KEY (`id_personal_creado`) REFERENCES `personal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `historia_clinica_ibfk_3` FOREIGN KEY (`id_personal_asignado`) REFERENCES `personal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2147483648 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+-- ----------------------------------------------------------------------------
+-- Table cmq.pacientes
+-- ----------------------------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `cmq`.`pacientes` (
+  `id` VARCHAR(60) NOT NULL ,
+  `tipo_documento` VARCHAR(15) NULL DEFAULT NULL ,
+  `habilitado` BIT(1) NULL DEFAULT NULL ,
+  `id_personal_creado` VARCHAR(60) NULL DEFAULT NULL ,
+  `fecha_creacion` DATE NULL DEFAULT NULL ,
+  `numero_documento` VARCHAR(15) NOT NULL ,
+  `nombre_1` VARCHAR(50) NULL DEFAULT NULL ,
+  `nombre_2` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_1` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_2` VARCHAR(50) NULL DEFAULT NULL ,
+  `sexo` VARCHAR(10) NULL DEFAULT NULL ,
+  `correo` VARCHAR(50) NULL DEFAULT NULL ,
+  `telefono_1` VARCHAR(25) NULL DEFAULT NULL ,
+  `telefono_2` VARCHAR(25) NULL DEFAULT NULL ,
+  `fecha_nacimiento` DATE NULL DEFAULT NULL ,
+  `provincia` VARCHAR(25) NULL DEFAULT NULL ,
+  `canton` VARCHAR(25) NULL DEFAULT NULL ,
+  `direccion` VARCHAR(200) NULL DEFAULT NULL ,
+  `ocupacion` VARCHAR(50) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `numero_documento` (`numero_documento` ASC) ,
+  INDEX `id_personal_creado` (`id_personal_creado` ASC) ,
+  FULLTEXT INDEX `tipo_documento` (`tipo_documento` ASC, `id_personal_creado` ASC, `numero_documento` ASC, `nombre_1` ASC, `apellido_1` ASC, `canton` ASC) ,
+  FULLTEXT INDEX `tipo_documento_2` (`tipo_documento` ASC, `id_personal_creado` ASC, `numero_documento` ASC, `nombre_1` ASC, `apellido_1` ASC, `canton` ASC) ,
+  FULLTEXT INDEX `tipo_documento_3` (`tipo_documento` ASC, `id_personal_creado` ASC, `numero_documento` ASC, `nombre_1` ASC, `apellido_1` ASC, `canton` ASC) ,
+  CONSTRAINT `pacientes_ibfk_1`
+    FOREIGN KEY (`id_personal_creado` )
+    REFERENCES `cmq`.`personal` (`id` ))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
--- ----------------------------
--- Records of historia_clinica
--- ----------------------------
+-- ----------------------------------------------------------------------------
+-- Table cmq.personal
+-- ----------------------------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `cmq`.`personal` (
+  `id` VARCHAR(60) NOT NULL ,
+  `habilitado` BIT(1) NULL DEFAULT NULL ,
+  `tipo_documento` VARCHAR(15) NULL DEFAULT NULL ,
+  `numero_documento` VARCHAR(10) NULL DEFAULT NULL ,
+  `nombre_1` VARCHAR(50) NULL DEFAULT NULL ,
+  `nombre_2` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_1` VARCHAR(50) NULL DEFAULT NULL ,
+  `apellido_2` VARCHAR(50) NULL DEFAULT NULL ,
+  `sexo` VARCHAR(10) NULL DEFAULT NULL ,
+  `correo` VARCHAR(50) NULL DEFAULT NULL ,
+  `telefono_1` VARCHAR(25) NULL DEFAULT NULL ,
+  `telefono_2` VARCHAR(25) NULL DEFAULT NULL ,
+  `fecha_nacimiento` DATE NULL DEFAULT NULL ,
+  `cargo` VARCHAR(200) NULL DEFAULT NULL ,
+  `especialidad` VARCHAR(50) NULL DEFAULT NULL ,
+  `miniatura` VARCHAR(200) NULL DEFAULT NULL ,
+  `foto` VARCHAR(200) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
--- ----------------------------
--- Table structure for multimedia
--- ----------------------------
-CREATE TABLE `multimedia`  (
-  `id` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `habilitado` bit(1) NULL DEFAULT NULL,
-  `id_paciente` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `id_personal_asignado` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `tipo_archivo` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `direccion_guardado` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `fecha` date NULL DEFAULT NULL,
-  `formato` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `peso` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `id_paciente`(`id_paciente`) USING BTREE,
-  INDEX `id_personal_asignado`(`id_personal_asignado`) USING BTREE,
-  CONSTRAINT `multimedia_ibfk_1` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `multimedia_ibfk_2` FOREIGN KEY (`id_personal_asignado`) REFERENCES `personal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+-- ----------------------------------------------------------------------------
+-- Table cmq.multimedia
+-- ----------------------------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `cmq`.`multimedia` (
+  `id` VARCHAR(60) NOT NULL ,
+  `habilitado` BIT(1) NULL DEFAULT NULL ,
+  `id_paciente` VARCHAR(60) NULL DEFAULT NULL ,
+  `id_personal_asignado` VARCHAR(60) NULL DEFAULT NULL ,
+  `tipo_archivo` VARCHAR(10) NULL DEFAULT NULL ,
+  `direccion_guardado` VARCHAR(200) NULL DEFAULT NULL ,
+  `fecha` DATE NULL DEFAULT NULL ,
+  `formato` VARCHAR(10) NULL DEFAULT NULL ,
+  `peso` VARCHAR(10) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `id_paciente` (`id_paciente` ASC) ,
+  INDEX `id_personal_asignado` (`id_personal_asignado` ASC) ,
+  CONSTRAINT `multimedia_ibfk_1`
+    FOREIGN KEY (`id_paciente` )
+    REFERENCES `cmq`.`pacientes` (`id` ),
+  CONSTRAINT `multimedia_ibfk_2`
+    FOREIGN KEY (`id_personal_asignado` )
+    REFERENCES `cmq`.`personal` (`id` ))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
--- ----------------------------
--- Table structure for pacientes
--- ----------------------------
-DROP TABLE IF EXISTS `pacientes`;
-CREATE TABLE `pacientes`  (
-  `id` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `tipo_documento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `habilitado` bit(1) NULL DEFAULT NULL,
-  `id_personal_creado` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `fecha_creacion` date NULL DEFAULT NULL,
-  `numero_documento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `nombre_1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `nombre_2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `apellido_1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `apellido_2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `sexo` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `correo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `telefono_1` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `telefono_2` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `fecha_nacimiento` date NULL DEFAULT NULL,
-  `provincia` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `canton` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `direccion` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `ocupacion` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `numero_documento`(`numero_documento`) USING BTREE,
-  INDEX `id_personal_creado`(`id_personal_creado`) USING BTREE,
-  FULLTEXT INDEX `tipo_documento`(`tipo_documento`, `id_personal_creado`, `numero_documento`, `nombre_1`, `apellido_1`, `canton`),
-  FULLTEXT INDEX `tipo_documento_2`(`tipo_documento`, `id_personal_creado`, `numero_documento`, `nombre_1`, `apellido_1`, `canton`),
-  FULLTEXT INDEX `tipo_documento_3`(`tipo_documento`, `id_personal_creado`, `numero_documento`, `nombre_1`, `apellido_1`, `canton`),
-  CONSTRAINT `pacientes_ibfk_1` FOREIGN KEY (`id_personal_creado`) REFERENCES `personal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of pacientes
--- ----------------------------
--- ----------------------------
--- Table structure for personal
--- ----------------------------
-DROP TABLE IF EXISTS `personal`;
-CREATE TABLE `personal`  (
-  `id` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `habilitado` bit(1) NULL DEFAULT NULL,
-  `tipo_documento` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `numero_documento` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `nombre_1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `nombre_2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `apellido_1` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `apellido_2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `sexo` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `correo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `telefono_1` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `telefono_2` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `fecha_nacimiento` date NULL DEFAULT NULL,
-  `cargo` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `especialidad` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `miniatura` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `foto` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of personal
--- ----------------------------
---INSERT INTO `personal` VALUES ('19ca97bd-a610-11ec-abd6-28924a4663c9', b'1', 'Pasaporte', '7897987', '879879', '345', '7987987', '345', 'hombre', '4564647', '28828585', '822828', '0000-00-00', 'Doctor', 'Psicorehabilitación', '', '8');
-INSERT INTO `personal` VALUES ('6513b3b6-a244-11ec-8ec8-28924a4663c9', b'1', 'Cedula', '1311206104', 'jose', 'andres', 'pacheco', 'zamora', 'hombre', 'joseaandrespz@gmail.com', '0996575807', '0996575012', '1994-08-22', 'Doctor', 'Ginecologia', '', '');
---INSERT INTO `personal` VALUES ('bcf268f2-a5a8-11ec-a01e-28924a4663c9', b'1', 'Cedula', '1312131234', 'ububvuv', 'ds', 'gvygvtitgv', 'asdsad', 'mujer', '213213', '0996575807', '0996575807', '2022-03-22', 'Doctor', 'Cardiologia', '', 'wqw');
---INSERT INTO `personal` VALUES ('ddc90196-a60f-11ec-abd6-28924a4663c9', b'1', 'Cedula', '645456465', '465465', 'dwd', '46546', 'dw', 'mujer', '65465464', '65465', '465446', '0000-00-00', 'Enfermeriar', '', '', '');
---INSERT INTO `personal` VALUES ('f2319422-a5a8-11ec-a01e-28924a4663c9', b'1', 'Cedula', 'yhytryt', 'ytryt', 'wwd', 'rtyf', 'wdd', 'hombre', 'ytf', 'ytf', 'ytf', '2022-03-22', 'Doctor', 'Medicina General', '', 'ytf');
-
--- ----------------------------
--- Table structure for usuarios
--- ----------------------------
-CREATE TABLE `usuarios`  (
-  `nombre_usuario` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `contrasena_usuario` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `id_personal` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `permisos` int(11) NULL DEFAULT NULL,
-  `habilitado` bit(1) NULL DEFAULT NULL,
-  PRIMARY KEY (`nombre_usuario`) USING BTREE,
-  INDEX `id_personal`(`id_personal`) USING BTREE,
-  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_personal`) REFERENCES `personal` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of usuarios
--- ----------------------------
---INSERT INTO `usuarios` VALUES ('54654', '$2y$10$P57paFoU93KJ0pCz98H7muxcjDmj5WWCkevFW3sbOOcLMh2ObxfSa', 'ddc90196-a60f-11ec-abd6-28924a4663c9', 1, b'1');
---INSERT INTO `usuarios` VALUES ('987', '$2y$10$aCj0NvvLOEROz4IS8GqPPO.5gmlnuqcOYwdgB5jx1hzkKmMIuZ0H.', '19ca97bd-a610-11ec-abd6-28924a4663c9', 1, b'1');
-INSERT INTO `usuarios` VALUES ('admin', '$2y$10$YevM.1.dBfAilrf.n9IByO0w2Mli9HGXviln6s/qVRmCQTYy5iYSW', NULL, 2, b'1');
---INSERT INTO `usuarios` VALUES ('itgvitviytvvuv', '$2y$10$0/jzxetWSUfvO0O.DRnqc.cfSu4Gfv99HhZ6tovG6VRMvRGHLP15O', 'bcf268f2-a5a8-11ec-a01e-28924a4663c9', 1, b'1');
-INSERT INTO `usuarios` VALUES ('cayo', '$2y$10$YevM.1.dBfAilrf.n9IByO0w2Mli9HGXviln6s/qVRmCQTYy5iYSW', '6513b3b6-a244-11ec-8ec8-28924a4663c9', 1, b'1');
---INSERT INTO `usuarios` VALUES ('ytf', '$2y$10$vgEBsIYLo43Ql9rbZkFSjeU5EirK2FVg05VxVW2sIpM45k51ZV7Za', 'f2319422-a5a8-11ec-a01e-28924a4663c9', 1, b'1');
-
+-- ----------------------------------------------------------------------------
+-- Table cmq.usuarios
+-- ----------------------------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `cmq`.`usuarios` (
+  `nombre_usuario` VARCHAR(60) NOT NULL ,
+  `contrasena_usuario` VARCHAR(255) NULL DEFAULT NULL ,
+  `id_personal` VARCHAR(60) NULL DEFAULT NULL ,
+  `permisos` INT(11) NULL DEFAULT NULL ,
+  `habilitado` BIT(1) NULL DEFAULT NULL ,
+  PRIMARY KEY (`nombre_usuario`) ,
+  INDEX `id_personal` (`id_personal` ASC) ,
+  CONSTRAINT `usuarios_ibfk_1`
+    FOREIGN KEY (`id_personal`)
+    REFERENCES `cmq`.`personal` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 SET FOREIGN_KEY_CHECKS = 1;
+
+INSERT INTO `cmq`.`usuarios` (`nombre_usuario`, `contrasena_usuario`, `permisos`, `habilitado`)
+VALUES ('admin','$2y$10$YevM.1.dBfAilrf.n9IByO0w2Mli9HGXviln6s/qVRmCQTYy5iYSW',2,1);

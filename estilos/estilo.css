@@ -3,10 +3,28 @@
     src : url("/fuente/League_Spartan/LeagueSpartan-VariableFont_wght.ttf") format("truetype");
   }
   @keyframes anim{
-  
-    0% {border-color: rgb(179, 255, 0);}
-    50% {border-color: rgb(0, 255, 179);} 
-    100% {border-color: rgb(132, 0, 255);} 
+    0% {border-color: rgb(0, 190, 246);}
+    20% {border-color: rgb(30, 127, 246);}
+    30% {border-color: rgb(60, 127, 246);}
+    40% {border-color: rgb(90, 127, 246);}
+    50% {border-color: rgb(120, 127, 246);}
+    60% {border-color: rgb(120, 127, 246);}
+    70% {border-color: rgb(90, 127, 246);} 
+    80% {border-color: rgb(60, 127, 246);}
+    90% {border-color: rgb(30, 127, 246);}
+    100% {border-color: rgb(0, 190, 246);}
+  }
+  @keyframes indicar_buscar{
+    0% {background-color: rgb(0, 190, 246);}
+    20% {background-color: rgb(30, 127, 246);}
+    30% {background-color: rgb(60, 127, 246);}
+    40% {background-color: rgb(90, 127, 246);}
+    50% {background-color: rgb(120, 127, 246);}
+    60% {background-color: rgb(120, 127, 246);}
+    70% {background-color: rgb(90, 127, 246);} 
+    80% {background-color: rgb(60, 127, 246);}
+    90% {background-color: rgb(30, 127, 246);}
+    100% {background-color: rgb(0, 190, 246);}
   }
   :root {
     --tamano-letra: 20px;
@@ -17,7 +35,7 @@
     --color-1-formulario: #787ff6;
     --color-1-error: #e24444;
     --color-selecionar: #7bd5f5;
-    --color-label-informacion: #7a7a7a;
+    --color-label-informacion: #5b5b5b;
     --color-fondo-contenedores-modal: white;
     --color-1-fondo-chbk: #e0d9ff;
     

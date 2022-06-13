@@ -8,33 +8,42 @@
     text-align: left;
     word-spacing: 50px;
     letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+}
+#contenedor_asignados{
+    display: flex;
+    justify-content: flex-end;
+}
+#contenedor_asignados>#input_asignado_pp{
+    width: 507px;
+}
+#formulario_restablecer_asignado_pp{
+    margin-left: 5px;
+    width: 36px;
+    height: 36px;
 }
 
-.info_creado_asignado_pp:nth-child(2)>.botones_auto{
-    justify-content: right;
+.todos_boton_restablecer:hover,.todos_boton_restablecer::after{
+cursor: pointer;
 }
-.input_formulario_1_pp>.botones_auto>.boton_auto_restablecer{
-    margin-right: 5px;
-    width: 100px;
-}
-div.botones_auto_formulario{
-    border: 0;
+.input_formulario_7_pp>div,.input_formulario_8_pp>div{
     display: flex;
-    justify-content: right;
+    justify-content: flex-start;
 }
-div.botones_auto_formulario>button{
-    border: 0;
-    background-color: var(--color-1-formulario);
-    color: white;
-    border-radius: 15px;
-    font-size: 17px;
-    width: 100px;
-    height: 30px;
-    
+.input_formulario_7_pp>div>.contenedor_input_label_form{
+    width: 190px;
 }
-div.input_formulario_2_pp>div.botones_auto_formulario{
-    display: flex;
-    justify-content: right;
+.boton_restablecer_2{
+
+    margin: 0 2px 0 4px;
+}
+.input_formulario_3_pp:first-child {
+    width: 542px;
+}
+#input_creado_por_pp{
     width: 100%;
-    padding-right: 35px;
+}
+.input_formulario_4_pp>div>.boton_calcular{
+    margin-right: 0;
 }

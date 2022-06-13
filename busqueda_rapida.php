@@ -1,4 +1,5 @@
 <?php
+try {
 $conn = new mysqli("localhost","cmq-web","CmQu1n1nde","cmq");
 $tipo = $_POST["tipo"];
 if($tipo=="bndp"){
@@ -37,4 +38,7 @@ if($tipo=="bndp"){
 }
 
 $conn->close();
+} catch (Exception $e) {
+    echo "NO FUE POSIBLE CONECTARSE AL SERVIDOR";
+}
 ?>

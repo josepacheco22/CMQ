@@ -22,6 +22,14 @@ function desresaltar_descargar(numero){
     $('.diseño_descargar_'+numero).css('color', color_blanco);
     $('.diseño_descargar_'+numero).css('fill', color_blanco);
 }
+function resaltar_paciente(numero){
+  $('.diseño_paciente_'+numero).css('color', color_1_paciente);
+  $('.diseño_paciente_'+numero).css('fill', color_1_paciente);
+}
+function desresaltar_paciente(numero){
+  $('.diseño_paciente_'+numero).css('color', color_blanco);
+  $('.diseño_paciente_'+numero).css('fill', color_blanco);
+}
 function resaltar_pass(numero){
     $('.diseño_pass_'+numero).css('color', color_1_pass);
     $('.diseño_pass_'+numero).css('fill', color_1_pass);

@@ -1,18 +1,14 @@
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-leer cookies
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 var id_historial_clinica = sessionStorage.getItem('id_historial');
 function verificar_id_historial(){
-    if(id_historial_clinica=="")
-    {
+    if(id_historial_clinica==""){
         window.location.href = "panel_personal.html";
         sessionStorage.setItem('id_historial', "");
     }
 };
-verificar_cookie();
 verificar_id_historial();
+
+
+
 
 document.getElementById("formulario_restablecer_asignado_pp").onclick = function(){
     document.getElementById("input_asignado_pp").options.item(ids_personal_asignados.indexOf(datos_historial["id_personal_asignado"])).selected = 'selected';
@@ -25,9 +21,9 @@ llenar formulario
 var datos_historial = [];
 var paciente_seleccionado = "";
 var paciente_seleccionado_original = "";
-var personal_creado = "";
+/*var personal_creado = "";
 var personal_asignado = "";
-var edad_paciente = "";
+var edad_paciente = "";*/
 function llenar_formulario_completo() {
     var parametros_rp = {
         "tipo": "efhic",
@@ -46,7 +42,7 @@ function llenar_formulario_completo() {
                     window.close();
                 }else{
                     
-                    datos_historial = JSON.parse(response); 
+                 datos_historial = JSON.parse(response); 
                     paciente_seleccionado = datos_historial["id_paciente"];
                     paciente_seleccionado_original = datos_historial["id_paciente"];
                     personal_creado = datos_historial["id_personal_creado"];
@@ -62,12 +58,23 @@ function llenar_formulario_completo() {
                     document.getElementById("input_presion_arterial_1_pp").value = division_presion_arterial[0];
                     document.getElementById("input_presion_arterial_2_pp").value = division_presion_arterial[1];
 
+                    document.getElementById("boton_abrir_paciente_pp").style.display = "none";
+                    if(paciente_seleccionado != ""){
+                      document.getElementById("boton_abrir_paciente_pp").style.display = "block";
+                    }       
+
 
                     document.getElementById("input_asignado_pp").value = datos_historial["personal_asignado"];
                     document.getElementById("input_fecha_consulta_pp").value = datos_historial["fecha_consulta"];
                     document.getElementById("input_peso_pp").value = datos_historial["peso"];
                     document.getElementById("input_talla_pp").value = datos_historial["talla"];
                     document.getElementById("input_pulso_pp").value = datos_historial["pulso"];
+                    if(datos_historial["archivado"]=="1"){
+                     document.getElementById("input_habilitado").checked = true;
+                    }else
+                    {
+                     document.getElementById("input_habilitado").checked = false;
+                    }
                     document.getElementById("input_temperatura_pp").value = datos_historial["temperatura"];
                     document.getElementById("input_frecuencia_respiratoria_pp").value = datos_historial["frecuencia_respiratoria"];
                     document.getElementById("input_primera_consulta_pp").value = datos_historial["primera_consulta"];
@@ -85,7 +92,7 @@ function llenar_formulario_completo() {
                     
 
                     document.getElementById("datos_paciente_tipo_documento_pp").innerHTML = datos_historial["pa_tipo_documento"];
-                    document.getElementById("datos_paciente_id_personal_creado_pp").innerHTML  = datos_historial["pa_id_personal_creado"];
+                    document.getElementById("datos_paciente_id_personal_creado_pp").innerHTML  = datos_historial["pa_personal_creado"];
                     document.getElementById("datos_paciente_fecha_creacion_pp").innerHTML = datos_historial["pa_fecha_creacion"];
                     document.getElementById("datos_paciente_numero_documento_pp").innerHTML = datos_historial["pa_numero_documento"];
                     document.getElementById("datos_paciente_nombres_pp").innerHTML = datos_historial["pa_nombres"];
@@ -100,12 +107,18 @@ function llenar_formulario_completo() {
                     document.getElementById("datos_paciente_direccion_pp").innerHTML = datos_historial["pa_direccion"];
                     document.getElementById("datos_paciente_ocupacion_pp").innerHTML = datos_historial["pa_ocupacion"];
                     
+                    llenar_lista_personal()
+                    
                 }
             } 
         }
     });
 };
-llenar_formulario_completo();
+document.getElementById("modal_pp").style.display = "block";
+document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+llenar_formulario_completo();                 
+
+
 
 
 
@@ -127,14 +140,35 @@ function llenar_lista_personal(){
                 $(".lista_personal_asignar").detach();
                 $("#input_asignado_pp").append(division_respuesta[0]);   
                 ids_personal_asignados = JSON.parse(division_respuesta[1]);
+
                 document.getElementById("input_asignado_pp").options.item(ids_personal_asignados.indexOf(datos_historial["id_personal_asignado"])).selected = 'selected';
+                /*document.getElementById("input_creado_por_pp").value = document.getElementById("input_asignado_pp").options[document.getElementById("input_asignado_pp").value].text;
+
+                
+                paciente_seleccionado = sessionStorage.getItem('id_paciente');
+                if( paciente_seleccionado == ""){
+                    document.getElementById("contenido_esperar_pp").style.display = "none";
+                    document.getElementById("modal_pp").style.display = "none";
+                    document.getElementById("boton_abrir_paciente_pp").style.display = "none";
+                }else{
+                    document.getElementById("boton_abrir_paciente_pp").style.display = "inline-block";
+                }*/
+                document.getElementById("contenido_esperar_pp").style.display = "none";
+                document.getElementById("modal_pp").style.display = "none";
             } 
         }
     });
 };
-llenar_lista_personal();
 
-
+document.getElementById("boton_abrir_paciente_pp").onclick = function(){
+  if(paciente_seleccionado!=""){
+      sessionStorage.setItem('id_paciente', paciente_seleccionado);
+      window.open("datos_paciente.html");
+      document.getElementById("boton_abrir_paciente_pp").style.display = "block";
+  }else{
+      document.getElementById("boton_abrir_paciente_pp").style.display = "none";
+  }
+};
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -208,152 +242,10 @@ $(document).ready(function(){
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-llenar tabla pacientes
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-var ids_tabla = [];
-function llenar_tabla_pp_pa() {
-    $('td').css('background-color', '#1f2f98');
-    document.getElementById("boton_aceptar_pp").hidden=true;
-    ids_tabla = [];
-    var parametros_rp = {
-        "tipo": "btpa",
-        "tipo_documento": document.getElementById("buscar_tipo_documento_pp").value,
-        "numerodoc": document.getElementById("buscar_numerodoc_pp").value,
-        "nombres": document.getElementById("buscar_nombres_pp").value,
-        "apellidos": document.getElementById("buscar_apellidos_pp").value,
-        "creado_por": document.getElementById("buscar_creado_por_pp").value,
-        "fecha_creado": document.getElementById("buscar_fecha_creado_pp").value,
-        "numero_filas": document.getElementById("cantidad_filas_tabla_pp").value
-    };
-    
-    $.ajax({ 
-        data: parametros_rp,
-        url: "consulta.php", 
-        type: "POST",
-        beforeSend: function (){
-        },
-        success:function (response){
-            if(response!="")
-            {
-                var division_respuesta = response.split("ids");
-                $(".resultados_de_tablas").detach();
-                $("#cuerpo_tabla").append(division_respuesta[0]);   
-                ids_tabla = JSON.parse(division_respuesta[1]); 
-            } 
-        }
-    });
-};
-llenar_tabla_pp_pa();
-document.getElementById("actualizar_paciente_pp").onclick = function(){
-    llenar_tabla_pp_pa();
-};
-document.getElementById("buscar_tipo_documento_pp").addEventListener('change', (event) => {
-    llenar_tabla_pp_pa();
-});
-document.getElementById("boton_borrar_tipo_documento_pp").onclick = function(){
-    document.getElementById("buscar_tipo_documento_pp").options.item(0).selected = 'selected';
-    llenar_tabla_pp_pa();
-};
-document.getElementById("buscar_numerodoc_pp").addEventListener('keyup', (event) => {
-    llenar_tabla_pp_pa();
-});
-document.getElementById("boton_borrar_numero_documento_pp").onclick = function(){
-    document.getElementById("buscar_numerodoc_pp").value = "";
-    llenar_tabla_pp_pa();
-};
-document.getElementById("buscar_nombres_pp").addEventListener('keyup', (event) => {
-    llenar_tabla_pp_pa();
-});
-document.getElementById("boton_borrar_nombres_pp").onclick = function(){
-    document.getElementById("buscar_nombres_pp").value = "";
-    llenar_tabla_pp_pa();
-};
-document.getElementById("buscar_apellidos_pp").addEventListener('keyup', (event) => {
-    llenar_tabla_pp_pa();
-});
-document.getElementById("boton_borrar_apellidos_pp").onclick = function(){
-    document.getElementById("buscar_apellidos_pp").value = "";
-    llenar_tabla_pp_pa();
-};
-document.getElementById("buscar_creado_por_pp").addEventListener('keyup', (event) => {
-    llenar_tabla_pp_pa();
-});
-document.getElementById("boton_borrar_creado_por_pp").onclick = function(){
-    document.getElementById("buscar_creado_por_pp").value = "";
-    llenar_tabla_pp_pa();
-};
-document.getElementById("buscar_tipo_documento_pp").addEventListener('change', (event) => {
-    llenar_tabla_pp_pa();
-});
-document.getElementById("buscar_fecha_creado_pp").addEventListener('keyup', (event) => {
-    llenar_tabla_pp_pa();
-});
-document.getElementById("boton_borrar_fecha_creado_pp").onclick = function(){
-    document.getElementById("buscar_fecha_creado_pp").value = "";
-    llenar_tabla_pp_pa();
-};
-document.getElementById("cantidad_filas_tabla_pp").addEventListener('change', (event) => {
-    llenar_tabla_pp_pa();
-});
-document.getElementById("borrar_borrar_todo_pp").onclick = function(){
-    document.getElementById("buscar_tipo_documento_pp").options.item(0).selected = 'selected';
-    document.getElementById("buscar_numerodoc_pp").value = "";
-    document.getElementById("buscar_nombres_pp").value = "";
-    document.getElementById("buscar_apellidos_pp").value = "";
-    document.getElementById("buscar_creado_por_pp").value = "";
-    document.getElementById("buscar_fecha_creado_pp").value = "";
-    llenar_tabla_pp_pa();
-};
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-nuevo paciente
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-document.getElementById("agregar_paciente_pp").onclick = function(){
-    verificar_cookie();
-    window.open("nuevo_paciente.html");
-}
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-abrir buscar paciente
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-document.getElementById("boton_interaccion_paciente_pp").onclick = function(){
-    llenar_tabla_pp_pa();
-    document.getElementById("modal_pp").style.display = "block";
-    document.getElementById("contenido_buscar_paciente_pp").style.display = "inline-block";
-};
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-cerrar y borrar todo
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-function borrar_tabla_pacientes(){
-    $(".resultados_de_tablas").detach();
-    ids_tabla = [];
-    document.getElementById("buscar_tipo_documento_pp").options.item(0).selected = 'selected';
-    document.getElementById("buscar_numerodoc_pp").value = "";
-    document.getElementById("buscar_nombres_pp").value = "";
-    document.getElementById("buscar_apellidos_pp").value = "";
-    document.getElementById("buscar_creado_por_pp").value = "";
-    document.getElementById("buscar_fecha_creado_pp").value = "";
-    document.getElementById("contenido_buscar_paciente_pp").style.display = "none";
-    document.getElementById("modal_pp").style.display = "none";
-    document.getElementById("boton_aceptar_pp").hidden=true;
-};
-document.getElementById("boton_cancelar_pp").onclick = function(){
-    borrar_tabla_pacientes();
-};
-document.getElementById("cerrar_superior_pp").onclick = function(){
-    borrar_tabla_pacientes();
-};
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 seleccionar paciente
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-function seleccionar_id_paciente(numero){
+/*function seleccionar_id_paciente(numero){
     if((ids_tabla.length)!=0){
         $('td').css('background-color', '#1f2f98');
         $('.fila_selecionada_'+numero).css('background-color', '#45c4c4');
@@ -362,47 +254,54 @@ function seleccionar_id_paciente(numero){
     }else{
         document.getElementById("boton_aceptar_pp").hidden=true;
     }
-};
+};*/
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 baceptar al seleccionar paciente
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+var edad_paciente = "";
+var primera_consulta_paciente = "";
 function buscar_datos_paciente() {
-    ids_tabla = [];
-    var parametros_rp = {
-        "tipo": "dpas",
-        "id": paciente_seleccionado
-    };
-    $.ajax({ 
-        data: parametros_rp,
-        url: "consulta.php", 
-        type: "POST",
-        beforeSend: function (){
-        },
-        success:function (response){
-            if(response!="")
-            {
-                ids_tabla = JSON.parse(response);
-                document.getElementById("datos_paciente_tipo_documento_pp").innerHTML = ids_tabla[0] ;
-                document.getElementById("datos_paciente_fecha_creacion_pp").innerHTML = ids_tabla[1] ;
-                document.getElementById("datos_paciente_numero_documento_pp").innerHTML = ids_tabla[2] ;
-                document.getElementById("datos_paciente_nombres_pp").innerHTML = ids_tabla[3] ;
-                document.getElementById("datos_paciente_apellidos_pp").innerHTML = ids_tabla[4] ;
-                document.getElementById("datos_paciente_sexo_pp").innerHTML = ids_tabla[5] ;
-                document.getElementById("datos_paciente_correo_pp").innerHTML = ids_tabla[6] ;
-                document.getElementById("datos_paciente_telefono_1_pp").innerHTML = ids_tabla[7] ;
-                document.getElementById("datos_paciente_telefono_2_pp").innerHTML = ids_tabla[8] ;
-                document.getElementById("datos_paciente_fecha_nacimiento_pp").innerHTML = ids_tabla[9] ;
-                document.getElementById("datos_paciente_provincia_pp").innerHTML = ids_tabla[10] ;
-                document.getElementById("datos_paciente_canton_pp").innerHTML = ids_tabla[11] ;
-                document.getElementById("datos_paciente_direccion_pp").innerHTML = ids_tabla[12] ;
-                document.getElementById("datos_paciente_ocupacion_pp").innerHTML = ids_tabla[13] ;
-                document.getElementById("datos_paciente_id_personal_creado_pp").innerHTML = ids_tabla[14] ;
-                edad_paciente = ids_tabla[15];
-            } 
-        }
-    });
+ ids_tabla = [];
+ if(paciente_seleccionado!=""){
+     var parametros_rp = {
+      "tipo": "dpas",
+      "id": paciente_seleccionado
+     };
+     $.ajax({ 
+         data: parametros_rp,
+         url: "consulta.php", 
+         type: "POST",
+         beforeSend: function (){
+         },
+         success:function (response){
+          ids_tabla = JSON.parse(response);
+          document.getElementById("datos_paciente_tipo_documento_pp").innerHTML = ids_tabla[0] ;
+          document.getElementById("datos_paciente_fecha_creacion_pp").innerHTML = ids_tabla[1] ;
+          document.getElementById("datos_paciente_numero_documento_pp").innerHTML = ids_tabla[2] ;
+          document.getElementById("datos_paciente_nombres_pp").innerHTML = ids_tabla[3] ;
+          document.getElementById("datos_paciente_apellidos_pp").innerHTML = ids_tabla[4] ;
+          document.getElementById("datos_paciente_sexo_pp").innerHTML = ids_tabla[5] ;
+          document.getElementById("datos_paciente_correo_pp").innerHTML = ids_tabla[6] ;
+          document.getElementById("datos_paciente_telefono_1_pp").innerHTML = ids_tabla[7] ;
+          document.getElementById("datos_paciente_telefono_2_pp").innerHTML = ids_tabla[8] ;
+          document.getElementById("datos_paciente_fecha_nacimiento_pp").innerHTML = ids_tabla[9] ;
+          document.getElementById("datos_paciente_provincia_pp").innerHTML = ids_tabla[10] ;
+          document.getElementById("datos_paciente_canton_pp").innerHTML = ids_tabla[11] ;
+          document.getElementById("datos_paciente_direccion_pp").innerHTML = ids_tabla[12] ;
+          document.getElementById("datos_paciente_ocupacion_pp").innerHTML = ids_tabla[13] ;
+          document.getElementById("datos_paciente_id_personal_creado_pp").innerHTML = ids_tabla[14] ;
+          edad_paciente = ids_tabla[15];
+          primera_consulta_paciente = ids_tabla[16];
+          document.getElementById("contenido_esperar_pp").style.display = "none";
+          document.getElementById("modal_pp").style.display = "none";
+          document.getElementById("boton_abrir_paciente_pp").style.display = "inline-block";
+         }
+     });
+ }else{
+  document.getElementById("boton_abrir_paciente_pp").style.display = "none";
+ } 
 };
 
 
@@ -431,43 +330,42 @@ document.getElementById("formulario_restablecer_primera_consulta_pp").onclick = 
         document.getElementById("input_primera_consulta_pp").value = datos_historial["primera_consulta"];
     }
 };
-document.getElementById("boton_aceptar_pp").onclick = function(){
-    if(paciente_seleccionado != "")
-    {
-        buscar_datos_paciente();
-        borrar_tabla_pacientes();
-    }
-};
+
 document.getElementById("boton_restablecer_pp").onclick = function(){
     paciente_seleccionado = paciente_seleccionado_original;
-        buscar_datos_paciente();
-        borrar_tabla_pacientes();
+    document.getElementById("modal_pp").style.display = "block";
+    document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+    buscar_datos_paciente();
 }
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 campos automaticos de fechas y edad
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
 document.getElementById("boton_limpiar_pp").onclick = function(){
-    paciente_seleccionado = "";
-    document.getElementById("datos_paciente_tipo_documento_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_fecha_creacion_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_numero_documento_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_nombres_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_apellidos_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_sexo_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_correo_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_telefono_1_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_telefono_2_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_fecha_nacimiento_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_provincia_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_canton_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_direccion_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_ocupacion_pp").innerHTML = "" ;
-    document.getElementById("datos_paciente_id_personal_creado_pp").innerHTML = "" ;
-    edad_paciente = "";
+  paciente_seleccionado = "";
+  document.getElementById("datos_paciente_tipo_documento_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_fecha_creacion_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_numero_documento_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_nombres_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_apellidos_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_sexo_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_correo_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_telefono_1_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_telefono_2_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_fecha_nacimiento_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_provincia_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_canton_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_direccion_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_ocupacion_pp").innerHTML = "" ;
+  document.getElementById("datos_paciente_id_personal_creado_pp").innerHTML = "" ;
+  edad_paciente = "";
+  primera_consulta_paciente = "";
+  document.getElementById("boton_abrir_paciente_pp").style.display = "none";
 };
+
+
+
 function dia_actual(){
     var hoy = new Date(); 
     document.getElementById("input_fecha_consulta_pp").value = hoy.getFullYear()+"-"+(((hoy.getMonth()+1)+"").padStart(2, "0"))+"-"+((hoy.getDate())+"").padStart(2, "0");
@@ -483,7 +381,8 @@ guardar
 var id_historial = ""; 
 var archivar_historial = 0;
 var fallo_registro = 0;
-function guardar_historial_editado(archivo_si_no) {
+var input_habilitado_guard= "0";
+function guardar_historial_editado() {
     var hoy = new Date(); 
     var fecha_actual_consulta_1 = document.getElementById("input_fecha_consulta_pp").value; 
     let fecha_actual_consulta_1_valido = Date.parse(fecha_actual_consulta_1);
@@ -495,14 +394,17 @@ function guardar_historial_editado(archivo_si_no) {
     if(fecha_actual_consulta_2==""||isNaN(fecha_actual_consulta_2_valido)){
         fecha_actual_consulta_2 = datos_historial["primera_consulta"];
     }
-
+    input_habilitado_guard= "0";
+    if(document.getElementById("input_habilitado").checked){
+        input_habilitado_guard= "1";
+    }
     var parametros_rp = {
         "tipo": "edthis",
         "id": id_historial_clinica,
         "id_paciente": paciente_seleccionado,
         "id_creado_usuario": cookies_pagina["id_personal"],
         "creado_usuario":  cookies_pagina["usuario"],
-        "archivado": archivo_si_no,
+        "archivado": input_habilitado_guard,
         "edad":document.getElementById("input_edad_pp").value,
         "id_personal_creado": personal_creado,
         "id_personal_asignado": ids_personal_asignados[parseInt(document.getElementById("input_asignado_pp").value)],
@@ -532,7 +434,7 @@ function guardar_historial_editado(archivo_si_no) {
         beforeSend: function (){
         },
         success:function (response){
-            if(response!="")
+            /*if(response!="")
             {   
                 document.getElementById("contenido_esperar_pp").style.display = "none";
                 var resultado = response.split("/");
@@ -546,7 +448,20 @@ function guardar_historial_editado(archivo_si_no) {
                     fallo_registro = 1;
                 }
                 document.getElementById("mensaje_alerta_pp").style.display = "inline-block";
-            } 
+            } */
+
+          if(response == "0"){
+            document.getElementById("contenido_esperar_pp").style.display = "none";
+            document.getElementById("mensaje_alerta_pp").style.display = "inline-block";
+            document.getElementById("label_mensaje_alerta_pp").innerHTML = "FALLO REGISTRO";
+          }else{
+            if(input_habilitado_guard == "1"){
+              window.location.href = "panel_personal_arch.html";
+            }else{
+              sessionStorage.setItem("id_historial", id_historial_clinica);
+              window.location.href = "editar_historial.html";
+            }
+          }
         }
     });
 };
@@ -559,7 +474,7 @@ document.getElementById("formulario_guardar_1_pp").onclick = function(){
     document.getElementById("modal_pp").style.display = "block";
     document.getElementById("contenido_esperar_pp").style.display = "inline-block";
     guardar_historial_editado(0);
-};
+};/*
 document.getElementById("formulario_guardar_archivar_1_pp").onclick = function(){
     document.getElementById("modal_pp").style.display = "block";
     document.getElementById("contenido_confirmar_pp").style.display = "inline-block";
@@ -567,7 +482,7 @@ document.getElementById("formulario_guardar_archivar_1_pp").onclick = function()
 document.getElementById("formulario_guardar_archivar_pp").onclick = function(){
     document.getElementById("modal_pp").style.display = "block";
     document.getElementById("contenido_confirmar_pp").style.display = "inline-block";
-};
+};*/
 document.getElementById("boton_confirmar_cancelar_pp").onclick = function(){
     document.getElementById("contenido_confirmar_pp").style.display = "none";
     document.getElementById("modal_pp").style.display = "none";
@@ -631,6 +546,13 @@ document.getElementById("boton_alerta_cofirmar_pp").onclick = function(){
     }
     document.getElementById("mensaje_alerta_pp").style.display = "none";
     document.getElementById("modal_pp").style.display = "none";
+};
+
+document.getElementById("boton_interaccion_paciente_pp").onclick = function(){
+  $(".resultados_de_tablas").detach();
+  document.getElementById("modal_pp").style.display = "block";
+  document.getElementById("contenido_esperar_pp").style.display = "inline-block";
+  llenar_tabla_pp_pa();
 };
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

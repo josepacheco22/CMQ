@@ -3,6 +3,11 @@ var id_paciente = sessionStorage.getItem('id_paciente');
 
 var ids_tabla = [];
 function llenar_tabla_con_esperar() {
+  $('th').css({"animation-name": "indicar_buscar"});
+  $('th').css({"animationDuration": "600ms"});
+  $('th').css({"animationIterationCount": "infinite"});
+  
+  $(".resultados_de_tablas").detach();
     var parametros_rp = {
         "tipo": "tphs",
         "id": id_paciente,
@@ -30,7 +35,8 @@ function llenar_tabla_con_esperar() {
                 ids_tabla = JSON.parse(division_respuesta[1]); 
                 
                 document.getElementById("contenido_esperar_pp").style.display = "none";
-                document.getElementById("modal_pp").style.display =  "none"; 
+                document.getElementById("modal_pp").style.display =  "none";
+                $('th').css({"animation-name": "none"}); 
             } 
         }
     });

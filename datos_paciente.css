@@ -65,6 +65,7 @@ llenar formulario
   justify-content: left;
   align-items: center;
   color: var(--color-label-informacion);
+  overflow: hidden;
 }
 
 
@@ -159,6 +160,12 @@ llenar formulario
 }
 #navegador_datos_paciente>div:hover,#navegador_datos_paciente>div>*:hover,#navegador_datos_paciente>div>*:focus,#navegador_datos_paciente>div:focus{
   background: var(--color-1-formulario);
+}
+#tabla_pacientes{
+  width: 1000px;
+  overflow: hidden;
+  border-radius: 15px;
+  margin-bottom: 100px;
 }
 
 
@@ -294,11 +301,6 @@ modal alerta
   }
 
 
-  .interior_formulario_tabla_rpa{
-    padding-bottom: 50px;
-    width: 100%;
-
-  }
   .interior_formulario_tabla_rpa>table>{
     width: 100%;
   }

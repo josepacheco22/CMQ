@@ -11,3 +11,5 @@ var color_1_asignar= "#243bbd";
 var color_1_pass= "#e8ff19";
 
 var color_1_descargar= "#9900ff";
+
+var color_1_paciente= "#9900ff";

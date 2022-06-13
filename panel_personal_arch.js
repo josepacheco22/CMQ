@@ -5,7 +5,13 @@ llenar tabla pacientes
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 var ids_tabla = [];
+var ids_tabla_paciente = [];
 function llenar_tabla_asignados() {
+  
+  $('th').css({"animation-name": "indicar_buscar"});
+  $('th').css({"animationDuration": "600ms"});
+  $('th').css({"animationIterationCount": "infinite"});
+  /*$(".resultados_de_tablas").detach();*/
     var parametros_rp = {
         "tipo": "thasarch",
         "id_asignado": cookies_pagina["id_personal"],
@@ -25,17 +31,32 @@ function llenar_tabla_asignados() {
         beforeSend: function (){
         },
         success:function (response){
-            if(response!="")
+            if(response!="0")
             {
                 var division_respuesta = response.split("ids");
                 $(".resultados_de_tablas").detach();
                 $("#cuerpo_tabla_pp").append(division_respuesta[0]);   
                 ids_tabla = JSON.parse(division_respuesta[1]); 
+                ids_tabla_paciente = JSON.parse(division_respuesta[2]);
+                $('th').css({"animation-name": "none"});
             } 
         }
     });
 };
+
+function accion_paciente(numero){
+  if(ids_tabla_paciente[numero] != null){
+    sessionStorage.setItem('id_paciente', ids_tabla_paciente[numero]);
+    window.open("datos_paciente.html");
+  }  
+}
+
 function llenar_tabla_con_esperar() {
+  $('th').css({"animation-name": "indicar_buscar"});
+  $('th').css({"animationDuration": "600ms"});
+  $('th').css({"animationIterationCount": "infinite"});
+  
+  /*$(".resultados_de_tablas").detach();*/
     var parametros_rp = {
         "tipo": "thasarch",
         "id_asignado": cookies_pagina["id_personal"],
@@ -61,8 +82,10 @@ function llenar_tabla_con_esperar() {
                 $(".resultados_de_tablas").detach();
                 $("#cuerpo_tabla_pp").append(division_respuesta[0]);   
                 ids_tabla = JSON.parse(division_respuesta[1]); 
+                ids_tabla_paciente = JSON.parse(division_respuesta[2]);
                 document.getElementById("contenido_esperar_pp").style.display = "none"; 
                 document.getElementById("modal_pp").style.display =  "none";
+                $('th').css({"animation-name": "none"});
             } 
         }
     });
@@ -366,6 +389,11 @@ document.getElementById("nombres_desc").addEventListener('keyup', (event) => {
 });
 
 function llenar_tabla_desc_con_esperar() {
+  
+  $('th').css({"animation-name": "indicar_buscar"});
+  $('th').css({"animationDuration": "600ms"});
+  $('th').css({"animationIterationCount": "infinite"});
+  /*$(".resultados_de_tablas").detach();*/
     var parametros_rp = {
         "tipo": "tarchdesca",
         "id": document.getElementById("id_desc").value,
@@ -393,6 +421,7 @@ function llenar_tabla_desc_con_esperar() {
                 ids_tabla = JSON.parse(division_respuesta[1]); 
                 document.getElementById("contenido_esperar_pp").style.display = "none"; 
                 document.getElementById("modal_pp").style.display =  "none";
+                $('th').css({"animation-name": "none"});
             } 
         }
     });

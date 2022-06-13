@@ -1,4 +1,94 @@
-    .datos_paciente_pp{
+
+  #seccion_paciente_pp,#seccion_historial_consulta_pp{
+    border: 3px solid var(--color-paguina-principal);
+    border-radius: 20px;
+    height: 100%;
+    display: inline-block;
+    justify-content: space-between;
+    padding: 10px 0;    
+  }
+  #seccion_paciente_pp{
+    padding: 0;
+  }
+
+  #contenedor_direc,#contenedor_izquierda_derecha{
+    display: flex;
+    flex-direction: row;
+    padding-top: 8px;
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+  .cont_izq_dere{
+    width: 50%;
+  }
+  .input_izq_1{
+    width: 100%;
+    margin-top: 7px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .tipo_datos_paciente_pp{
+    width: 219px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .datos_paciente_pp{
+    width: 100%;
+    min-height: 20px;
+    text-align: initial;
+    padding-left: 7px;
+    max-height: 270px;
+    overflow: hidden;
+    color: var(--color-label-informacion);
+  }
+  #contenedor_direc>.tipo_datos_paciente_pp{
+    width: 174px;
+  }
+  #contenedor_direc>.datos_paciente_pp{
+    max-width: 839px;
+    text-align: initial;
+  }
+  #contenedor_bot_form_pac{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 3px solid var(--color-paguina-principal);
+    padding: 10px;
+  }
+  .botones_formulario_paciente{
+    display: block;
+    justify-content: right;
+    width: 25%;
+    font-size: 18px;
+    height: 35px;
+    text-align: center;
+    background-color: var(--color-1-formulario);
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    margin: 0 2.5px;
+  }
+  #contenedor_direc{
+    margin-bottom: 19px;
+    margin-top: 4px;
+  }
+  .botones_formulario_paciente:hover,.botones_formulario_paciente:after{
+    cursor: pointer;
+  }
+
+  #boton_abrir_paciente_pp{
+    display: none;
+  }
+/*
+
+  
+  
+  
+  
+  
+  .datos_paciente_pp{
     min-height: 15px;
   }
   #seccion_paciente_pp,#seccion_historial_consulta_pp{
@@ -9,29 +99,21 @@
     justify-content: space-between;
     padding: 10px 0;    
   }
-  #seccion_paciente_pp>div{
-    float: left;
-    display: block;
-    justify-content: right;
-  }
+  
+  
+
   #seccion_paciente_pp>div:nth-child(odd){
     text-align: right;
     width: 17%;
   }
-  #seccion_paciente_pp>div:nth-child(even){
-    width: 30%;
-  }
+  
   #seccion_paciente_pp>div:nth-child(5){
     width: 100%;
     display: flex;
     justify-content: left;
   }
-  
-  #seccion_paciente_pp>div:nth-child(even)>*,#seccion_paciente_pp>div:nth-child(odd)>*{
-    display: block;
-    justify-content: right;
-    width: 100%;
-  }
+
+
   #seccion_paciente_pp>div:nth-child(odd)>label{
     max-width: 159.625px;
     max-height: 16px; 
@@ -60,21 +142,39 @@
     max-height: 80px;
     color: rgb(95, 95, 95)
   }
+  #contenedor_bot_form_pac{
+  #seccion_paciente_pp>div{
+    float: left;
+    display: block;
+    justify-content: right;
+  }
+  
+  #contenedor_bot_form_pac{
+ #seccion_paciente_pp>div:nth-child(even){
+    width: 30%;
+  }
+  #contenedor_bot_form_pac{
   #seccion_paciente_pp>div:last-child{
     width: 100%;
     display: flex;
     justify-content: right;
     margin: 20px 10px;
     margin: 0;
-    padding-right: 40px;
+    padding-right: 20px;
   }
   #seccion_paciente_pp>div:nth-child(2n+1)>*{
     display: block;
     justify-content: right; 
     text-align: left;
     width: 100%;
-  }  
-  #seccion_paciente_pp>div:last-child>button{
+  }   /*
+  #seccion_paciente_pp>div:nth-child(even)>*,#seccion_paciente_pp>div:nth-child(odd)>*{
+    display: block;
+    justify-content: right;
+    width: 100%;
+  }
+  .botones_formulario_paciente{
+  /*#seccion_paciente_pp>div:last-child>button{
     width:200px;
     font-size: 18px;
     height: 35px;
@@ -85,13 +185,34 @@
     border: 0;
     border-radius: 10px;
   }
-  #boton_limpiar_pp,#boton_restablecer_pp{
+  .botones_formulario_paciente{
+    display: block;
+    justify-content: right;
+    width:200px;
+    font-size: 18px;
+    height: 35px;
+    margin-left: 0;
+    text-align: center;
+    background-color: var(--color-1-formulario);
+    color: white;
+    border: 0;
+    border-radius: 10px;
     margin-right: 10px;
   }
-  #seccion_paciente_pp>div:last-child>button:hover{
+  .botones_formulario_paciente:hover,.botones_formulario_paciente:after{
+    cursor: pointer;
+  }
+  #boton_interaccion_paciente_pp{
+    margin-right: 0;
+  }
+  .botones_formulario_paciente:hover,.botones_formulario_paciente:after{
     cursor: pointer;
   }
   #seccion_paciente_pp>div>label{
     margin: 5px 0;
     font-size: 17px;
   }
+  #boton_abrir_pp{
+    margin-right: 10px;
+    display: none;
+  }*/

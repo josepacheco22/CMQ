@@ -1,5 +1,7 @@
 <?php
 
+try {
+
 $conn = new mysqli("localhost","root","1311206104","cmq");
 //$conn = new mysqli("localhost","cmq-web","CmQu1n1nde","cmq");
 $tipo = $_POST["tipo"];
@@ -321,6 +323,15 @@ if($tipo=="vr")
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["apellidos"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre_usuario"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["fecha_creacion"]."</td>      
+            <td class='diseno_abrir fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div class='diseño_abrir_".($i-1)." iconos_tabla_accion' onclick='accion_abrir(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='diseño_abrir_".($i-1)." bi bi-folder2-open' viewBox='0 0 16 16'>
+                        <path d='M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14V3.5zM2 6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5a.5.5 0 0 0-.5.5V6zm-.367 1a.5.5 0 0 0-.496.562l.64 5.124A1.5 1.5 0 0 0 3.266 14h9.468a1.5 1.5 0 0 0 1.489-1.314l.64-5.124A.5.5 0 0 0 14.367 7H1.633z'/>
+                    </svg>
+                    ABRIR
+                </div>
+            </td>
+            
             </tr>";
             array_push($ids,$fila_tabla_personal_usuario["id"]);
             $i++;
@@ -333,7 +344,7 @@ if($tipo=="vr")
 }else if($tipo=="dpas"){
     $id = $_POST["id"];
     $array_resultado = array();
-    $query_consulta_tabla = mysqli_query($conn,"SELECT `tipo_documento`, `fecha_creacion`, `numero_documento`, concat(`nombre_1`,' ',`nombre_2`) AS `nombres`, concat(`apellido_1`,' ',`apellido_2`) AS `apellidos` , `sexo`, `correo`, `telefono_1`, `telefono_2`, `fecha_nacimiento`, `provincia`, `canton`, `direccion`, `ocupacion`, (SELECT u.`nombre_usuario` FROM `personal` p JOIN `usuarios` u ON p.`id` = u.`id_personal` WHERE p.`id` = `pacientes`.`id_personal_creado`) as `nombre_usuario` FROM `pacientes` WHERE `habilitado` = 1 AND `id` = '$id'");
+    $query_consulta_tabla = mysqli_query($conn,"SELECT p.`tipo_documento`, p.`fecha_creacion`, p.`numero_documento`, concat(p.`nombre_1`,' ',p.`nombre_2`) AS `nombres`, concat(p.`apellido_1`,' ',p.`apellido_2`) AS `apellidos` , p.`sexo`, p.`correo`, p.`telefono_1`, p.`telefono_2`, p.`fecha_nacimiento`, p.`provincia`, p.`canton`, p.`direccion`, p.`ocupacion`, u.`nombre_usuario`,IF((SELECT MIN(h.`primera_consulta`) FROM `historia_clinica` h WHERE h.`primera_consulta`<> '0000-00-00' AND h.`id_paciente` = p.`id`) IS NULL,(IF((SELECT MIN(h.`fecha_consulta`) FROM `historia_clinica` h WHERE h.`fecha_consulta`<> '0000-00-00' AND h.`id_paciente` = p.`id`) IS NULL ,CURDATE(),(SELECT MIN(h.`fecha_consulta`) FROM `historia_clinica` h WHERE h.`fecha_consulta`<> '0000-00-00' AND h.`id_paciente` = p.`id`)) ),(SELECT MIN(h.`primera_consulta`) FROM `historia_clinica`h WHERE h.`primera_consulta`<> '0000-00-00' AND h.`id_paciente` = p.`id`)) AS `primera_consulta` FROM `pacientes` p LEFT JOIN `usuarios` u ON u.`id_personal` = p.`id_personal_creado` WHERE p.`habilitado` = 1 AND p.`id` = '$id';");
     $numero_filas_consulta_tabla = mysqli_num_rows($query_consulta_tabla);
     $resultado = mysqli_fetch_array($query_consulta_tabla);
     if($numero_filas_consulta_tabla == 1)
@@ -380,7 +391,8 @@ if($tipo=="vr")
             $resultado["direccion"],
             $resultado["ocupacion"],
             $resultado["nombre_usuario"],
-            $edad
+            $edad,
+            $resultado["primera_consulta"]
         );
         echo json_encode($array_resultado);
     }   
@@ -411,25 +423,22 @@ if($tipo=="vr")
     $diagnostico_definitivo = $_POST["diagnostico_definitivo"];
     $tratamiento = $_POST["tratamiento"];
     $query_registro = mysqli_query($conn,"SET @variable_id=uuid();");
-    if($id_paciente == ""){
-        $texto_id_paciente = "";
-        $id_paciente_2 = "";
-    }else{
-        $texto_id_paciente = "`id_paciente`,";
-        $id_paciente_2  = "'".$id_paciente."',";
-    }
-    if($id_personal_asignado == ""){
-        $texto_id_personal_asignado = "";
-        $id_personal_asignado_2 = "";
-    }else{
-        $texto_id_personal_asignado = "`id_personal_asignado`,";
-        $id_personal_asignado_2  = "'".$id_personal_asignado."',";
-    }
+
     $query_registro = mysqli_query($conn,"SET @VALOR_MAXIMO = (SELECT MAX(`id`) FROM `historia_clinica` WHERE 1);");
     $query_registro = mysqli_query($conn,"SET @ID = IF(@VALOR_MAXIMO IS NULL, 1 , @VALOR_MAXIMO+1);");
-    $query_registro = mysqli_query($conn,"INSERT INTO `historia_clinica`(`id`, `habilitado`, $texto_id_paciente `id_personal_creado`, $texto_id_personal_asignado `fecha_consulta`, `peso`, `talla`, `pulso`, `presion_arterial`, `temperatura`, `frecuencia_respiratoria`, `primera_consulta`, `motivo_consulta`, `enfermedad_actual`, `revisin_sistemas`, `a_p_p`, `a_p_f`, `examen_fisico`, `impresión_diagnostica`, `examenes`, `diagnostico_definitivo`, `tratamiento`, `archivado`, `edad`) VALUES (@ID, 1, $id_paciente_2 '$id_personal_creado', $id_personal_asignado_2 '$fecha_consulta', '$peso', '$talla', '$pulso', '$presion_arterial', '$temperatura', '$frecuencia_respiratoria', '$primera_consulta', '$motivo_consulta', '$enfermedad_actual', '$revisin_sistemas', '$a_p_p', '$a_p_f', '$examen_fisico', '$impresión_diagnostica', '$examenes', '$diagnostico_definitivo', '$tratamiento', $archivado, '$edad')");
+    $query_registro = mysqli_query($conn,"INSERT INTO `historia_clinica`(`id`,`habilitado`,`fecha_consulta`, `peso`, `talla`, `pulso`, `presion_arterial`, `temperatura`, `frecuencia_respiratoria`, `primera_consulta`, `motivo_consulta`, `enfermedad_actual`, `revisin_sistemas`, `a_p_p`, `a_p_f`, `examen_fisico`, `impresión_diagnostica`, `examenes`, `diagnostico_definitivo`, `tratamiento`, `archivado`, `edad`) VALUES (@ID, 1, '$fecha_consulta', '$peso', '$talla', '$pulso', '$presion_arterial', '$temperatura', '$frecuencia_respiratoria', '$primera_consulta', '$motivo_consulta', '$enfermedad_actual', '$revisin_sistemas', '$a_p_p', '$a_p_f', '$examen_fisico', '$impresión_diagnostica', '$examenes', '$diagnostico_definitivo', '$tratamiento', $archivado, '$edad');");
     
     if(($conn->affected_rows)==1){
+
+        if($id_paciente != ""){
+            $query_registro = mysqli_query($conn,"UPDATE `historia_clinica` SET `id_paciente`='$id_paciente' WHERE `id`= @ID;");
+        }
+        if($id_personal_asignado != ""){
+            $query_registro = mysqli_query($conn,"UPDATE `historia_clinica` SET `id_personal_asignado`='$id_personal_asignado' WHERE `id`= @ID;");
+        }
+        if($id_personal_creado != ""){
+            $query_registro = mysqli_query($conn,"UPDATE `historia_clinica` SET `id_personal_creado`='$id_personal_creado' WHERE `id`= @ID;");
+        }  
         $query_registro = mysqli_query($conn,"SELECT @ID");
         $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_registro); 
         if($numero_filas_consulta_tabla_personal_usuario == 1)
@@ -660,44 +669,34 @@ if($tipo=="vr")
                     LEFT JOIN `usuarios`upa ON h.`id_personal_asignado` = upa.`id_personal` WHERE h.`id` = @ID LIMIT 1;
                     ");
                 }
-                echo "Registro con exitó/".$fila_tabla_personal_usuario["@ID"];
+                echo $fila_tabla_personal_usuario["@ID"];
             }
         }
     }else{
-        echo "Fallo Registro/0";
+        echo "0";
     }
 }else if($tipo=="npcr"){
     $id = $_POST["id"];
 
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT `nombre_1`, `apellido_1` FROM `personal` WHERE `id`='$id'");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) AS `nombres` FROM `personal` WHERE `id`='$id'");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     if($numero_filas_consulta_tabla_personal_usuario == 1)
     {
         while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
-        { /*
-            $nombre = explode(" ", $fila_tabla_personal_usuario["nombre_1"]);
-            $apellido = explode(" ", $fila_tabla_personal_usuario["apellido_1"]);
-            echo  $nombre[0]." ".$apellido[0];*/
-            echo  $fila_tabla_personal_usuario["nombre_1"]." ".$fila_tabla_personal_usuario["apellido_1"];
+        { 
+            echo  $fila_tabla_personal_usuario["nombres"];
         }
     }
 }else if($tipo=="lp"){
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT p.`nombre_1`, p.`apellido_1`, u.`nombre_usuario`, p.`id` FROM `personal` p JOIN `usuarios` u ON p.`id` = u.`id_personal` WHERE U.`permisos`= 1 AND u.`habilitado`=1;");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT CONCAT(p.`nombre_1`,' ',p.`nombre_2`,' ',p.`apellido_1`,' ',p.`apellido_2`,' : ',u.`nombre_usuario`) AS `nombres`, p.`id` FROM `personal` p JOIN `usuarios` u ON p.`id` = u.`id_personal` WHERE u.`permisos`= 1 AND u.`habilitado`=1 ORDER BY CONCAT(p.`nombre_1`,' ',p.`nombre_2`,' ',p.`apellido_1`,' ',p.`apellido_2`,' : ',u.`nombre_usuario`) ASC;");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     $i = 1;
     $ids = array();
-    if($numero_filas_consulta_tabla_personal_usuario >= 1)
-    {   
+    if($numero_filas_consulta_tabla_personal_usuario >= 1)    {   
         echo "<option class='lista_personal_asignar' value='0'></option>";
         array_push($ids,"");
-        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
-        {
-            /*$nombre = explode(" ", $fila_tabla_personal_usuario["nombre_1"]);
-            $apellido = explode(" ", $fila_tabla_personal_usuario["apellido_1"]);
-            echo "<option class='lista_personal_asignar' value='".$i."'>".$nombre[0]." ".$apellido[0].": ".$fila_tabla_personal_usuario["nombre_usuario"]."</option>";
-            */
-            echo "<option class='lista_personal_asignar' value='".$i."'>".$fila_tabla_personal_usuario["nombre_1"]." ".$fila_tabla_personal_usuario["apellido_1"].": ".$fila_tabla_personal_usuario["nombre_usuario"]."</option>";
-            
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH)){
+            echo "<option class='lista_personal_asignar' value='".$i."'>".$fila_tabla_personal_usuario["nombres"]."</option>";
             array_push($ids,$fila_tabla_personal_usuario["id"]);
             $i++;
         }
@@ -708,7 +707,6 @@ if($tipo=="vr")
     $id_asignado = $_POST["id_asignado"];
     $id = $_POST["id"];
     $fecha_consulta = $_POST["fecha_consulta"];
-    $primera_consulta = $_POST["primera_consulta"];
     $cedula = $_POST["cedula"];
     if($cedula==""){
         $isnullorlike1 = "pa.`numero_documento` IS NULL OR pa.`numero_documento` LIKE '%%'";
@@ -721,14 +719,13 @@ if($tipo=="vr")
     }else{
         $isnullorlike2 = "CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) LIKE '%$nombre%'";
     }
-
     $usuario = $_POST["usuario"];
     $cantidad_filas = $_POST["cantidad_filas"];
-
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'0' AND h.`id_personal_asignado`= '$id_asignado' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, pa.`id` AS `id_paciente` , pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'0' AND h.`id_personal_asignado`= '$id_asignado' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     $i = 1;
     $ids = array();
+    $ids_paciente = array();
     if($numero_filas_consulta_tabla_personal_usuario >= 1)
     {
         while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
@@ -739,7 +736,6 @@ if($tipo=="vr")
             <td class='fila_selecionada_".($i-1)." mouseover numero_de_fila_pp'>".$i."</td>
             <td class='fila_selecionada_".($i-1)." id_historial_asignados'>".$ids_tabla."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["fecha_consulta"]."</td>
-            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["primera_consulta"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["numero_documento"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre_usuario"]."</td>
@@ -749,6 +745,14 @@ if($tipo=="vr")
                         <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
                     </svg>
                     EDITAR
+                </div>
+            </td>
+            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div onmouseout='desresaltar_paciente(".($i-1).")' onmouseover='resaltar_paciente(".($i-1).")' class='diseño_paciente_".($i-1)." iconos_tabla_accion' onclick='accion_paciente(".($i-1).")'>
+                  <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='diseño_paciente_".($i-1)." bi bi-person-fill' viewBox='0 0 16 16'>
+                    <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/>
+                  </svg>
+                    PACIENTE
                 </div>
             </td>
             <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
@@ -770,12 +774,15 @@ if($tipo=="vr")
                         
             </tr>";
             array_push($ids,$fila_tabla_personal_usuario["id"]);
+            array_push($ids_paciente,$fila_tabla_personal_usuario["id_paciente"]);
             $i++;
         }
 
     }
     echo "ids";
     echo json_encode($ids);
+    echo "ids";
+    echo json_encode($ids_paciente);
     
 }else if($tipo=="fpc"){
     $id = $_POST["id"];
@@ -799,7 +806,7 @@ if($tipo=="vr")
     
 }else if($tipo=="efhic"){
     $id = $_POST["id"];
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT hc.`id`, hc.`habilitado`, hc.`id_paciente`, hc.`id_personal_creado`, hc.`id_personal_asignado`, CONCAT(pec.`nombre_1`,' ',pec.`apellido_1`, ': ',uc.`nombre_usuario`) as `personal_creado`, CONCAT(pea.`nombre_1`,' ',pea.`apellido_1`, ': ',ua.`nombre_usuario`) as `personal_asignado`, hc.`fecha_consulta`, hc.`peso`, hc.`talla`, hc.`pulso`, hc.`presion_arterial`, hc.`temperatura`, hc.`frecuencia_respiratoria`, hc.`primera_consulta`, hc.`motivo_consulta`, hc.`enfermedad_actual`, hc.`revisin_sistemas`, hc.`a_p_p`, hc.`a_p_f`, hc.`examen_fisico`, hc.`impresión_diagnostica`, hc.`examenes`, hc.`diagnostico_definitivo`, hc.`tratamiento`, hc.`archivado`, hc.`edad`, pa.`id` AS `pa_id`, pa.`tipo_documento` AS `pa_tipo_documento`, pa.`id_personal_creado` AS `pa_id_personal_creado`, pa.`fecha_creacion` AS `pa_fecha_creacion`, pa.`numero_documento` AS `pa_numero_documento`, CONCAT(pa.`nombre_1`,' ',pa.`nombre_2`) AS `pa_nombres`, CONCAT(pa.`apellido_1`,' ',pa.`apellido_1`) AS `pa_apellidos`, pa.`sexo` AS `pa_sexo`, pa.`correo` AS `pa_correo`, pa.`telefono_1` AS `pa_telefono_1`, pa.`telefono_2` AS `pa_telefono_2`, pa.`fecha_nacimiento` AS `pa_fecha_nacimiento`, pa.`provincia` AS `pa_provincia`, pa.`canton` AS `pa_canton`, pa.`direccion` AS `pa_direccion`, pa.`ocupacion` AS `pa_ocupacion` FROM (((((`historia_clinica` hc LEFT JOIN `pacientes` pa ON hc.`id_paciente` = pa.`id`) LEFT JOIN `personal` pec ON hc.`id_personal_creado` = pec.`id`) LEFT JOIN `personal` pea ON hc.`id_personal_asignado` = pea.`id`) LEFT JOIN `usuarios` uc ON hc.`id_personal_creado` = uc.`id_personal`) LEFT JOIN `usuarios` ua ON hc.`id_personal_asignado` = ua.`id_personal`) WHERE hc.`id` = '$id';");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT hc.`id`, hc.`habilitado`, hc.`id_paciente`, hc.`id_personal_creado`, hc.`id_personal_asignado`, CONCAT(pec.`nombre_1`,' ',pec.`nombre_2`,' ',pec.`apellido_1`,' ',pec.`apellido_2`,' : ',uc.`nombre_usuario`) as `personal_creado`, CONCAT(pea.`nombre_1`,' ',pea.`apellido_1`, ': ',ua.`nombre_usuario`) as `personal_asignado`, hc.`fecha_consulta`, hc.`peso`, hc.`talla`, hc.`pulso`, hc.`presion_arterial`, hc.`temperatura`, hc.`frecuencia_respiratoria`, hc.`primera_consulta`, hc.`motivo_consulta`, hc.`enfermedad_actual`, hc.`revisin_sistemas`, hc.`a_p_p`, hc.`a_p_f`, hc.`examen_fisico`, hc.`impresión_diagnostica`, hc.`examenes`, hc.`diagnostico_definitivo`, hc.`tratamiento`, hc.`archivado`, hc.`edad`, pa.`id` AS `pa_id`, pa.`tipo_documento` AS `pa_tipo_documento`, (SELECT ubp.`nombre_usuario` FROM `usuarios` ubp WHERE pa.`id_personal_creado` = ubp.`id_personal` LIMIT 1) AS `pa_personal_creado`, pa.`fecha_creacion` AS `pa_fecha_creacion`, pa.`numero_documento` AS `pa_numero_documento`, CONCAT(pa.`nombre_1`,' ',pa.`nombre_2`) AS `pa_nombres`, CONCAT(pa.`apellido_1`,' ',pa.`apellido_1`) AS `pa_apellidos`, pa.`sexo` AS `pa_sexo`, pa.`correo` AS `pa_correo`, pa.`telefono_1` AS `pa_telefono_1`, pa.`telefono_2` AS `pa_telefono_2`, pa.`fecha_nacimiento` AS `pa_fecha_nacimiento`, pa.`provincia` AS `pa_provincia`, pa.`canton` AS `pa_canton`, pa.`direccion` AS `pa_direccion`, pa.`ocupacion` AS `pa_ocupacion` FROM (((((`historia_clinica` hc LEFT JOIN `pacientes` pa ON hc.`id_paciente` = pa.`id`) LEFT JOIN `personal` pec ON hc.`id_personal_creado` = pec.`id`) LEFT JOIN `personal` pea ON hc.`id_personal_asignado` = pea.`id`) LEFT JOIN `usuarios` uc ON hc.`id_personal_creado` = uc.`id_personal`) LEFT JOIN `usuarios` ua ON hc.`id_personal_asignado` = ua.`id_personal`) WHERE hc.`id` = '$id';");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     if($numero_filas_consulta_tabla_personal_usuario >= 1)
     {
@@ -836,6 +843,7 @@ if($tipo=="vr")
                 "habilitado" => $fila_tabla_personal_usuario["habilitado"],
                 "id_paciente" => $fila_tabla_personal_usuario["id_paciente"],
                 "id_personal_creado" => $fila_tabla_personal_usuario["id_personal_creado"],
+                "archivado" => $fila_tabla_personal_usuario["archivado"],
                 "personal_creado" => $fila_tabla_personal_usuario["personal_creado"],
                 "id_personal_asignado" => $fila_tabla_personal_usuario["id_personal_asignado"],
                 "personal_asignado" => $fila_tabla_personal_usuario["personal_asignado"],
@@ -861,7 +869,7 @@ if($tipo=="vr")
                 "edad" => $fila_tabla_personal_usuario["edad"],
                 "pa_id" => $fila_tabla_personal_usuario["pa_id"],
                 "pa_tipo_documento" => $fila_tabla_personal_usuario["pa_tipo_documento"],
-                "pa_id_personal_creado" => $fila_tabla_personal_usuario["pa_id_personal_creado"],
+                "pa_personal_creado" => $fila_tabla_personal_usuario["pa_personal_creado"],
                 "pa_fecha_creacion" => $fila_tabla_personal_usuario["pa_fecha_creacion"],
                 "pa_numero_documento" => $fila_tabla_personal_usuario["pa_numero_documento"],
                 "pa_nombres" => $fila_tabla_personal_usuario["pa_nombres"],
@@ -1461,10 +1469,11 @@ if($tipo=="vr")
     $usuario = $_POST["usuario"];
     $cantidad_filas = $_POST["cantidad_filas"];
     //$query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'1' AND h.`id_personal_asignado`= '$id_asignado' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'1' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, pa.`id` AS `id_paciente` , CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'1' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     $i = 1;
     $ids = array();
+    $ids_paciente = array();
     if($numero_filas_consulta_tabla_personal_usuario >= 1)
     {
         while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
@@ -1487,7 +1496,15 @@ if($tipo=="vr")
                     </svg>
                     VER
                 </div>
-            </td>   
+            </td>  
+            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div onmouseout='desresaltar_paciente(".($i-1).")' onmouseover='resaltar_paciente(".($i-1).")' class='diseño_paciente_".($i-1)." iconos_tabla_accion' onclick='accion_paciente(".($i-1).")'>
+                  <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='diseño_paciente_".($i-1)." bi bi-person-fill' viewBox='0 0 16 16'>
+                    <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/>
+                  </svg>
+                    PACIENTE
+                </div>
+            </td> 
             <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
                 <div onmouseout='desresaltar_asignar(".($i-1).")' onmouseover='resaltar_asignar(".($i-1).")' class='diseño_asignar_".($i-1)." iconos_tabla_accion diseno_asignar' onclick='accion_asignar(".($i-1).")'>
                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='diseño_asignar_".($i-1)." bi bi-person-bounding-box' viewBox='0 0 16 16'>
@@ -1499,13 +1516,17 @@ if($tipo=="vr")
             </td>
                         
             </tr>";
+            
             array_push($ids,$fila_tabla_personal_usuario["id"]);
+            array_push($ids_paciente,$fila_tabla_personal_usuario["id_paciente"]);
             $i++;
         }
 
     }
     echo "ids";
     echo json_encode($ids);
+    echo "ids";
+    echo json_encode($ids_paciente);
     
 }else if($tipo=="tbusasi"){
     $nombres = $_POST["nombres"];
@@ -1813,11 +1834,9 @@ if($tipo=="vr")
     $id = $_POST["id"];
     $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT p.`tipo_documento`, u.`nombre_usuario` as `usuario`, CONCAT(pe.`nombre_1`,' ',pe.`apellido_1`) as`creado_por`, p.`fecha_creacion`, p.`numero_documento`, p.`nombre_1`, p.`nombre_2`, p.`apellido_1`, p.`apellido_2`, p.`sexo`, p.`correo`, p.`telefono_1`, p.`telefono_2`, p.`fecha_nacimiento`, p.`provincia`, p.`canton`, p.`direccion`, p.`ocupacion` FROM `pacientes` p  INNER JOIN `usuarios` u ON u.`id_personal` = p.`id_personal_creado`INNER JOIN `personal` pe ON pe.`id` = p.`id_personal_creado`WHERE p.`id` = '$id';");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
-    if($numero_filas_consulta_tabla_personal_usuario == 1)
-    {
+    if($numero_filas_consulta_tabla_personal_usuario == 1){
         $personal = array();
-        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
-        {
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH)){
             $personal = [
                 "tipo_documento" => $fila_tabla_personal_usuario["tipo_documento"],
                 "numero_documento" => $fila_tabla_personal_usuario["numero_documento"],
@@ -1834,7 +1853,6 @@ if($tipo=="vr")
                 "canton" => $fila_tabla_personal_usuario["canton"],
                 "direccion" => $fila_tabla_personal_usuario["direccion"],
                 "ocupacion" => $fila_tabla_personal_usuario["ocupacion"],
-
                 "fecha_creacion" => $fila_tabla_personal_usuario["fecha_creacion"],
                 "creado_por" => $fila_tabla_personal_usuario["creado_por"],
                 "usuario" => $fila_tabla_personal_usuario["usuario"]
@@ -1897,6 +1915,8 @@ $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["archivado"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["usuario_creado"]."</td>
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["usuario_asignado"]."</td>
+            
+
             <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
                 <div onmouseout='desresaltar_editar(".($i-1).")' onmouseover='resaltar_editar(".($i-1).")' class='diseño_editar_".($i-1)." iconos_tabla_accion' onclick='accion_editar(".($i-1).")'>
                     <svg xmlns='http://www.w3.org/2000/svg'  width='16' height='16' class='diseño_editar_".($i-1)." bi bi-pencil' viewBox='0 0 16 16'>
@@ -1905,6 +1925,7 @@ $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT
                     EDITAR
                 </div>
             </td>
+
                         
             </tr>";
             array_push($ids,$fila_tabla_personal_usuario["id"]);
@@ -2209,5 +2230,10 @@ IF('$nombres'='',CONCAT(`nombre_1_paci`,' ',`apellido_1_paci`) LIKE '%%' OR  CON
 
 
 $conn->close();
+
+} catch (Exception $e) {
+    echo "0" ;
+}
+
 
 ?>

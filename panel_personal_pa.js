@@ -26,6 +26,10 @@ llenar tabla pacientes
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 var ids_tabla = [];
 function llenar_tabla_pp_pa() {
+  $('th').css({"animation-name": "indicar_buscar"});
+  $('th').css({"animationDuration": "600ms"});
+  $('th').css({"animationIterationCount": "infinite"});
+  /*$(".resultados_de_tablas").detach();*/
     var parametros_rp = {
         "tipo": "tpa",
         "tipo_documento": document.getElementById("buscar_tipo_documento_pp").value,
@@ -50,11 +54,13 @@ function llenar_tabla_pp_pa() {
                 $(".resultados_de_tablas").detach();
                 $("#cuerpo_tabla_pp").append(division_respuesta[0]);   
                 ids_tabla = JSON.parse(division_respuesta[1]); 
+                $('th').css({"animation-name": "none"});
             } 
         }
     });
 };
 function llenar_tabla_pp_pa_con_espera() {
+  $(".resultados_de_tablas").detach();
     var parametros_rp = {
         "tipo": "tpa",
         "tipo_documento": document.getElementById("buscar_tipo_documento_pp").value,

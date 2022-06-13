@@ -5,6 +5,10 @@
         <title>CMQ</title>
         <script src="librerias/jquery-3.6.0.min.js" type="text/javascript"></script>
         <link  type="image/svg+xml" rel="icon" href="iconos/icono_pulso_corazon.svg">
+        
+
+    <link rel="stylesheet" href="nuevo_historial_datos_paciente.css" type="text/css">
+    <link rel="stylesheet" href="nuevo_historial.css" type="text/css">
     </head>
     <body>
         <div id="barra_principal">
@@ -13,92 +17,132 @@
             <div class="elementos_seccion_pp" id="titulo_formulario_pp">
                 <h1>FORMULARIO CONSULTA</h1>
             </div>
-        </div>
+        </div>            
         <div class="seccion_pp seccion_normal_pp">
             <div class="elementos_seccion_pp" id="seccion_paciente_pp">
-                <div>
-                    <label class="tipo_datos_paciente_pp" >Tipo Documento: </label>
-                    <label class="tipo_datos_paciente_pp" >Numero Documento: </label> 
-                    <label class="tipo_datos_paciente_pp" >Nombres: </label>
-                    <label class="tipo_datos_paciente_pp" >Apellidos: </label> 
-                    <label class="tipo_datos_paciente_pp" >Sexo: </label>
-                    <label class="tipo_datos_paciente_pp" >Fecha Nacimiento:</label>
-                    <label class="tipo_datos_paciente_pp" >Telefono: </label>
+
+                <div id="contenedor_izquierda_derecha">
+                    <div id="contenedor_izquierda" class="cont_izq_dere">
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >Tipo Documento: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_tipo_documento_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >N° Documento: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_numero_documento_pp"></label> 
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >Nombres: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_nombres_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >Apellidos: </label> 
+                            <label class="datos_paciente_pp" id="datos_paciente_apellidos_pp"></label> 
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >Sexo: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_sexo_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >Fecha Nacimiento:</label>
+                            <label class="datos_paciente_pp" id="datos_paciente_fecha_nacimiento_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >Telefono: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_telefono_1_pp"></label>
+                        </div>
+                    </div>
+                    <div id="contenedor_derecho" class="cont_izq_dere">
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >Convencional:</label>
+                            <label class="datos_paciente_pp" id="datos_paciente_telefono_2_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp">Ocupacion: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_ocupacion_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp" >Correo: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_correo_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp">Creado por:  </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_id_personal_creado_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp">Fecha Creacion: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_fecha_creacion_pp"></label>
+                        
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp">Provincia: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_provincia_pp"></label>
+                        </div>
+                        <div class="input_izq_1">
+                            <label class="tipo_datos_paciente_pp">Canton: </label>
+                            <label class="datos_paciente_pp" id="datos_paciente_canton_pp"></label>
+                        </div>
+                    </div>
+
                 </div>
-                <div>
-                    <label class="datos_paciente_pp" id="datos_paciente_tipo_documento_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_numero_documento_pp"></label> 
-                    <label class="datos_paciente_pp" id="datos_paciente_nombres_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_apellidos_pp"></label> 
-                    <label class="datos_paciente_pp" id="datos_paciente_sexo_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_fecha_nacimiento_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_telefono_1_pp"></label>
-                </div>
-                <div>
-                    <label class="tipo_datos_paciente_pp" >Convencional:</label>
-                    <label class="tipo_datos_paciente_pp">Ocupacion: </label>
-                    <label class="tipo_datos_paciente_pp" >Correo: </label>
-                    <label class="tipo_datos_paciente_pp">Creado por:  </label>
-                    <label class="tipo_datos_paciente_pp">Fecha Creacion: </label>
-                    <label class="tipo_datos_paciente_pp">Provincia: </label>
-                    <label class="tipo_datos_paciente_pp">Canton: </label>
-                </div>
-                <div>
-                    <label class="datos_paciente_pp" id="datos_paciente_telefono_2_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_ocupacion_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_correo_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_id_personal_creado_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_fecha_creacion_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_provincia_pp"></label>
-                    <label class="datos_paciente_pp" id="datos_paciente_canton_pp"></label>
-                </div>
-                <div>
+                
+                
+                    
+                    
+
+     
+
+                <div id="contenedor_direc">
                     <label class="tipo_datos_paciente_pp">Direccion: </label>
                     <label class="datos_paciente_pp" id="datos_paciente_direccion_pp"></label>
                 </div>
-                <div>
-                    <button id="boton_limpiar_pp">
+                <div id="contenedor_bot_form_pac">
+                    <button type="hidden" id="boton_abrir_paciente_pp" class="botones_formulario_paciente" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder2-open" viewBox="0 0 16 16">
+                            <path d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14V3.5zM2 6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5a.5.5 0 0 0-.5.5V6zm-.367 1a.5.5 0 0 0-.496.562l.64 5.124A1.5 1.5 0 0 0 3.266 14h9.468a1.5 1.5 0 0 0 1.489-1.314l.64-5.124A.5.5 0 0 0 14.367 7H1.633z"/>
+                        </svg>
+                        ABRIR
+                    </button>
+                    <button id="boton_limpiar_pp" class="botones_formulario_paciente">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
                             <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828l.645-1.937zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.734 1.734 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.734 1.734 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.734 1.734 0 0 0 3.407 2.31l.387-1.162zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L10.863.1z"/>
-                          </svg>
-                          Limpiar</button>
-                    <button id="boton_interaccion_paciente_pp">
+                        </svg>
+                        BORRAR PACIENTE
+                    </button>
+                    <button id="boton_interaccion_paciente_pp" class="botones_formulario_paciente">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                          </svg>
-                        Buscar</button>
-                </div>
-            </div>
-        </div>
-        <div class="seccion_pp seccion_normal_pp">
-            <div class="elementos_seccion_pp" id="seccion_creado_asignado_pp">
-                <div class="input_formulario_2_pp" id="creado_asignado_pp">
-                    <div class="input_formulario_1_pp info_creado_asignado_pp">
-                        <div>
-                            <label class="label_formulario_historial_pp">Creado por:</label>
-                            <input class="input_formulario_historial_pp" type="text" id="input_creado_por_pp" disabled>
-                        </div>
-                    </div>
-                    <div class="input_formulario_1_pp info_creado_asignado_pp">
-                        <div>
-                            <label class="label_formulario_historial_pp">Asignado:</label>
-                            <select class="input_formulario_historial_pp" id="input_asignado_pp">
-                            </select>
-                        </div>
-                    </div>
+                        </svg>
+                        BUSCAR
+                    </button>
                 </div>
             </div>
         </div>
         <div class="seccion_pp seccion_normal_pp">
             <div class="elementos_seccion_pp" id="seccion_historial_consulta_pp">
-                <div class="input_formulario_2_pp">
+                <div id="guardar_archivar_id">
+
+
+
+                <div id="contenido_archivado">
+                    <label class="label_formulario" >ARCHIVADO</label>
+                    <div class ="input_con_alerta " >
+                        <label class="content-input" >
+                            <input class="diseño_checkox" type="checkbox" name="Vehiculo" id="input_habilitado" value="autopista"><i></i>
+                        </label>
+                    </div>
+                </div>
+                    
+
+                    <!--
                     <button class="boton_formulario_consulta_pp" id="formulario_guardar_archivar_pp">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
                             <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                           </svg>
                         Guardar y Archivar</button>
+                        -->
                         <button class="boton_formulario_consulta_pp" id="formulario_guardar_pp">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
                             <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
                             </polyline>
                         </svg>
@@ -106,138 +150,167 @@
                         
                     
                 </div>
+                
                 <div class="input_formulario_2_pp" id="fechas_edad_pp">
-                    <div class="input_formulario_1_pp info_autorelleno_pp">
-                        <div>
-                            <label class="label_formulario_historial_pp">Fecha Consulta:</label>
-                            <input class="input_formulario_historial_pp" type="text" id="input_fecha_consulta_pp" >
+
+                    <div class="input_formulario_3_pp">
+                        <div class="input_formulario_4_pp info_creado_asignado_pp">
+                            <label class="label_formulario_historial_pp">Creado</label>
+                            <input class="input_formulario_historial_asignado_pp" type="text" id="input_creado_por_pp" disabled>
                         </div>
-                        <div>
-                            <button class="boton_auto_pp" id="formulario_auto_fecha_consulta_pp">Calcular</button>
-                        </div>
-                    </div>
-                    <div class="input_formulario_1_pp info_autorelleno_pp">
-                        <div>
-                            <label class="label_formulario_historial_pp">Edad:</label>
-                            <input class="input_formulario_historial_pp" type="text" id="input_edad_pp">
-                        </div>
-                        <div>
-                            <button class="boton_auto_pp" id="formulario_auto_edad_pp">Calcular</button>
+                        <div class="input_formulario_4_pp info_creado_asignado_pp">
+                            <label class="label_formulario_historial_pp">Asignado</label>
+                            <select class="input_formulario_historial_asignado_pp" id="input_asignado_pp">
+                            </select>
                         </div>
                     </div>
-                    <div class="input_formulario_1_pp info_autorelleno_pp">
-                        <div>
-                            <label class="label_formulario_historial_pp">Primera Consulta:</label>
-                            <input class="input_formulario_historial_pp" type="text" id="input_primera_consulta_pp" >
-                        </div>
-                        <div>
-                            <button class="boton_auto_pp" id="formulario_auto_primera_consulta_pp">Calcular</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="input_formulario_2_pp">
-                    <div class="input_formulario_1_pp">
-                        <label class="label_formulario_historial_pp">Peso:</label>
-                        <div>
-                            <input  class="input_formulario_historial_pp"  type="text" id="input_peso_pp" >
-                            <label class="label_nomenclaturas_pp">lbs</label>
-                        </div>
-                    </div>
-                    <div class="input_formulario_1_pp">
-                        <label class="label_formulario_historial_pp">Talla:</label>
-                        <div>
-                            <input  class="input_formulario_historial_pp" type="text" id="input_talla_pp" >
-                            <label class="label_nomenclaturas_pp">cm</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="input_formulario_2_pp">
-                    <div class="input_formulario_1_pp">
-                        <label class="label_formulario_historial_pp">Pulso:</label>
-                        <div>
-                            <input  class="input_formulario_historial_pp" type="text"  id="input_pulso_pp" >
-                            <label class="label_nomenclaturas_pp">LPM</label>
-                        </div>
-                    </div>
-                    <div class="input_formulario_1_pp">
-                        <label class="label_formulario_historial_pp">Presion Arterial:</label>
-                        <div  id="input_presion_arterial_pp">
-                            <input class="input_formulario_historial_pp" type="text" id="input_presion_arterial_1_pp">
-                            <label class="label_nomenclaturas_pp">/</label>
-                            <input class="input_formulario_historial_pp" type="text" id="input_presion_arterial_2_pp">
-                        </div>
-                    </div>
-                </div>
-                <div class="input_formulario_2_pp">
-                    <div class="input_formulario_1_pp">
-                        <label  class="label_formulario_historial_pp">Temperatura:</label>
-                        <div>
-                            <input  class="input_formulario_historial_pp" type="text" type="number" id="input_temperatura_pp">
-                            <label class="label_nomenclaturas_pp">ºC</label>
-                        </div>
-                    </div>
-                    <div class="input_formulario_1_pp">
-                        <label class="label_formulario_historial_pp">Frecuencia Respiratoria:</label>
-                        <div>
-                            <input class="input_formulario_historial_pp" type="text" type="number" id="input_frecuencia_respiratoria_pp">
-                            <label class="label_nomenclaturas_pp">x</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">Motivo Monsulta:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_motivo_consulta_pp"></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">Enfermedad Actual:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_enfermedad_actual_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">Revisin Sistemas:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_revisin_sistemas_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">A.P.P.:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_a_p_p_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">A.P.F.:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_a_p_f_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">Examen Físico:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_examen_fisico_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">Impresión Diagnostica:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_impresión_diagnostica_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">Examenes:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_examenes_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">Diagnostico Definitivo:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_diagnostico_definitivo_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <label class="label_formulario_historial_pp">Tratamiento:</label>
-                    <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_tratamiento_pp" ></textarea> 
-                </div>
-                <div class="input_formulario_2_pp">
-                    <button class="boton_formulario_consulta_pp" id="formulario_guardar_archivar_1_pp">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
-                            <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                          </svg>
-                        Guardar y Archivar</button>
-                        <button class="boton_formulario_consulta_pp" id="formulario_guardar_1_pp">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
-                            </polyline>
-                        </svg>
-                        Guardar</button>
+
+
+
                     
+                    <div class="input_formulario_3_pp">
+                        <div class="input_formulario_4_pp info_autorelleno_pp">
+                            <label class="label_formulario_historial_pp">Fecha Consulta</label>
+                            <div>
+                                <input class="input_formulario_historial_pp" type="text" id="input_fecha_consulta_pp" >
+                                <svg id="formulario_auto_fecha_consulta_pp" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class=" boton_calcular bi bi-calculator-fill" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="input_formulario_4_pp info_autorelleno_pp">
+                            <label class="label_formulario_historial_pp">Edad</label>
+                            <div>
+                                <input class="input_formulario_historial_pp" type="text" id="input_edad_pp">
+                                <svg id="formulario_auto_edad_pp" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="boton_calcular bi bi-calculator-fill" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z"/>
+                                </svg>
+                            </div>
+                            
+                        </div>
+                        <div class="input_formulario_4_pp info_autorelleno_pp">
+                            <label class="label_formulario_historial_pp">Primera Consulta</label>
+                            <div>
+                                <input class="input_formulario_historial_pp" type="text" id="input_primera_consulta_pp" >
+                                <svg id="formulario_auto_primera_consulta_pp" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class=" boton_calcular bi bi-calculator-fill" viewBox="0 0 16 16">
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z"/>
+                                </svg>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
+
+                <div class="input_formulario_5_pp" id="ppt_tpf_pp">
+                    <div class="input_formulario_6_pp" id="ppt_pp">
+                        <div class="input_formulario_7_pp">
+                            <label class="label_formulario_historial_pp">Peso</label>
+                            <div class="contenedor_input_label_form" >
+                                <input  class="input_formulario_historial_pp"  type="text" id="input_peso_pp" >
+                                <label class="label_nomenclaturas_pp">lbs</label>
+                            </div>
+                        </div>
+                        <div class="input_formulario_7_pp">
+                            <label class="label_formulario_historial_pp">Pulso</label>
+                            <div class="contenedor_input_label_form" >
+                                <input class="input_formulario_historial_pp" type="text"  id="input_pulso_pp" >
+                                <label class="label_nomenclaturas_pp">LPM</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input_formulario_6_pp" id="ppt_pp">
+                        <div class="input_formulario_7_pp">
+                            <label  class="label_formulario_historial_pp">Temperatura</label>
+                            <div class="contenedor_input_label_form" >
+                                <input  class="input_formulario_historial_pp" type="text" type="number" id="input_temperatura_pp">
+                                <label class="label_nomenclaturas_pp">ºC</label>
+                            </div>
+                        </div>
+                        <div class="input_formulario_7_pp">
+                            <label class="label_formulario_historial_pp">Talla</label>
+                            <div class="contenedor_input_label_form" >
+                                <input  class="input_formulario_historial_pp" type="text" id="input_talla_pp" >
+                                <label class="label_nomenclaturas_pp">cm</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+
+                    <div class="input_formulario_6_pp" id="tpf_pp">
+                        
+                        <div class="input_formulario_7_pp">
+                            <label class="label_formulario_historial_pp">Presion Arterial</label>
+                            <div  class="contenedor_input_label_form"  id="input_presion_arterial_pp">
+                                <input class="input_formulario_historial_pp" type="text" id="input_presion_arterial_1_pp">
+                                <label class="label_nomenclaturas_pp">/</label>
+                                <input class="input_formulario_historial_pp" type="text" id="input_presion_arterial_2_pp">
+                            </div>
+                        </div>
+                        <div class="input_formulario_7_pp">
+                            <label class="label_formulario_historial_pp">Frecuencia Respiratoria</label>
+                            <div class="contenedor_input_label_form" >
+                                <input class="input_formulario_historial_pp" type="text" type="number" id="input_frecuencia_respiratoria_pp">
+                                <label class="label_nomenclaturas_pp">x</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input_formulario_5_pp" id="formulario_general">
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">Motivo Monsulta:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_motivo_consulta_pp"></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">Enfermedad Actual:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_enfermedad_actual_pp" ></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">Revisin Sistemas:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_revisin_sistemas_pp" ></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">A.P.P.:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_a_p_p_pp" ></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">A.P.F.:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_a_p_f_pp" ></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">Examen Físico:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_examen_fisico_pp" ></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">Impresión Diagnostica:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_impresión_diagnostica_pp" ></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">Examenes:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_examenes_pp" ></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">Diagnostico Definitivo:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_diagnostico_definitivo_pp" ></textarea> 
+                    </div>
+                    <div class="input_formulario_8_pp">
+                        <label class="label_formulario_historial_pp">Tratamiento:</label>
+                        <textarea maxlength="200" rows="3" class="input_formulario_historial_pp" type="text" id="input_tratamiento_pp" ></textarea> 
+                    </div>
+                </div>
+                <div id="contenedor_boton_guardar_inferior" >
+                    <button class="boton_formulario_consulta_pp" id="formulario_guardar_1_pp">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8">
+                                </polyline>
+                            </svg>
+                            Guardar
+                    </button>
+                </div>
+                    
+                    
             </div>
         </div>
 
@@ -248,126 +321,11 @@ modal
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <div id="modal_pp" class="modal_pp">
     <div id="contenido_buscar_paciente_pp">
-        <div class ="secciones_buscar_paciente_pp"  id="secciones_buscar_paciente_1_pp">
-            <label id="label_titulo_buscar_paciente_1_pp">BUSCAR PACIENTE</label>
-            <button class="boton_cerrar_superior_pp" id="cerrar_superior_pp">
-                <svg id="icono_boton_cerrar_pp" width="16" height="16"  xmlns="http://www.w3.org/2000/svg" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                </svg>
-            </button>
-        </div>
-        <div class="elementos_contenedores_pp" id="opciones_tabla_pp">
-            <div>
-                <label id="label_cantidad_registros">MAX</label>
-                <select class="input_buscar_tabla_pp" id="cantidad_filas_tabla_pp">
-                    <option value="10" selected>10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                </select>
-            </div>
-            <button class="opciones_tabla_pp" id="borrar_borrar_todo_pp">
-                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
-                    <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="white" stroke="none">
-                    <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                    </g>
-                </svg>
-                LIMPIAR TODO</button>
-            <button class="opciones_tabla_pp" id="agregar_paciente_pp">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                  </svg>
-                  NUEVO PACIENTE</button>
-            <button class="opciones_tabla_pp" id="actualizar_paciente_pp">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
-                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
-                </svg>
-            ACTUALIZAR</button>
-        </div>
-        <div class ="elementos_contenedores_pp secciones_buscar_paciente_pp"  id="contenido_tabla_pp">
-            <table class="tabla tabla_pp">
-                <tr id="cabecera_tabla_pp">
-                    <th cope="col" id="numero_de_fila_pp">#
-                    </th>
-                    <th>Tipo Documento
-                        <div class="contenedor_input_boton_pp">
-                            <select class="input_buscar_tabla_pp" id="buscar_tipo_documento_pp"> 
-                                <option value="cp" selected="selected">C/P</option> 
-                                <option value="Cedula">Cedula</option> 
-                                <option value="Pasaporte">Pasaporte</option> 
-                            </select>
-                            <svg class="boton_borrar_pp" id="boton_borrar_tipo_documento_pp" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="#000000" stroke="none">
-                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                                </g>
-                            </svg>
-                        </div>
-                    </th>
-                    <th>NumeroDoc
-                        <div class="contenedor_input_boton_pp">
-                            <input class="input_buscar_tabla_pp" type="text" id="buscar_numerodoc_pp" >
-                            <svg class="boton_borrar_pp" id="boton_borrar_numero_documento_pp" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="#000000" stroke="none">
-                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                                </g>
-                            </svg>
-                        </div>
-                    </th>
-                    <th>Nombres
-                        <div class="contenedor_input_boton_pp">
-                            <input class="input_buscar_tabla_pp" type="text" id="buscar_nombres_pp">
-                            <svg class="boton_borrar_pp" id="boton_borrar_nombres_pp" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="#000000" stroke="none">
-                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                                </g>
-                            </svg>
-                        </div>
-                    </th>
-                    <th>Apellidos
-                        <div class="contenedor_input_boton_pp">
-                            <input class="input_buscar_tabla_pp" type="text" id="buscar_apellidos_pp">
-                            <svg class="boton_borrar_pp" id="boton_borrar_apellidos_pp" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="#000000" stroke="none">
-                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                                </g>
-                            </svg>
-                        </div>
-                    </th>
-                    <th>Creado Por
-                        <div class="contenedor_input_boton_pp">
-                            <input class="input_buscar_tabla_pp" type="text" id="buscar_creado_por_pp">
-                            <svg class="boton_borrar_pp" id="boton_borrar_creado_por_pp" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="#000000" stroke="none">
-                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                                </g>
-                            </svg>
-                        </div>
-                    </th>
-                    <th>Fecha Creacion
-                        <div class="contenedor_input_boton_pp">
-                            <input class="input_buscar_tabla_pp" type="text" id="buscar_fecha_creado_pp" maxlength="10">
-                            <svg class="boton_borrar_pp" id="boton_borrar_fecha_creado_pp" version="1.0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 120.000000 120.000000" preserveAspectRatio="xMidYMid meet">
-                                <g   transform="translate(0.000000,120.000000) scale(0.050000,-0.050000)" fill="#000000" stroke="none">
-                                <path d="M281 2056 c-68 -73 -50 -131 149 -465 226 -381 221 -326 42 -427 -255 -145 -265 -206 -78 -482 2 -4 28 8 57 27 29 19 55 31 57 28 3 -4 61 -86 130 -182 221 -310 202 -310 921 12 553 248 610 283 569 348 -19 30 -48 34 -195 28 -210 -9 -222 -3 -382 206 -118 155 -121 169 -42 197 37 13 -114 218 -182 246 -78 33 -114 22 -297 -94 -73 -45 -135 -79 -139 -75 -4 4 -85 138 -181 297 -241 402 -314 459 -429 336z m1167 -1019 c86 -115 158 -190 194 -204 77 -29 73 -42 -19 -70 -116 -35 -165 -28 -225 29 -30 29 -64 46 -76 39 -42 -26 -22 -92 39 -128 l60 -37 -103 -43 -102 -43 -58 62 c-35 38 -70 58 -88 51 -42 -16 -37 -60 10 -103 22 -20 40 -42 40 -50 0 -16 -216 -92 -226 -79 -83 102 -254 341 -253 353 1 14 633 402 659 405 6 1 72 -81 148 -182z"/>
-                                </g>
-                            </svg>
-                        </div>
-                    </th>
-                </tr>
-                <tbody id="cuerpo_tabla">
-                </tbody>
-            </table>
-        </div>
-        <div class ="secciones_buscar_paciente_pp"  id="secciones_buscar_paciente_4_pp">
-            <button class="botones_inferior_pp" id="boton_aceptar_pp" hidden>ACEPTAR</button>
-            <button class="botones_inferior_pp" id="boton_cancelar_pp">CANCELAR</button>
-        </div>
+        
     </div>
     <div id="contenido_confirmar_pp">
         <div class ="interior_confirmar_registro_pp interior_confirmar_registro_superior_pp" id="">
-            <label class="mensaje_formulario_pp" >Seguro desea guardar y archivar el historial?</label>
+            <label class="mensaje_formulario_pp" >DESEA GUARDAR LOS CAMBIOS?</label>
         </div>
         <div class ="interior_confirmar_registro_pp interior_confirmar_registro_botones_pp" id="">
             <button class="interior_botones_confimrar_pp" id="boton_confirmar_aceptar_pp">ACEPTAR</button>
@@ -384,7 +342,7 @@ modal
     </div>
     <div id="mensaje_alerta_pp">
         <div class ="interior_alerta_pp " id="interior_alerta_botones_pp">
-            <label id="label_mensaje_alerta_pp">Fallo Registro</label>
+            <label id="label_mensaje_alerta_pp"></label>
         </div>
         <div class ="interior_alerta_pp interior_alerta_botones_pp" id="">
             <button class="mensaje_alerta_boton_pp" id="boton_alerta_cofirmar_pp">ACEPTAR</button>
@@ -406,8 +364,13 @@ modal
     <script type="text/javascript" src="estilos/estilo.js"></script>
     <link rel="stylesheet" href="diseño_tablas.css" type="text/css">
     <link rel="stylesheet" href="opciones_tabla.css" type="text/css">
+    <link rel="stylesheet" href="diseno_checkbox.css" type="text/css">
+    <link rel="stylesheet" href="estilos/modal_general.css" type="text/css">
 
     <link rel="stylesheet" href="nuevo_historial_datos_paciente.css" type="text/css">
     <link rel="stylesheet" href="nuevo_historial.css" type="text/css">
     <script type="text/javascript" src="nuevo_historial.js"></script>
+    
+    
+    
 </html>

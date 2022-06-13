@@ -10,7 +10,7 @@
     display:flex;
     align-items: center;
     justify-content: space-between;
-    width: 70%;
+    width: 850px;
     position: relative;
     height: 50px;
   }
@@ -24,21 +24,22 @@
 formulario historial
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-  .input_formulario_2_pp{
+  .input_formulario_5_pp{
     width: 100%;   
     display: flex; 
     margin: 10px 0;
+    padding: 0 20px;
+    justify-content: space-around;
   }
-  .input_formulario_2_pp>label{
+  .label_formulario_historial_pp{
     justify-content: left;
-    width: 200px;
     text-align: right;
     padding-right: 10px;
     height: 30px ;
     padding-top: 10px;
   }
   .input_formulario_2_pp>input,.input_formulario_2_pp>textarea{
-    border: 2px solid var(--color-1-formulario);
+    border: 3px solid var(--color-1-formulario);
     justify-content: left; 
     width: 705px;
     max-width: 705px;
@@ -51,6 +52,7 @@ formulario historial
     width: 48%;
     display: flex;
   }
+  /*
   .input_formulario_1_pp>label{
     justify-content: left;
     width: 400px;
@@ -60,7 +62,7 @@ formulario historial
     padding-right: 5px;
   }
   .input_formulario_1_pp>div{
-    border: 2px solid var(--color-1-formulario);
+    border: 3px solid var(--color-1-formulario);
     border-radius: 15px;
     width: 100%;
     display: flex;
@@ -88,25 +90,122 @@ formulario historial
     padding-top: 7px;
     
   }
-  
+  */
   .input_formulario_2_pp:first-child,.input_formulario_2_pp:last-child{
     display: flex;
     justify-content: right;
-    padding-right: 40px;
   }
   .boton_formulario_consulta_pp{
     border: 0;
     background-color: var(--color-1-formulario);
     border-radius: 10px;
-    height: 35px;
-    width: 200px;
+    height: 49px;
+    width: 204px;
     color: white;
-    font-size: 18px;
+    font-size: calc(var(--tamano-letra) + 6px );
     margin-left: 10px;
   }
   button:hover{
     cursor: pointer;
   }
+  #fechas_edad_pp{
+    border: 3px solid var(--color-paguina-principal);
+    border-left: 0;
+    border-right: 0;
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  #ppt_tpf_pp{
+    border-bottom: 3px solid var(--color-paguina-principal);
+    border-left: 0;
+    border-right: 0;
+    margin-top: 0;
+    padding: 0px 0px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+  }
+  #ppt_pp,#tpf_pp{
+    padding: 6px 25px 23px 25px;
+    width: 50%;
+  }
+  .input_formulario_7_pp{
+    
+  }
+  #ppt_pp{
+    border-right: 3px solid var(--color-paguina-principal);
+  }
+  .input_formulario_7_pp>label{
+    margin-bottom: 2px;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-left: 19px;
+  }
+
+  /*.input_formulario_7_pp>div{*/
+    .contenedor_input_label_form{
+    border: 3px solid var(--color-1-formulario);
+    border-radius: 14px;
+    padding: 0;
+  }
+
+  
+  /*.input_formulario_7_pp>div>input{*/
+    .contenedor_input_label_form>.input_formulario_historial_pp{
+    height: 30px;
+    width: 77%;
+    font-size: calc(var(--tamano-letra) - 1px);
+    text-align: center;
+    border: 1px;
+  }
+  
+  
+ 
+
+  
+
+
+
+
+  #input_presion_arterial_1_pp,#input_presion_arterial_2_pp{
+    width: 43%;
+  }
+    .input_formulario_historial_pp{
+    border: 3px solid var(--color-1-formulario);
+    justify-content: left; 
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 15px;
+    font-size: calc( var(--tamano-letra) - 1px);
+  }
+  #formulario_general{
+    border-bottom: 3px solid var(--color-paguina-principal);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 23px;
+    margin-top: -12px;
+  }
+  .input_formulario_8_pp>label{
+    margin: 10px 0 3px 19px;
+  }
+  .input_formulario_8_pp{
+    display: flex;
+    flex-direction: column;
+  }
+  .label_formulario_historial_pp{
+    display: flex;
+  }
+  #contenedor_boton_guardar_inferior{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    padding-right: 20px;
+  }
+  #seccion_historial_consulta_pp{
+    margin-bottom: 100px;
+  }
+  /*
   #input_presion_arterial_pp>input{
     padding: 0 3px;
     text-align: right;
@@ -114,35 +213,25 @@ formulario historial
   }
   #input_presion_arterial_pp>input:last-child{
     text-align: left;
-  }
-  #fechas_edad_pp{
-    border: 3px solid var(--color-paguina-principal);
-    border-left: 0;
-    border-right: 0;
-    padding: 5px 0 15px 0;
-    padding-left: 20px;
-    padding-right: 35px;
-    margin-top: 20px;
-  }
-
+  }*/
+/*
   .info_autorelleno_pp{
     width: 33.3%;
     display: block;
-  }
+  }*/
   .info_autorelleno_pp>div{
-    margin-top: 10px;
     border: 0;
     width: 100%;
     display: flex;
     justify-content: center;
   }
   .info_autorelleno_pp>div>input{
-    border: 2px solid var(--color-1-formulario);
+    border: 3px solid var(--color-1-formulario);
     width: 122px;
     padding: 0 5px;
     text-align: center;
     margin-left: 5px;
-  }
+  }/*
   .info_autorelleno_pp>div>button{
     border: 0;
     width: 50px;
@@ -153,12 +242,27 @@ formulario historial
     font-size: 17px;
     color: white;
   }
+  */
+  #guardar_archivar_id{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 11px 20px 0 0;
+  }
+  .input_formulario_3_pp:first-child{
+    padding: 5px 5px 0px 15px;
+  }
+  .input_formulario_3_pp:last-child{
+    padding: 0px 23px 21px 25px;
+    border-left: 3px solid var(--color-paguina-principal);
+  }
   #seccion_creado_asignado_pp{
     border: 3px solid var(--color-paguina-principal);
     border-radius: 20px;
     padding: 10px 0  10px 40px ;
     height: auto;
-  }
+  }/*
   .info_creado_asignado_pp{
     border: 0;
     width: 50%;
@@ -198,127 +302,24 @@ formulario historial
     font-size: 18px;
     color: white;
   }
-  
+  */
    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 modal 
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-  #modal_pp {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-     /* Location of the box */
+  /*#modal_pp {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(32, 32, 36); /* Fallback color */
-    background-color: rgba(41, 81, 87, 0.4); /* Black w/ opacity */
-  }
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-modal buscar paciente
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-  #contenido_buscar_paciente_pp {
-    background-color: #fefefe;
-    margin-top: 25px;
-    padding: 20px 10px 20px 10px;
-    border: 1px solid var(--color-1-formulario);
-    border-radius: 15px;
-    width: 1200px;
-    display: none;
-    font-size: 15px;
-  }
-
-  .botones_inferior_pp{
-    margin-left: 10px;
-    justify-content: right;
-    font-size: 20px;
-    color: white;
-    background-color: var(--color-1-formulario);
-    border: 0;
-    border-radius: 15px;
-    height: 40px;
-    width: 200px;
-    align-items: center;
-  }
-
-  .secciones_buscar_paciente_pp:first-child{
-    padding: 0 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 25px;
-    border-bottom: 3px solid var(--color-1-formulario);
-    display: flex;
-    justify-content: space-between;
-  }
-  #label_titulo_buscar_paciente_1_pp{
-    text-align: center;
-  }
-
-  .boton_cerrar_superior_pp{
-    border: 0;
-    background: white;
-  }
-  #icono_boton_cerrar_pp{
-    width: 30px;
-    height: 30px;
-    fill: var(--color-1-formulario);
-  }
-  #opciones_tabla_pp{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  .secciones_buscar_paciente_pp:last-child{
-    padding: 0 10px;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 3px solid var(--color-1-formulario);
-    display: flex;
-    justify-content: right;
-  }
-  table{
-    height: 300px;
-    overflow: auto
-  }
-  /*.secciones_buscar_paciente_2_pp{
-    border-top: 3px solid var(--color-1-formulario);
-    margin: 10px 0;
-  }
-  .
-  #secciones_buscar_paciente_1_pp{
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-  }
-
-  
-
-  #secciones_buscar_paciente_4_pp{
-    display: flex;
-    justify-content: right;
-    padding-right: 30px;
-  }
-
-  .secciones_buscar_paciente_2_pp{
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-  }
-  .tabla{
-    height: 300px;
-    overflow: auto
-  }
-  .resultados_de_tablas:hover{
-    cursor: pointer;
-  }
-*/
-
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(32, 32, 36); 
+    background-color: rgba(41, 81, 87, 0.4); 
+  }*/
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 modal confirmar registro
@@ -330,7 +331,7 @@ modal confirmar registro
   padding: 0 10px 20px 10px;
   border: 1px solid var(--color-1-formulario);
   border-radius: 15px;
-  width: 450px;
+  width: 580px;
   display: none;
   font-size: 15px;
 }
@@ -391,11 +392,15 @@ cursor: pointer;
 }
 .interior_confirmar_registro_superior_pp
 {
-  padding: 20px 0;
+  padding: 32px 0;
+  border-bottom: 3px solid var(--color-1-formulario);
+  border-top: 3px solid var(--color-1-formulario);
+  margin: 25px 0 5px 0;
 }
 .interior_confirmar_registro_superior_pp>label
 {
   font-size: 20px;
+  font-size: calc(var(--tamano-letra) + 13px);
 }
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -429,12 +434,12 @@ modal alerta
   font-size: var(--tamano-letra);
 }
 #interior_alerta_botones_pp{
-  font-size: 20px;
-  padding: 20px 0;
+  font-size: calc(var(--tamano-letra) + 13px);
+  padding: 30px 0;
   justify-content: center;
   margin-top: 30px;
-  border-top: 2px solid var(--color-1-formulario);
-  border-bottom: 2px solid var(--color-1-formulario);
+  border-top: 3px solid var(--color-1-formulario);
+  border-bottom: 3px solid var(--color-1-formulario);
 }
 .mensaje_alerta_boton_pp:hover,
 .mensaje_alerta_boton_pp:focus {
@@ -462,4 +467,82 @@ modal esperar
 .ajuste_elementos_esperar_pp>img{
   width: 100px;
   height: 100px;
+}
+/*
+.boton_restablecer{
+  width: 42px;
+    height: 42px;
+    margin-left: 3px;
+}
+
+
+#formulario_auto_fecha_consulta_pp,#formulario_auto_edad_pp,#formulario_auto_primera_consulta_pp{
+  fill: var(--color-paguina-principal);
+  width: 25px;
+  height: 25px;
+  margin: 0 20px 0 10px;
+}
+
+
+#formulario_auto_fecha_consulta_pp:hover,#formulario_auto_edad_pp:hover,#formulario_auto_primera_consulta_pp:hover,#formulario_auto_fecha_consulta_pp:after,#formulario_auto_edad_pp:after,#formulario_auto_primera_consulta_pp:after{
+  cursor: pointer;
+}
+
+
+.input_formulario_4_pp{
+  max-inline-size: max-content;
+  width: 100%;
+}*/
+
+#input_asignado_pp{
+  text-align: initial;
+  padding-left: 25px;
+}
+
+.boton_calcular,.boton_restablecer_2,.boton_restablecer{
+  fill: var(--color-paguina-principal);
+  width: 34px;
+    height: 34px;
+  margin: 0 2px 0 0px;
+}
+.boton_calcular{
+  margin: 0 5px 0 5px;
+}
+.input_formulario_4_pp>div>.input_formulario_historial_pp{
+  border-radius: 15px;
+  height: 35px;
+  width: 160px;
+  font-size: calc(var(--tamano-letra) - 1px);
+}
+.input_formulario_4_pp>label{
+  display: flex;
+  padding-left: 10px;
+  margin: 0px 0 6px 0;
+}
+.input_formulario_historial_asignado_pp{
+  width: 553px;
+  height: 39px;
+  border: 3px solid var(--color-1-formulario);
+  border-radius: 20px;
+  font-size: calc(var(--tamano-letra) + 2px);
+  padding-left: 27px;
+  background: white;
+  color: black;
+}
+#contenido_archivado{
+  display: flex;
+  align-items: center;
+  margin-right: 18px;
+}
+#contenido_archivado>label{
+  margin-right: 5px;
+  height: 19px;
+  margin-top: 2px;
+}
+#contenido_archivado>div{
+    width: 55px;
+    height: 32px;
+}
+.boton_calcular:hover,.boton_restablecer:hover,.boton_calcular:after,.boton_restablecer:after{
+  cursor: pointer;
 }
