@@ -150,9 +150,9 @@ modal_ejecutar_aceptar_ids.onclick = function(){
         document.getElementById("modal_contenido_ids").style.display = "none";
         document.getElementById("contenido_esperar_pp").style.display = "inline-block";
         var parametros_ids = {
-            "tipo": "vr",
-            "usuario": usuario_ids.value,
-            "contrasena": contrasena_ids.value
+          "tipo": "vr",
+          "usuario": usuario_ids.value,
+          "contrasena": contrasena_ids.value
         };
         $.ajax({ 
             data: parametros_ids,
@@ -161,32 +161,37 @@ modal_ejecutar_aceptar_ids.onclick = function(){
             beforeSend: function (){
             },
             success:function (response){
-                if(response == "N")
+                //if(response != "0")
+                if(response == "0")
                 {
+                  console.log(response);
                     alerta_usaurio_no_encontrado();
-                }else
-                {
+                }else {
+                  
                     const resultado_consulta = JSON.parse(response);
-                    if(resultado_consulta[2]=="0")
+                    if(resultado_consulta["habilitado"]=="0")
                     {
                         alerta_usaurio_no_encontrado();
-
                     }else{
-                        document.cookie = "usuario="+var_usuario_ids;
-                        document.cookie = "contrasena="+var_contrasena_ids;
-                        document.cookie = "id_personal="+resultado_consulta[0];
-                        document.cookie = "permisos="+resultado_consulta[1];
+                        document.cookie = "usuario="+resultado_consulta["usuario"];
+                        document.cookie = "contrasena="+resultado_consulta["contrasena"];
+                        document.cookie = "id_personal="+resultado_consulta["id_personal"];
+                        document.cookie = "permisos="+resultado_consulta["permisos"];
                         document.cookie = "max-age=";
+
                         /*if(document.getElementById('recordar_sesion_ids').checked)
                         {
                             document.cookie = "max-age="+(30*24*60*60);
                         }*/
-                        if(resultado_consulta[1]=="2")
+                        if(resultado_consulta["permisos"]=="2")
                         {
                             window.location.href = "panel_administrador.html";
                         }else
                         {
+                          if(resultado_consulta["permisos"]=="1"){
+                            /*console.log(resultado_consulta["id_personal"]);*/
                             window.location.href = "panel_personal.html";
+                          }
                         }
                     }
                     

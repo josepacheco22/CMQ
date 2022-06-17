@@ -92,10 +92,14 @@ document.getElementById("boton_borrar_nombre_usuario").onclick = function(){
 
 
 document.getElementById("boton_nuevo_administrador").onclick = function(){
-    sessionStorage.setItem("nombre_usuarios", "");
-    window.open("editar_admin.html");
+    /*sessionStorage.setItem("nombre_usuarios", "");
+    window.open("editar_admin.html");*/
 };
 function accion_editar(numero){
-    sessionStorage.setItem("nombre_usuarios", ids_tabla[numero]);
-    window.open("editar_admin.html");
+    /*sessionStorage.setItem("nombre_usuarios", ids_tabla[numero]);
+    window.open("editar_admin.html");*/
+}
+function accion_eliminar(numero){
+  /*sessionStorage.setItem("nombre_usuarios", ids_tabla[numero]);
+  window.open("editar_admin.html");*/
 }

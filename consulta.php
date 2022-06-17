@@ -1,30 +1,34 @@
 <?php
 
 try {
-
-$conn = new mysqli("localhost","root","1311206104","cmq");
-//$conn = new mysqli("localhost","cmq-web","CmQu1n1nde","cmq");
+$conn = new mysqli("localhost","root","CmQu1n1nde","cmq");
+//$conn = new mysqli("192.168.100.8","root","CmQu1n1nde","cmq");
 $tipo = $_POST["tipo"];
 if($tipo=="vr")
 {
     $usuario = $_POST["usuario"];
     $contrasena = $_POST["contrasena"];
-    $queryusuario = mysqli_query($conn,"SELECT * FROM usuarios WHERE nombre_usuario = '$usuario'");
-    $numero_filas = mysqli_num_rows($queryusuario); 
+    $sql = "SELECT * FROM usuarios WHERE nombre_usuario = '$usuario'";
+    $queryusuario = mysqli_query($conn,$sql);
+    $numero_filas = mysqli_num_rows($queryusuario);
     $resultado = mysqli_fetch_array($queryusuario);
-    if (($numero_filas==1) && (password_verify($contrasena,$resultado['contrasena_usuario'])) )
-    { 
-        $info = array(
-        $resultado['id_personal'],
-        $resultado['permisos'],
-        $resultado['habilitado']);
-
-        $json_info = json_encode($info);
-        echo $json_info;
+    $info = [];
+    if (($numero_filas>=1) && (password_verify($contrasena,$resultado['contrasena_usuario'])) )
+    {
+      $info = [
+        "usuario" => $usuario,
+        "contrasena" => $contrasena,
+        "id_personal" => $resultado['id_personal'],
+        "permisos" => $resultado['permisos']
+      ];
+        echo json_encode($info);
     }else
     {
-        echo "N";
+        echo "0";
     }
+    //$contrasena_usuario = password_hash("CmQu1n1nde", PASSWORD_BCRYPT);
+    //echo $contrasena_usuario;
+    //echo 'Error: '. $conn->error;
 }else if($tipo=="rp"){
     $tipo_documento = $_POST["tipo_documento"];
     $numero_documento = $_POST["numero_documento"];
@@ -35,6 +39,7 @@ if($tipo=="vr")
     $telefono_1 = $_POST["telefono_1"];
     $telefono_2 = $_POST["telefono_2"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    
     $cargo = $_POST["cargo"];
     $especialidad = $_POST["especialidad"];
     $miniatura = $_POST["miniatura"];
@@ -157,11 +162,17 @@ if($tipo=="vr")
     $telefono_1 = $_POST["telefono_1"];
     $telefono_2 = $_POST["telefono_2"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    if($fecha_nacimiento == "")
+    {
+      $fecha_nacimiento = "null";
+    }else{
+      $fecha_nacimiento = "'$fecha_nacimiento'";
+    }
     $provincia = $_POST["provincia"];
     $canton = $_POST["canton"];
     $direccion = $_POST["direccion"];
     $ocupacion = $_POST["ocupacion"];
-    $query_registro_usuario = mysqli_query($conn,"INSERT INTO `pacientes`(`id`, `tipo_documento`, `habilitado`, `id_personal_creado`, `fecha_creacion`, `numero_documento`, `nombre_1`, `nombre_2`, `apellido_1`, `apellido_2`, `sexo`, `correo`, `telefono_1`, `telefono_2`, `fecha_nacimiento`, `provincia`, `canton`, `direccion`, `ocupacion`) VALUES (uuid(), '$tipo_documento', 1, '$id_personal_creado', '$fecha_creacion', '$numero_documento', '$nombre_1', '$nombre_2', '$apellido_1', '$apellido_2', '$sexo', '$correo', '$telefono_1', '$telefono_2', '$fecha_nacimiento', '$provincia', '$canton', '$direccion', '$ocupacion')");
+    $query_registro_usuario = mysqli_query($conn,"INSERT INTO `pacientes`(`id`, `tipo_documento`, `habilitado`, `id_personal_creado`, `fecha_creacion`, `numero_documento`, `nombre_1`, `nombre_2`, `apellido_1`, `apellido_2`, `sexo`, `correo`, `telefono_1`, `telefono_2`, `fecha_nacimiento`, `provincia`, `canton`, `direccion`, `ocupacion`) VALUES (uuid(), '$tipo_documento', 1, '$id_personal_creado', '$fecha_creacion', '$numero_documento', '$nombre_1', '$nombre_2', '$apellido_1', '$apellido_2', '$sexo', '$correo', '$telefono_1', '$telefono_2', $fecha_nacimiento, '$provincia', '$canton', '$direccion', '$ocupacion')");
     if(($conn->affected_rows)==1){
         echo "REGISTRO CON EXITO";
     }else{
@@ -253,7 +264,7 @@ if($tipo=="vr")
     }
 }else if($tipo=="dthisdes"){
     $id = $_POST["id"];
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`,h.`primera_consulta`, pa.`numero_documento`, concat(pa.`nombre_1`,' ', pa.`apellido_1`) as nombre_1, uc.`nombre_usuario` as  `creado`, ua.`nombre_usuario` as `asignado` FROM (((`historia_clinica` h LEFT JOIN `pacientes` pa ON pa.`id` = h.`id_paciente`) LEFT JOIN `usuarios` uc ON uc.`id_personal` = h.`id_personal_creado`) LEFT JOIN `usuarios` ua ON ua.`id_personal` = h.`id_personal_asignado`) WHERE h.`habilitado`= b'1' AND h.`id` = '$id' LIMIT 1;");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`,h.`primera_consulta`, pa.`numero_documento`, concat(pa.`nombre_1`,' ', pa.`apellido_1`) as nombre_1, uc.`nombre_usuario` as  `creado`, ua.`nombre_usuario` as `asignado` FROM (((`historia_clinica` h LEFT JOIN `pacientes` pa ON pa.`id` = h.`id_paciente`) LEFT JOIN `usuarios` uc ON uc.`id_personal` = h.`id_personal_creado`) LEFT JOIN `usuarios` ua ON ua.`id_personal` = h.`id_personal_asignado`) WHERE h.`habilitado`= 1 AND h.`id` = '$id' LIMIT 1;");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     if($numero_filas_consulta_tabla_personal_usuario == 1)
     {
@@ -422,519 +433,40 @@ if($tipo=="vr")
     $examenes = $_POST["examenes"];
     $diagnostico_definitivo = $_POST["diagnostico_definitivo"];
     $tratamiento = $_POST["tratamiento"];
-    $query_registro = mysqli_query($conn,"SET @variable_id=uuid();");
 
-    $query_registro = mysqli_query($conn,"SET @VALOR_MAXIMO = (SELECT MAX(`id`) FROM `historia_clinica` WHERE 1);");
-    $query_registro = mysqli_query($conn,"SET @ID = IF(@VALOR_MAXIMO IS NULL, 1 , @VALOR_MAXIMO+1);");
-    $query_registro = mysqli_query($conn,"INSERT INTO `historia_clinica`(`id`,`habilitado`,`fecha_consulta`, `peso`, `talla`, `pulso`, `presion_arterial`, `temperatura`, `frecuencia_respiratoria`, `primera_consulta`, `motivo_consulta`, `enfermedad_actual`, `revisin_sistemas`, `a_p_p`, `a_p_f`, `examen_fisico`, `impresión_diagnostica`, `examenes`, `diagnostico_definitivo`, `tratamiento`, `archivado`, `edad`) VALUES (@ID, 1, '$fecha_consulta', '$peso', '$talla', '$pulso', '$presion_arterial', '$temperatura', '$frecuencia_respiratoria', '$primera_consulta', '$motivo_consulta', '$enfermedad_actual', '$revisin_sistemas', '$a_p_p', '$a_p_f', '$examen_fisico', '$impresión_diagnostica', '$examenes', '$diagnostico_definitivo', '$tratamiento', $archivado, '$edad');");
-    
-    if(($conn->affected_rows)==1){
+    /*
+    $sql = "SET @VALOR_MAXIMO = (SELECT MAX(`id`) FROM `historia_clinica` WHERE 1);";
+    mysqli_query($conn,$sql);
+    $sql = "INSERT INTO `historia_clinica`(`id`,`habilitado`,`fecha_consulta`, `peso`, `talla`, `pulso`, `presion_arterial`, `temperatura`, `frecuencia_respiratoria`, `primera_consulta`, `motivo_consulta`, `enfermedad_actual`, `revisin_sistemas`, `a_p_p`, `a_p_f`, `examen_fisico`, `impresión_diagnostica`, `examenes`, `diagnostico_definitivo`, `tratamiento`, `archivado`, `edad`) VALUES (@ID, 1, '$fecha_consulta', '$peso', '$talla', '$pulso', '$presion_arterial', '$temperatura', '$frecuencia_respiratoria', '$primera_consulta', '$motivo_consulta', '$enfermedad_actual', '$revisin_sistemas', '$a_p_p', '$a_p_f', '$examen_fisico', '$impresión_diagnostica', '$examenes', '$diagnostico_definitivo', '$tratamiento', $archivado, '$edad');";
+    echo $sql;
+    */
 
+    $sql = "ALTER TABLE `historia_clinica` AUTO_INCREMENT = 1;";
+    mysqli_query($conn,$sql);
+    $sql = "INSERT INTO `historia_clinica`(`habilitado`,`fecha_consulta`, `peso`, `talla`, `pulso`, `presion_arterial`, `temperatura`, `frecuencia_respiratoria`, `primera_consulta`, `motivo_consulta`, `enfermedad_actual`, `revisin_sistemas`, `a_p_p`, `a_p_f`, `examen_fisico`, `impresión_diagnostica`, `examenes`, `diagnostico_definitivo`, `tratamiento`, `archivado`, `edad`) VALUES ( 1, '$fecha_consulta', '$peso', '$talla', '$pulso', '$presion_arterial', '$temperatura', '$frecuencia_respiratoria', '$primera_consulta', '$motivo_consulta', '$enfermedad_actual', '$revisin_sistemas', '$a_p_p', '$a_p_f', '$examen_fisico', '$impresión_diagnostica', '$examenes', '$diagnostico_definitivo', '$tratamiento', $archivado, '$edad');";
+    if(mysqli_query($conn,$sql)){
+      $sql = "SELECT LAST_INSERT_ID() as id;";
+      $sqlresult = mysqli_query($conn,$sql);
+      $resultado = mysqli_fetch_array($sqlresult);
+      $numero_filas = mysqli_num_rows($sqlresult); 
+      if($numero_filas == 1){
+        $id_insert = $resultado["id"];
         if($id_paciente != ""){
-            $query_registro = mysqli_query($conn,"UPDATE `historia_clinica` SET `id_paciente`='$id_paciente' WHERE `id`= @ID;");
+          $sql = "UPDATE `historia_clinica` SET `id_paciente`='$id_paciente' WHERE `id`= $id_insert;";
+          mysqli_query($conn,$sql);
         }
         if($id_personal_asignado != ""){
-            $query_registro = mysqli_query($conn,"UPDATE `historia_clinica` SET `id_personal_asignado`='$id_personal_asignado' WHERE `id`= @ID;");
+            $sql = "UPDATE `historia_clinica` SET `id_personal_asignado`='$id_personal_asignado' WHERE `id`= $id_insert;";
+            mysqli_query($conn,$sql);
         }
         if($id_personal_creado != ""){
-            $query_registro = mysqli_query($conn,"UPDATE `historia_clinica` SET `id_personal_creado`='$id_personal_creado' WHERE `id`= @ID;");
+            $sql = "UPDATE `historia_clinica` SET `id_personal_creado`='$id_personal_creado' WHERE `id`= $id_insert;";
+            mysqli_query($conn,$sql);
         }  
-        $query_registro = mysqli_query($conn,"SELECT @ID");
-        $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_registro); 
-        if($numero_filas_consulta_tabla_personal_usuario == 1)
-        {
-            while($fila_tabla_personal_usuario = $query_registro ->fetch_array(MYSQLI_BOTH))
-            {
-                if($archivado=="1"){
-                    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"INSERT INTO `historia_archivado` (`fecha_creacion`,
-                    `id_h`,
-                    `fecha_consulta_h`,
-                    `id_creado_usuario`,
-                    `creado_usuario`,
-                    `peso_h`,
-                    `talla_h`,
-                    `pulso_h`,
-                    `presion_arterial_h`,
-                    `temperatura_h`,
-                    `frecuencia_respiratoria_h`,
-                    `primera_consulta_h`,
-                    `motivo_consulta_h`,
-                    `enfermedad_actual_h`,
-                    `revisin_sistemas_h`,
-                    `a_p_p_h`,
-                    `a_p_f_h`,
-                    `examen_fisico_h`,
-                    `impresión_diagnostica_h`,
-                    `examenes_h`,
-                    `diagnostico_definitivo_h`,
-                    `tratamiento_h`,
-                    `archivado_h`,
-                    `edad_h`,
-                    `id_paci`,
-                    `tipo_documento_paci`,
-                    `fecha_creacion_paci`,
-                    `numero_documento_paci`,
-                    `nombre_1_paci`,
-                    `nombre_2_paci`,
-                    `apellido_1_paci`,
-                    `apellido_2_paci`,
-                    `sexo_paci`,
-                    `correo_paci`,
-                    `telefono_1_paci`,
-                    `telefono_2_paci`,
-                    `fecha_nacimiento_paci`,
-                    `provincia_paci`,
-                    `canton_paci`,
-                    `direccion_paci`,
-                    `ocupacion_paci`,
-                    `id_pcpaci`,
-                    `tipo_documento_pcpaci`,
-                    `numero_documento_pcpaci`,
-                    `nombre_1_pcpaci`,
-                    `nombre_2_pcpaci`,
-                    `apellido_1_pcpaci`,
-                    `apellido_2_pcpaci`,
-                    `sexo_pcpaci`,
-                    `correo_pcpaci`,
-                    `telefono_1_pcpaci`,
-                    `telefono_2_pcpaci`,
-                    `fecha_nacimiento_pcpaci`,
-                    `cargo_pcpaci`,
-                    `especialidad_pcpaci`,
-                    `miniatura_pcpaci`,
-                    `foto_pcpaci`,
-                    `nombre_usuario_pcpaci`,
-                    `permisos_pcpaci`,
-                    `id_pc`,
-                    `tipo_documento_pc`,
-                    `numero_documento_pc`,
-                    `nombre_1_pc`,
-                    `nombre_2_pc`,
-                    `apellido_1_pc`,
-                    `apellido_2_pc`,
-                    `sexo_pc`,
-                    `correo_pc`,
-                    `telefono_1_pc`,
-                    `telefono_2_pc`,
-                    `fecha_nacimiento_pc`,
-                    `cargo_pc`,
-                    `especialidad_pc`,
-                    `miniatura_pc`,
-                    `foto_pc`,
-                    `nombre_usuario_upc`,
-                    `permisos_upc`,
-                    `id_pa`,
-                    `tipo_documento_pa`,
-                    `numero_documento_pa`,
-                    `nombre_1_pa`,
-                    `nombre_2_pa`,
-                    `apellido_1_pa`,
-                    `apellido_2_pa`,
-                    `sexo_pa`,
-                    `correo_pa`,
-                    `telefono_1_pa`,
-                    `telefono_2_pa`,
-                    `fecha_nacimiento_pa`,
-                    `cargo_pa`,
-                    `especialidad_pa`,
-                    `miniatura_pa`,
-                    `foto_pa`,
-                    `nombre_usuario_upa`,
-                    `permisos_upa`
-                    )
-                    
-                    SELECT 
-                    CURDATE() AS `fecha_creacion`,
-                    h.`id`,
-                    h.`fecha_consulta`,
-                    '$id_creado_usuario' as `id_creado_usuario`,
-                    '$creado_usuario' as `creado_usuario`,
-                    h.`peso`,
-                    h.`talla`,
-                    h.`pulso`,
-                    h.`presion_arterial`,
-                    h.`temperatura`,
-                    h.`frecuencia_respiratoria`,
-                    h.`primera_consulta`,
-                    h.`motivo_consulta`,
-                    h.`enfermedad_actual`,
-                    h.`revisin_sistemas`,
-                    h.`a_p_p`,
-                    h.`a_p_f`,
-                    h.`examen_fisico`,
-                    h.`impresión_diagnostica`,
-                    h.`examenes`,
-                    h.`diagnostico_definitivo`,
-                    h.`tratamiento`,
-                    h.`archivado`,
-                    h.`edad`, 
-                    paci.`id`,
-                    paci.`tipo_documento`,
-                    paci.`fecha_creacion`,
-                    paci.`numero_documento`,
-                    paci.`nombre_1`,
-                    paci.`nombre_2`,
-                    paci.`apellido_1`,
-                    paci.`apellido_2`,
-                    paci.`sexo`,
-                    paci.`correo`,
-                    paci.`telefono_1`,
-                    paci.`telefono_2`,
-                    paci.`fecha_nacimiento`,
-                    paci.`provincia`,
-                    paci.`canton`,
-                    paci.`direccion`,
-                    paci.`ocupacion`, 
-                    tpcpa.`id`,
-                    tpcpa.`tipo_documento`,
-                    tpcpa.`numero_documento`,
-                    tpcpa.`nombre_1`,
-                    tpcpa.`nombre_2`,
-                    tpcpa.`apellido_1`,
-                    tpcpa.`apellido_2`,
-                    tpcpa.`sexo`,
-                    tpcpa.`correo`,
-                    tpcpa.`telefono_1`,
-                    tpcpa.`telefono_2`,
-                    tpcpa.`fecha_nacimiento`,
-                    tpcpa.`cargo`,
-                    tpcpa.`especialidad`,
-                    tpcpa.`miniatura`,
-                    tpcpa.`foto`,
-                    tpcpa.`nombre_usuario`,
-                    tpcpa.`permisos`,
-                    pc.`id`,
-                    pc.`tipo_documento`,
-                    pc.`numero_documento`,
-                    pc.`nombre_1`,
-                    pc.`nombre_2`,
-                    pc.`apellido_1`,
-                    pc.`apellido_2`,
-                    pc.`sexo`,
-                    pc.`correo`,
-                    pc.`telefono_1`,
-                    pc.`telefono_2`,
-                    pc.`fecha_nacimiento`,
-                    pc.`cargo`,
-                    pc.`especialidad`,
-                    pc.`miniatura`,
-                    pc.`foto`,
-                    upc.`nombre_usuario`,
-                    upc.`permisos`,
-                    pa.`id`,
-                    pa.`tipo_documento`,
-                    pa.`numero_documento`,
-                    pa.`nombre_1`,
-                    pa.`nombre_2`,
-                    pa.`apellido_1`,
-                    pa.`apellido_2`,
-                    pa.`sexo`,
-                    pa.`correo`,
-                    pa.`telefono_1`,
-                    pa.`telefono_2`,
-                    pa.`fecha_nacimiento`,
-                    pa.`cargo`,
-                    pa.`especialidad`,
-                    pa.`miniatura`,
-                    pa.`foto`, 
-                    upa.`nombre_usuario`,
-                    upa.`permisos`
-                    FROM 
-                    `historia_clinica` h
-                    LEFT JOIN `pacientes` paci ON h.`id_paciente` = paci.`id`
-                    LEFT JOIN (SELECT
-                    p.`id`,
-                    p.`tipo_documento`,
-                    p.`numero_documento`,
-                    p.`nombre_1`,
-                    p.`nombre_2`,
-                    p.`apellido_1`,
-                    p.`apellido_2`,
-                    p.`sexo`,
-                    p.`correo`,
-                    p.`telefono_1`,
-                    p.`telefono_2`,
-                    p.`fecha_nacimiento`,
-                    p.`cargo`,
-                    p.`especialidad`,
-                    p.`miniatura`,
-                    p.`foto`,
-                    u.`nombre_usuario`,
-                    u.`permisos`
-                    FROM `personal` p
-                    LEFT JOIN `usuarios` u ON p.`id` = u.`id_personal`) tpcpa ON  h.`id_paciente` = tpcpa.`id`
-                    LEFT JOIN `personal`pc on h.`id_personal_creado` = pc.`id`
-                    LEFT JOIN `usuarios`upc ON h.`id_personal_creado` = upc.`id_personal`
-                    LEFT JOIN `personal`pa ON h.`id_personal_asignado` = pa.`id`
-                    LEFT JOIN `usuarios`upa ON h.`id_personal_asignado` = upa.`id_personal` WHERE h.`id` = @ID LIMIT 1;
-                    ");
-                }
-                echo $fila_tabla_personal_usuario["@ID"];
-            }
-        }
-    }else{
-        echo "0";
-    }
-}else if($tipo=="npcr"){
-    $id = $_POST["id"];
-
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) AS `nombres` FROM `personal` WHERE `id`='$id'");
-    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
-    if($numero_filas_consulta_tabla_personal_usuario == 1)
-    {
-        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
-        { 
-            echo  $fila_tabla_personal_usuario["nombres"];
-        }
-    }
-}else if($tipo=="lp"){
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT CONCAT(p.`nombre_1`,' ',p.`nombre_2`,' ',p.`apellido_1`,' ',p.`apellido_2`,' : ',u.`nombre_usuario`) AS `nombres`, p.`id` FROM `personal` p JOIN `usuarios` u ON p.`id` = u.`id_personal` WHERE u.`permisos`= 1 AND u.`habilitado`=1 ORDER BY CONCAT(p.`nombre_1`,' ',p.`nombre_2`,' ',p.`apellido_1`,' ',p.`apellido_2`,' : ',u.`nombre_usuario`) ASC;");
-    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
-    $i = 1;
-    $ids = array();
-    if($numero_filas_consulta_tabla_personal_usuario >= 1)    {   
-        echo "<option class='lista_personal_asignar' value='0'></option>";
-        array_push($ids,"");
-        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH)){
-            echo "<option class='lista_personal_asignar' value='".$i."'>".$fila_tabla_personal_usuario["nombres"]."</option>";
-            array_push($ids,$fila_tabla_personal_usuario["id"]);
-            $i++;
-        }
-    }
-    echo "ids";
-    echo json_encode($ids);
-}else if($tipo=="thas"){
-    $id_asignado = $_POST["id_asignado"];
-    $id = $_POST["id"];
-    $fecha_consulta = $_POST["fecha_consulta"];
-    $cedula = $_POST["cedula"];
-    if($cedula==""){
-        $isnullorlike1 = "pa.`numero_documento` IS NULL OR pa.`numero_documento` LIKE '%%'";
-    }else{
-        $isnullorlike1 = "pa.`numero_documento` LIKE '%$cedula%'";
-    }
-    $nombre = $_POST["nombre"];
-    if($nombre==""){
-        $isnullorlike2 = "CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) IS NULL OR CONCAT(pa.`nombre_1`, ' ' , pa.`apellido_1`) LIKE '%$nombre%'";
-    }else{
-        $isnullorlike2 = "CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) LIKE '%$nombre%'";
-    }
-    $usuario = $_POST["usuario"];
-    $cantidad_filas = $_POST["cantidad_filas"];
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, pa.`id` AS `id_paciente` , pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'0' AND h.`id_personal_asignado`= '$id_asignado' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
-    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
-    $i = 1;
-    $ids = array();
-    $ids_paciente = array();
-    if($numero_filas_consulta_tabla_personal_usuario >= 1)
-    {
-        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
-        {
-            $ids_tabla = str_pad((($fila_tabla_personal_usuario["id"])), 6, "0", STR_PAD_LEFT);
-            $ids_tabla = $ids_tabla[0].$ids_tabla[1].$ids_tabla[2]." ".$ids_tabla[3].$ids_tabla[4].$ids_tabla[5];
-            echo "<tr class='resultados_de_tablas' onmouseout='desresaltar(".($i-1).")' onmouseover='resaltar(".($i-1).")'>
-            <td class='fila_selecionada_".($i-1)." mouseover numero_de_fila_pp'>".$i."</td>
-            <td class='fila_selecionada_".($i-1)." id_historial_asignados'>".$ids_tabla."</td>
-            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["fecha_consulta"]."</td>
-            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["numero_documento"]."</td>
-            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre"]."</td>
-            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre_usuario"]."</td>
-            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
-                <div onmouseout='desresaltar_editar(".($i-1).")' onmouseover='resaltar_editar(".($i-1).")' class='diseño_editar_".($i-1)." iconos_tabla_accion' onclick='accion_editar(".($i-1).")'>
-                    <svg xmlns='http://www.w3.org/2000/svg'  width='16' height='16' class='diseño_editar_".($i-1)." bi bi-pencil' viewBox='0 0 16 16'>
-                        <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
-                    </svg>
-                    EDITAR
-                </div>
-            </td>
-            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
-                <div onmouseout='desresaltar_paciente(".($i-1).")' onmouseover='resaltar_paciente(".($i-1).")' class='diseño_paciente_".($i-1)." iconos_tabla_accion' onclick='accion_paciente(".($i-1).")'>
-                  <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='diseño_paciente_".($i-1)." bi bi-person-fill' viewBox='0 0 16 16'>
-                    <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/>
-                  </svg>
-                    PACIENTE
-                </div>
-            </td>
-            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
-                <div onmouseout='desresaltar_archivar(".($i-1).")' onmouseover='resaltar_archivar(".($i-1).")' class='diseño_archivar_".($i-1)." iconos_tabla_accion diseno_archivar' onclick='accion_archivar(".($i-1).")'>
-                    <svg xmlns='http://www.w3.org/2000/svg'  width='16' height='16' fill='currentColor'class='diseño_archivar_".($i-1)." bi bi-archive' viewBox='0 0 16 16'>
-                        <path d='M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z'/>
-                    </svg>
-                    ARCHIVAR
-                </div>
-            </td>
-            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'>
-                <div onmouseout='desresaltar_eliminar(".($i-1).")' onmouseover='resaltar_eliminar(".($i-1).")'class='diseño_eliminar_".($i-1)." iconos_tabla_accion' onclick='accion_eliminar(".($i-1).")'>
-                    <svg xmlns='http://www.w3.org/2000/svg'   width='16' height='16' class='diseño_eliminar_".($i-1)." n bi bi-trash-fill' viewBox='0 0 16 16'>
-                        <path d='M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z'/>
-                    </svg>
-                    ELIMINAR
-                </div>
-            </td>
-                        
-            </tr>";
-            array_push($ids,$fila_tabla_personal_usuario["id"]);
-            array_push($ids_paciente,$fila_tabla_personal_usuario["id_paciente"]);
-            $i++;
-        }
-
-    }
-    echo "ids";
-    echo json_encode($ids);
-    echo "ids";
-    echo json_encode($ids_paciente);
-    
-}else if($tipo=="fpc"){
-    $id = $_POST["id"];
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SET @fecha_1 = (SELECT MIN(`fecha_consulta`) FROM `historia_clinica` WHERE `id_paciente` = '$id');");
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SET @fecha_2 = (SELECT MIN(`primera_consulta`) FROM `historia_clinica` WHERE `id_paciente` = '$id');");
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT (IF(@fecha_1<@fecha_2,@fecha_1,@fecha_2)) AS `fecha`;");
-    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
-    if($numero_filas_consulta_tabla_personal_usuario == 1)
-    {
-        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
-        {
-            if($fila_tabla_personal_usuario["fecha"]==""){
-                echo "0000-00-00";
-            }else {
-                echo $fila_tabla_personal_usuario["fecha"];
-            }
-            
-        }
-
-    }
-    
-}else if($tipo=="efhic"){
-    $id = $_POST["id"];
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT hc.`id`, hc.`habilitado`, hc.`id_paciente`, hc.`id_personal_creado`, hc.`id_personal_asignado`, CONCAT(pec.`nombre_1`,' ',pec.`nombre_2`,' ',pec.`apellido_1`,' ',pec.`apellido_2`,' : ',uc.`nombre_usuario`) as `personal_creado`, CONCAT(pea.`nombre_1`,' ',pea.`apellido_1`, ': ',ua.`nombre_usuario`) as `personal_asignado`, hc.`fecha_consulta`, hc.`peso`, hc.`talla`, hc.`pulso`, hc.`presion_arterial`, hc.`temperatura`, hc.`frecuencia_respiratoria`, hc.`primera_consulta`, hc.`motivo_consulta`, hc.`enfermedad_actual`, hc.`revisin_sistemas`, hc.`a_p_p`, hc.`a_p_f`, hc.`examen_fisico`, hc.`impresión_diagnostica`, hc.`examenes`, hc.`diagnostico_definitivo`, hc.`tratamiento`, hc.`archivado`, hc.`edad`, pa.`id` AS `pa_id`, pa.`tipo_documento` AS `pa_tipo_documento`, (SELECT ubp.`nombre_usuario` FROM `usuarios` ubp WHERE pa.`id_personal_creado` = ubp.`id_personal` LIMIT 1) AS `pa_personal_creado`, pa.`fecha_creacion` AS `pa_fecha_creacion`, pa.`numero_documento` AS `pa_numero_documento`, CONCAT(pa.`nombre_1`,' ',pa.`nombre_2`) AS `pa_nombres`, CONCAT(pa.`apellido_1`,' ',pa.`apellido_1`) AS `pa_apellidos`, pa.`sexo` AS `pa_sexo`, pa.`correo` AS `pa_correo`, pa.`telefono_1` AS `pa_telefono_1`, pa.`telefono_2` AS `pa_telefono_2`, pa.`fecha_nacimiento` AS `pa_fecha_nacimiento`, pa.`provincia` AS `pa_provincia`, pa.`canton` AS `pa_canton`, pa.`direccion` AS `pa_direccion`, pa.`ocupacion` AS `pa_ocupacion` FROM (((((`historia_clinica` hc LEFT JOIN `pacientes` pa ON hc.`id_paciente` = pa.`id`) LEFT JOIN `personal` pec ON hc.`id_personal_creado` = pec.`id`) LEFT JOIN `personal` pea ON hc.`id_personal_asignado` = pea.`id`) LEFT JOIN `usuarios` uc ON hc.`id_personal_creado` = uc.`id_personal`) LEFT JOIN `usuarios` ua ON hc.`id_personal_asignado` = ua.`id_personal`) WHERE hc.`id` = '$id';");
-    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
-    if($numero_filas_consulta_tabla_personal_usuario >= 1)
-    {
-        $ids = array();
-        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
-        {
-            $fecha_nacimiento = new DateTime($fila_tabla_personal_usuario["pa_fecha_nacimiento"]);
-            $hoy = new DateTime();
-            $calculo_edad = $hoy->diff($fecha_nacimiento);
-            if(($calculo_edad->y)==0){
-                if(($calculo_edad->m==0)){
-                    $edad = $calculo_edad->d;
-                    if(($calculo_edad->m)==1){
-                        $edad = $calculo_edad->d." Dia";
-                    }else{
-                        $edad = $calculo_edad->d." Dias";
-                    }
-                }else{
-                    if(($calculo_edad->m)==1){
-                        $edad = $calculo_edad->m." Mes";
-                    }else{
-                        $edad = $calculo_edad->m." Meses";
-                    }
-                }
-            }else{
-                if(($calculo_edad->y)==1){
-                    $edad = $calculo_edad->y." Año";
-                }else{
-                    $edad = $calculo_edad->y." Años";
-                }
-            }
-            $ids = [
-                "id" => $fila_tabla_personal_usuario["id"],
-                "habilitado" => $fila_tabla_personal_usuario["habilitado"],
-                "id_paciente" => $fila_tabla_personal_usuario["id_paciente"],
-                "id_personal_creado" => $fila_tabla_personal_usuario["id_personal_creado"],
-                "archivado" => $fila_tabla_personal_usuario["archivado"],
-                "personal_creado" => $fila_tabla_personal_usuario["personal_creado"],
-                "id_personal_asignado" => $fila_tabla_personal_usuario["id_personal_asignado"],
-                "personal_asignado" => $fila_tabla_personal_usuario["personal_asignado"],
-                "fecha_consulta" => $fila_tabla_personal_usuario["fecha_consulta"],
-                "peso" => $fila_tabla_personal_usuario["peso"],
-                "talla" => $fila_tabla_personal_usuario["talla"],
-                "pulso" => $fila_tabla_personal_usuario["pulso"],
-                "presion_arterial" => $fila_tabla_personal_usuario["presion_arterial"],
-                "temperatura" => $fila_tabla_personal_usuario["temperatura"],
-                "frecuencia_respiratoria" => $fila_tabla_personal_usuario["frecuencia_respiratoria"],
-                "primera_consulta" => $fila_tabla_personal_usuario["primera_consulta"],
-                "motivo_consulta" => $fila_tabla_personal_usuario["motivo_consulta"],
-                "enfermedad_actual" => $fila_tabla_personal_usuario["enfermedad_actual"],
-                "revisin_sistemas" => $fila_tabla_personal_usuario["revisin_sistemas"],
-                "a_p_p" => $fila_tabla_personal_usuario["a_p_p"],
-                "a_p_f" => $fila_tabla_personal_usuario["a_p_f"],
-                "examen_fisico" => $fila_tabla_personal_usuario["examen_fisico"],
-                "impresión_diagnostica" => $fila_tabla_personal_usuario["impresión_diagnostica"],
-                "examenes" => $fila_tabla_personal_usuario["examenes"],
-                "diagnostico_definitivo" => $fila_tabla_personal_usuario["diagnostico_definitivo"],
-                "tratamiento" => $fila_tabla_personal_usuario["tratamiento"],
-                "archivado" => $fila_tabla_personal_usuario["archivado"],
-                "edad" => $fila_tabla_personal_usuario["edad"],
-                "pa_id" => $fila_tabla_personal_usuario["pa_id"],
-                "pa_tipo_documento" => $fila_tabla_personal_usuario["pa_tipo_documento"],
-                "pa_personal_creado" => $fila_tabla_personal_usuario["pa_personal_creado"],
-                "pa_fecha_creacion" => $fila_tabla_personal_usuario["pa_fecha_creacion"],
-                "pa_numero_documento" => $fila_tabla_personal_usuario["pa_numero_documento"],
-                "pa_nombres" => $fila_tabla_personal_usuario["pa_nombres"],
-                "pa_apellidos" => $fila_tabla_personal_usuario["pa_apellidos"],
-                "pa_sexo" => $fila_tabla_personal_usuario["pa_sexo"],
-                "pa_correo" => $fila_tabla_personal_usuario["pa_correo"],
-                "pa_telefono_1" => $fila_tabla_personal_usuario["pa_telefono_1"],
-                "pa_telefono_2" => $fila_tabla_personal_usuario["pa_telefono_2"],
-                "pa_fecha_nacimiento" => $fila_tabla_personal_usuario["pa_fecha_nacimiento"],
-                "pa_provincia" => $fila_tabla_personal_usuario["pa_provincia"],
-                "pa_canton" => $fila_tabla_personal_usuario["pa_canton"],
-                "pa_direccion" => $fila_tabla_personal_usuario["pa_direccion"],
-                "pa_ocupacion" => $fila_tabla_personal_usuario["pa_ocupacion"],
-                "pa_edad_calculada" => $edad,
-            ];
-            
-        }
-        echo json_encode($ids);
-    }else{
-        echo "fallo";
-    }
-    
-}else if($tipo=="edthis"){
-    $id = $_POST["id"];
-    $id_paciente = $_POST["id_paciente"];
-    if($id_paciente==""){
-        $id_paciente = "NULL";
-    }else{
-        $id_paciente = "'".$id_paciente."'";
-    }
-    $archivado = $_POST["archivado"];
-    $edad = $_POST["edad"];
-    $id_personal_creado = $_POST["id_personal_creado"];
-    $id_personal_asignado = $_POST["id_personal_asignado"];
-    if($id_personal_asignado==""){
-        $id_personal_asignado = "NULL";
-    }else{
-        $id_personal_asignado = "'".$id_personal_asignado."'";
-    }
-    $fecha_consulta = $_POST["fecha_consulta"];
-    $peso = $_POST["peso"];
-    $talla = $_POST["talla"];
-    $pulso = $_POST["pulso"];
-    $presion_arterial = $_POST["presion_arterial"];
-    $temperatura = $_POST["temperatura"];
-    $frecuencia_respiratoria = $_POST["frecuencia_respiratoria"];
-    $primera_consulta = $_POST["primera_consulta"];
-    $motivo_consulta = $_POST["motivo_consulta"];
-    $enfermedad_actual = $_POST["enfermedad_actual"];
-    $revisin_sistemas = $_POST["revisin_sistemas"];
-    $a_p_p = $_POST["a_p_p"];
-    $a_p_f = $_POST["a_p_f"];
-    $examen_fisico = $_POST["examen_fisico"];
-    $impresión_diagnostica = $_POST["impresión_diagnostica"];
-    $examenes = $_POST["examenes"];
-    $diagnostico_definitivo = $_POST["diagnostico_definitivo"];
-    $tratamiento = $_POST["tratamiento"];
-    $creado_usuario = $_POST["creado_usuario"];
-    $id_creado_usuario = $_POST["id_creado_usuario"];
-
-
-    $sql = "UPDATE `historia_clinica` SET `id_paciente`=$id_paciente, `id_personal_creado`='$id_personal_creado',`id_personal_asignado`=$id_personal_asignado,`fecha_consulta`='$fecha_consulta',`peso`='$peso',`talla`='$talla',`pulso`='$pulso',`presion_arterial`='$presion_arterial',`temperatura`='$temperatura',`frecuencia_respiratoria`='$frecuencia_respiratoria',`primera_consulta`='$primera_consulta',`motivo_consulta`='$motivo_consulta',`enfermedad_actual`='$enfermedad_actual',`revisin_sistemas`='$revisin_sistemas',`a_p_p`='$a_p_p',`a_p_f`='$a_p_f',`examen_fisico`='$examen_fisico',`impresión_diagnostica`='$impresión_diagnostica',`examenes`='$examenes',`diagnostico_definitivo`='$diagnostico_definitivo',`tratamiento`='$tratamiento',`archivado`= b'$archivado',`edad`='$edad' WHERE `historia_clinica`.`id` = '$id';";
-    if(mysqli_query($conn,$sql)){
         if($archivado=="1"){
-            $query_consulta_tabla_personal_usuario = mysqli_query($conn,"INSERT INTO `historia_archivado` (`fecha_creacion`,
+          $sql = "ALTER TABLE `historia_archivado` AUTO_INCREMENT = 1;";
+          mysqli_query($conn,$sql);
+          $sql = "INSERT INTO `historia_archivado` (`fecha_creacion`,
             `id_h`,
             `fecha_consulta_h`,
             `id_creado_usuario`,
@@ -1154,8 +686,505 @@ if($tipo=="vr")
             LEFT JOIN `personal`pc on h.`id_personal_creado` = pc.`id`
             LEFT JOIN `usuarios`upc ON h.`id_personal_creado` = upc.`id_personal`
             LEFT JOIN `personal`pa ON h.`id_personal_asignado` = pa.`id`
-            LEFT JOIN `usuarios`upa ON h.`id_personal_asignado` = upa.`id_personal` WHERE h.`id` = '$id' LIMIT 1;
-            ");
+            LEFT JOIN `usuarios`upa ON h.`id_personal_asignado` = upa.`id_personal` WHERE h.`id` = $id_insert LIMIT 1;
+            ";
+            mysqli_query($conn,$sql);
+        }
+        echo $id_insert;
+      }
+    }else{
+        echo "0";
+    }
+}else if($tipo=="npcr"){
+    $id = $_POST["id"];
+
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT CONCAT(`nombre_1`,' ',`nombre_2`,' ',`apellido_1`,' ',`apellido_2`) AS `nombres` FROM `personal` WHERE `id`='$id'");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    if($numero_filas_consulta_tabla_personal_usuario == 1)
+    {
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        { 
+            echo  $fila_tabla_personal_usuario["nombres"];
+        }
+    }
+}else if($tipo=="lp"){
+    $sql = "SELECT CONCAT(p.`nombre_1`,' ',p.`nombre_2`,' ',p.`apellido_1`,' ',p.`apellido_2`,' : ',u.`nombre_usuario`) AS `nombres`, p.`id` FROM `personal` p JOIN `usuarios` u ON p.`id` = u.`id_personal` WHERE u.`permisos`= 1 AND u.`habilitado`=1 ORDER BY CONCAT(p.`nombre_1`,' ',p.`nombre_2`,' ',p.`apellido_1`,' ',p.`apellido_2`,' : ',u.`nombre_usuario`) ASC;";
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,$sql);
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    $i = 1;
+    $ids = array();
+    if($numero_filas_consulta_tabla_personal_usuario >= 1)    {   
+        echo "<option class='lista_personal_asignar' value='0'></option>";
+        array_push($ids,"");
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH)){
+            echo "<option class='lista_personal_asignar' value='".$i."'>".$fila_tabla_personal_usuario["nombres"]."</option>";
+            array_push($ids,$fila_tabla_personal_usuario["id"]);
+            $i++;
+        }
+        
+        echo "ids";
+        echo json_encode($ids);
+    }else{
+      echo 'Error: '. $conn->error, $sql;
+      echo "0";
+    }
+    
+}else if($tipo=="thas"){
+    $id_asignado = $_POST["id_asignado"];
+    $id = $_POST["id"];
+    $fecha_consulta = $_POST["fecha_consulta"];
+    $cedula = $_POST["cedula"];
+    if($cedula==""){
+        $isnullorlike1 = "pa.`numero_documento` IS NULL OR pa.`numero_documento` LIKE '%%'";
+    }else{
+        $isnullorlike1 = "pa.`numero_documento` LIKE '%$cedula%'";
+    }
+    $nombre = $_POST["nombre"];
+    if($nombre==""){
+        $isnullorlike2 = "CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) IS NULL OR CONCAT(pa.`nombre_1`, ' ' , pa.`apellido_1`) LIKE '%$nombre%'";
+    }else{
+        $isnullorlike2 = "CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) LIKE '%$nombre%'";
+    }
+    $usuario = $_POST["usuario"];
+    $cantidad_filas = $_POST["cantidad_filas"];
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, pa.`id` AS `id_paciente` , pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= 1 AND h.`archivado`= b'0' AND h.`id_personal_asignado`= '$id_asignado' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    $i = 1;
+    $ids = array();
+    $ids_paciente = array();
+    if($numero_filas_consulta_tabla_personal_usuario >= 1)
+    {
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        {
+            $ids_tabla = str_pad((($fila_tabla_personal_usuario["id"])), 6, "0", STR_PAD_LEFT);
+            $ids_tabla = $ids_tabla[0].$ids_tabla[1].$ids_tabla[2]." ".$ids_tabla[3].$ids_tabla[4].$ids_tabla[5];
+            echo "<tr class='resultados_de_tablas' onmouseout='desresaltar(".($i-1).")' onmouseover='resaltar(".($i-1).")'>
+            <td class='fila_selecionada_".($i-1)." mouseover numero_de_fila_pp'>".$i."</td>
+            <td class='fila_selecionada_".($i-1)." id_historial_asignados'>".$ids_tabla."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["fecha_consulta"]."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["numero_documento"]."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre"]."</td>
+            <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre_usuario"]."</td>
+            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div onmouseout='desresaltar_editar(".($i-1).")' onmouseover='resaltar_editar(".($i-1).")' class='diseño_editar_".($i-1)." iconos_tabla_accion' onclick='accion_editar(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg'  width='16' height='16' class='diseño_editar_".($i-1)." bi bi-pencil' viewBox='0 0 16 16'>
+                        <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
+                    </svg>
+                    EDITAR
+                </div>
+            </td>
+            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div onmouseout='desresaltar_paciente(".($i-1).")' onmouseover='resaltar_paciente(".($i-1).")' class='diseño_paciente_".($i-1)." iconos_tabla_accion' onclick='accion_paciente(".($i-1).")'>
+                  <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='diseño_paciente_".($i-1)." bi bi-person-fill' viewBox='0 0 16 16'>
+                    <path d='M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/>
+                  </svg>
+                    PACIENTE
+                </div>
+            </td>
+            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+                <div onmouseout='desresaltar_archivar(".($i-1).")' onmouseover='resaltar_archivar(".($i-1).")' class='diseño_archivar_".($i-1)." iconos_tabla_accion diseno_archivar' onclick='accion_archivar(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg'  width='16' height='16' fill='currentColor'class='diseño_archivar_".($i-1)." bi bi-archive' viewBox='0 0 16 16'>
+                        <path d='M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z'/>
+                    </svg>
+                    ARCHIVAR
+                </div>
+            </td>
+            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'>
+                <div onmouseout='desresaltar_eliminar(".($i-1).")' onmouseover='resaltar_eliminar(".($i-1).")'class='diseño_eliminar_".($i-1)." iconos_tabla_accion' onclick='accion_eliminar(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg'   width='16' height='16' class='diseño_eliminar_".($i-1)." n bi bi-trash-fill' viewBox='0 0 16 16'>
+                        <path d='M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z'/>
+                    </svg>
+                    ELIMINAR
+                </div>
+            </td>
+                        
+            </tr>";
+            array_push($ids,$fila_tabla_personal_usuario["id"]);
+            array_push($ids_paciente,$fila_tabla_personal_usuario["id_paciente"]);
+            $i++;
+        }
+
+    }
+    echo "ids";
+    echo json_encode($ids);
+    echo "ids";
+    echo json_encode($ids_paciente);
+    
+}else if($tipo=="fpc"){
+    $id = $_POST["id"];
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SET @fecha_1 = (SELECT MIN(`fecha_consulta`) FROM `historia_clinica` WHERE `id_paciente` = '$id');");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SET @fecha_2 = (SELECT MIN(`primera_consulta`) FROM `historia_clinica` WHERE `id_paciente` = '$id');");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT (IF(@fecha_1<@fecha_2,@fecha_1,@fecha_2)) AS `fecha`;");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    if($numero_filas_consulta_tabla_personal_usuario == 1)
+    {
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        {
+            if($fila_tabla_personal_usuario["fecha"]==""){
+                echo "0000-00-00";
+            }else {
+                echo $fila_tabla_personal_usuario["fecha"];
+            }
+            
+        }
+
+    }
+    
+}else if($tipo=="efhic"){
+    $id = $_POST["id"];
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT hc.`id`, hc.`habilitado`, hc.`id_paciente`, hc.`id_personal_creado`, hc.`id_personal_asignado`, CONCAT(pec.`nombre_1`,' ',pec.`nombre_2`,' ',pec.`apellido_1`,' ',pec.`apellido_2`,' : ',uc.`nombre_usuario`) as `personal_creado`, CONCAT(pea.`nombre_1`,' ',pea.`apellido_1`, ': ',ua.`nombre_usuario`) as `personal_asignado`, hc.`fecha_consulta`, hc.`peso`, hc.`talla`, hc.`pulso`, hc.`presion_arterial`, hc.`temperatura`, hc.`frecuencia_respiratoria`, hc.`primera_consulta`, hc.`motivo_consulta`, hc.`enfermedad_actual`, hc.`revisin_sistemas`, hc.`a_p_p`, hc.`a_p_f`, hc.`examen_fisico`, hc.`impresión_diagnostica`, hc.`examenes`, hc.`diagnostico_definitivo`, hc.`tratamiento`, hc.`archivado`, hc.`edad`, pa.`id` AS `pa_id`, pa.`tipo_documento` AS `pa_tipo_documento`, (SELECT ubp.`nombre_usuario` FROM `usuarios` ubp WHERE pa.`id_personal_creado` = ubp.`id_personal` LIMIT 1) AS `pa_personal_creado`, pa.`fecha_creacion` AS `pa_fecha_creacion`, pa.`numero_documento` AS `pa_numero_documento`, CONCAT(pa.`nombre_1`,' ',pa.`nombre_2`) AS `pa_nombres`, CONCAT(pa.`apellido_1`,' ',pa.`apellido_1`) AS `pa_apellidos`, pa.`sexo` AS `pa_sexo`, pa.`correo` AS `pa_correo`, pa.`telefono_1` AS `pa_telefono_1`, pa.`telefono_2` AS `pa_telefono_2`, pa.`fecha_nacimiento` AS `pa_fecha_nacimiento`, pa.`provincia` AS `pa_provincia`, pa.`canton` AS `pa_canton`, pa.`direccion` AS `pa_direccion`, pa.`ocupacion` AS `pa_ocupacion` FROM (((((`historia_clinica` hc LEFT JOIN `pacientes` pa ON hc.`id_paciente` = pa.`id`) LEFT JOIN `personal` pec ON hc.`id_personal_creado` = pec.`id`) LEFT JOIN `personal` pea ON hc.`id_personal_asignado` = pea.`id`) LEFT JOIN `usuarios` uc ON hc.`id_personal_creado` = uc.`id_personal`) LEFT JOIN `usuarios` ua ON hc.`id_personal_asignado` = ua.`id_personal`) WHERE hc.`id` = '$id';");
+    $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
+    if($numero_filas_consulta_tabla_personal_usuario >= 1)
+    {
+        $ids = array();
+        while($fila_tabla_personal_usuario = $query_consulta_tabla_personal_usuario->fetch_array(MYSQLI_BOTH))
+        {
+            $fecha_nacimiento = new DateTime($fila_tabla_personal_usuario["pa_fecha_nacimiento"]);
+            $hoy = new DateTime();
+            $calculo_edad = $hoy->diff($fecha_nacimiento);
+            if(($calculo_edad->y)==0){
+                if(($calculo_edad->m==0)){
+                    $edad = $calculo_edad->d;
+                    if(($calculo_edad->m)==1){
+                        $edad = $calculo_edad->d." Dia";
+                    }else{
+                        $edad = $calculo_edad->d." Dias";
+                    }
+                }else{
+                    if(($calculo_edad->m)==1){
+                        $edad = $calculo_edad->m." Mes";
+                    }else{
+                        $edad = $calculo_edad->m." Meses";
+                    }
+                }
+            }else{
+                if(($calculo_edad->y)==1){
+                    $edad = $calculo_edad->y." Año";
+                }else{
+                    $edad = $calculo_edad->y." Años";
+                }
+            }
+            $ids = [
+                "id" => $fila_tabla_personal_usuario["id"],
+                "habilitado" => $fila_tabla_personal_usuario["habilitado"],
+                "id_paciente" => $fila_tabla_personal_usuario["id_paciente"],
+                "id_personal_creado" => $fila_tabla_personal_usuario["id_personal_creado"],
+                "archivado" => $fila_tabla_personal_usuario["archivado"],
+                "personal_creado" => $fila_tabla_personal_usuario["personal_creado"],
+                "id_personal_asignado" => $fila_tabla_personal_usuario["id_personal_asignado"],
+                "personal_asignado" => $fila_tabla_personal_usuario["personal_asignado"],
+                "fecha_consulta" => $fila_tabla_personal_usuario["fecha_consulta"],
+                "peso" => $fila_tabla_personal_usuario["peso"],
+                "talla" => $fila_tabla_personal_usuario["talla"],
+                "pulso" => $fila_tabla_personal_usuario["pulso"],
+                "presion_arterial" => $fila_tabla_personal_usuario["presion_arterial"],
+                "temperatura" => $fila_tabla_personal_usuario["temperatura"],
+                "frecuencia_respiratoria" => $fila_tabla_personal_usuario["frecuencia_respiratoria"],
+                "primera_consulta" => $fila_tabla_personal_usuario["primera_consulta"],
+                "motivo_consulta" => $fila_tabla_personal_usuario["motivo_consulta"],
+                "enfermedad_actual" => $fila_tabla_personal_usuario["enfermedad_actual"],
+                "revisin_sistemas" => $fila_tabla_personal_usuario["revisin_sistemas"],
+                "a_p_p" => $fila_tabla_personal_usuario["a_p_p"],
+                "a_p_f" => $fila_tabla_personal_usuario["a_p_f"],
+                "examen_fisico" => $fila_tabla_personal_usuario["examen_fisico"],
+                "impresión_diagnostica" => $fila_tabla_personal_usuario["impresión_diagnostica"],
+                "examenes" => $fila_tabla_personal_usuario["examenes"],
+                "diagnostico_definitivo" => $fila_tabla_personal_usuario["diagnostico_definitivo"],
+                "tratamiento" => $fila_tabla_personal_usuario["tratamiento"],
+                "archivado" => $fila_tabla_personal_usuario["archivado"],
+                "edad" => $fila_tabla_personal_usuario["edad"],
+                "pa_id" => $fila_tabla_personal_usuario["pa_id"],
+                "pa_tipo_documento" => $fila_tabla_personal_usuario["pa_tipo_documento"],
+                "pa_personal_creado" => $fila_tabla_personal_usuario["pa_personal_creado"],
+                "pa_fecha_creacion" => $fila_tabla_personal_usuario["pa_fecha_creacion"],
+                "pa_numero_documento" => $fila_tabla_personal_usuario["pa_numero_documento"],
+                "pa_nombres" => $fila_tabla_personal_usuario["pa_nombres"],
+                "pa_apellidos" => $fila_tabla_personal_usuario["pa_apellidos"],
+                "pa_sexo" => $fila_tabla_personal_usuario["pa_sexo"],
+                "pa_correo" => $fila_tabla_personal_usuario["pa_correo"],
+                "pa_telefono_1" => $fila_tabla_personal_usuario["pa_telefono_1"],
+                "pa_telefono_2" => $fila_tabla_personal_usuario["pa_telefono_2"],
+                "pa_fecha_nacimiento" => $fila_tabla_personal_usuario["pa_fecha_nacimiento"],
+                "pa_provincia" => $fila_tabla_personal_usuario["pa_provincia"],
+                "pa_canton" => $fila_tabla_personal_usuario["pa_canton"],
+                "pa_direccion" => $fila_tabla_personal_usuario["pa_direccion"],
+                "pa_ocupacion" => $fila_tabla_personal_usuario["pa_ocupacion"],
+                "pa_edad_calculada" => $edad,
+            ];
+            
+        }
+        echo json_encode($ids);
+    }else{
+        echo "fallo";
+    }
+    
+}else if($tipo=="edthis"){
+    $id = $_POST["id"];
+    $id_paciente = $_POST["id_paciente"];
+    if($id_paciente==""){
+        $id_paciente = "NULL";
+    }else{
+        $id_paciente = "'".$id_paciente."'";
+    }
+    $archivado = $_POST["archivado"];
+    $edad = $_POST["edad"];
+    $id_personal_creado = $_POST["id_personal_creado"];
+    $id_personal_asignado = $_POST["id_personal_asignado"];
+    if($id_personal_asignado==""){
+        $id_personal_asignado = "NULL";
+    }else{
+        $id_personal_asignado = "'".$id_personal_asignado."'";
+    }
+    $fecha_consulta = $_POST["fecha_consulta"];
+    $peso = $_POST["peso"];
+    $talla = $_POST["talla"];
+    $pulso = $_POST["pulso"];
+    $presion_arterial = $_POST["presion_arterial"];
+    $temperatura = $_POST["temperatura"];
+    $frecuencia_respiratoria = $_POST["frecuencia_respiratoria"];
+    $primera_consulta = $_POST["primera_consulta"];
+    $motivo_consulta = $_POST["motivo_consulta"];
+    $enfermedad_actual = $_POST["enfermedad_actual"];
+    $revisin_sistemas = $_POST["revisin_sistemas"];
+    $a_p_p = $_POST["a_p_p"];
+    $a_p_f = $_POST["a_p_f"];
+    $examen_fisico = $_POST["examen_fisico"];
+    $impresión_diagnostica = $_POST["impresión_diagnostica"];
+    $examenes = $_POST["examenes"];
+    $diagnostico_definitivo = $_POST["diagnostico_definitivo"];
+    $tratamiento = $_POST["tratamiento"];
+    $creado_usuario = $_POST["creado_usuario"];
+    $id_creado_usuario = $_POST["id_creado_usuario"];
+
+    $sql = "UPDATE `historia_clinica` SET `id_paciente`=$id_paciente, `id_personal_creado`='$id_personal_creado',`id_personal_asignado`=$id_personal_asignado,`fecha_consulta`='$fecha_consulta',`peso`='$peso',`talla`='$talla',`pulso`='$pulso',`presion_arterial`='$presion_arterial',`temperatura`='$temperatura',`frecuencia_respiratoria`='$frecuencia_respiratoria',`primera_consulta`='$primera_consulta',`motivo_consulta`='$motivo_consulta',`enfermedad_actual`='$enfermedad_actual',`revisin_sistemas`='$revisin_sistemas',`a_p_p`='$a_p_p',`a_p_f`='$a_p_f',`examen_fisico`='$examen_fisico',`impresión_diagnostica`='$impresión_diagnostica',`examenes`='$examenes',`diagnostico_definitivo`='$diagnostico_definitivo',`tratamiento`='$tratamiento',`archivado`= b'$archivado',`edad`='$edad' WHERE `historia_clinica`.`id` = '$id';";
+    if(mysqli_query($conn,$sql)){
+        
+        if($archivado=="1"){
+          $sql = "ALTER TABLE `historia_archivado` AUTO_INCREMENT = 1;";
+          mysqli_query($conn,$sql);
+          $sql = "INSERT INTO `historia_archivado` (`fecha_creacion`,
+            `id_h`,
+            `fecha_consulta_h`,
+            `id_creado_usuario`,
+            `creado_usuario`,
+            `peso_h`,
+            `talla_h`,
+            `pulso_h`,
+            `presion_arterial_h`,
+            `temperatura_h`,
+            `frecuencia_respiratoria_h`,
+            `primera_consulta_h`,
+            `motivo_consulta_h`,
+            `enfermedad_actual_h`,
+            `revisin_sistemas_h`,
+            `a_p_p_h`,
+            `a_p_f_h`,
+            `examen_fisico_h`,
+            `impresión_diagnostica_h`,
+            `examenes_h`,
+            `diagnostico_definitivo_h`,
+            `tratamiento_h`,
+            `archivado_h`,
+            `edad_h`,
+            `id_paci`,
+            `tipo_documento_paci`,
+            `fecha_creacion_paci`,
+            `numero_documento_paci`,
+            `nombre_1_paci`,
+            `nombre_2_paci`,
+            `apellido_1_paci`,
+            `apellido_2_paci`,
+            `sexo_paci`,
+            `correo_paci`,
+            `telefono_1_paci`,
+            `telefono_2_paci`,
+            `fecha_nacimiento_paci`,
+            `provincia_paci`,
+            `canton_paci`,
+            `direccion_paci`,
+            `ocupacion_paci`,
+            `id_pcpaci`,
+            `tipo_documento_pcpaci`,
+            `numero_documento_pcpaci`,
+            `nombre_1_pcpaci`,
+            `nombre_2_pcpaci`,
+            `apellido_1_pcpaci`,
+            `apellido_2_pcpaci`,
+            `sexo_pcpaci`,
+            `correo_pcpaci`,
+            `telefono_1_pcpaci`,
+            `telefono_2_pcpaci`,
+            `fecha_nacimiento_pcpaci`,
+            `cargo_pcpaci`,
+            `especialidad_pcpaci`,
+            `miniatura_pcpaci`,
+            `foto_pcpaci`,
+            `nombre_usuario_pcpaci`,
+            `permisos_pcpaci`,
+            `id_pc`,
+            `tipo_documento_pc`,
+            `numero_documento_pc`,
+            `nombre_1_pc`,
+            `nombre_2_pc`,
+            `apellido_1_pc`,
+            `apellido_2_pc`,
+            `sexo_pc`,
+            `correo_pc`,
+            `telefono_1_pc`,
+            `telefono_2_pc`,
+            `fecha_nacimiento_pc`,
+            `cargo_pc`,
+            `especialidad_pc`,
+            `miniatura_pc`,
+            `foto_pc`,
+            `nombre_usuario_upc`,
+            `permisos_upc`,
+            `id_pa`,
+            `tipo_documento_pa`,
+            `numero_documento_pa`,
+            `nombre_1_pa`,
+            `nombre_2_pa`,
+            `apellido_1_pa`,
+            `apellido_2_pa`,
+            `sexo_pa`,
+            `correo_pa`,
+            `telefono_1_pa`,
+            `telefono_2_pa`,
+            `fecha_nacimiento_pa`,
+            `cargo_pa`,
+            `especialidad_pa`,
+            `miniatura_pa`,
+            `foto_pa`,
+            `nombre_usuario_upa`,
+            `permisos_upa`
+            )
+            
+            SELECT 
+            CURDATE() AS `fecha_creacion`,
+            h.`id`,
+            h.`fecha_consulta`,
+            '$id_creado_usuario' as `id_creado_usuario`,
+            '$creado_usuario' as `creado_usuario`,
+            h.`peso`,
+            h.`talla`,
+            h.`pulso`,
+            h.`presion_arterial`,
+            h.`temperatura`,
+            h.`frecuencia_respiratoria`,
+            h.`primera_consulta`,
+            h.`motivo_consulta`,
+            h.`enfermedad_actual`,
+            h.`revisin_sistemas`,
+            h.`a_p_p`,
+            h.`a_p_f`,
+            h.`examen_fisico`,
+            h.`impresión_diagnostica`,
+            h.`examenes`,
+            h.`diagnostico_definitivo`,
+            h.`tratamiento`,
+            h.`archivado`,
+            h.`edad`, 
+            paci.`id`,
+            paci.`tipo_documento`,
+            paci.`fecha_creacion`,
+            paci.`numero_documento`,
+            paci.`nombre_1`,
+            paci.`nombre_2`,
+            paci.`apellido_1`,
+            paci.`apellido_2`,
+            paci.`sexo`,
+            paci.`correo`,
+            paci.`telefono_1`,
+            paci.`telefono_2`,
+            paci.`fecha_nacimiento`,
+            paci.`provincia`,
+            paci.`canton`,
+            paci.`direccion`,
+            paci.`ocupacion`, 
+            tpcpa.`id`,
+            tpcpa.`tipo_documento`,
+            tpcpa.`numero_documento`,
+            tpcpa.`nombre_1`,
+            tpcpa.`nombre_2`,
+            tpcpa.`apellido_1`,
+            tpcpa.`apellido_2`,
+            tpcpa.`sexo`,
+            tpcpa.`correo`,
+            tpcpa.`telefono_1`,
+            tpcpa.`telefono_2`,
+            tpcpa.`fecha_nacimiento`,
+            tpcpa.`cargo`,
+            tpcpa.`especialidad`,
+            tpcpa.`miniatura`,
+            tpcpa.`foto`,
+            tpcpa.`nombre_usuario`,
+            tpcpa.`permisos`,
+            pc.`id`,
+            pc.`tipo_documento`,
+            pc.`numero_documento`,
+            pc.`nombre_1`,
+            pc.`nombre_2`,
+            pc.`apellido_1`,
+            pc.`apellido_2`,
+            pc.`sexo`,
+            pc.`correo`,
+            pc.`telefono_1`,
+            pc.`telefono_2`,
+            pc.`fecha_nacimiento`,
+            pc.`cargo`,
+            pc.`especialidad`,
+            pc.`miniatura`,
+            pc.`foto`,
+            upc.`nombre_usuario`,
+            upc.`permisos`,
+            pa.`id`,
+            pa.`tipo_documento`,
+            pa.`numero_documento`,
+            pa.`nombre_1`,
+            pa.`nombre_2`,
+            pa.`apellido_1`,
+            pa.`apellido_2`,
+            pa.`sexo`,
+            pa.`correo`,
+            pa.`telefono_1`,
+            pa.`telefono_2`,
+            pa.`fecha_nacimiento`,
+            pa.`cargo`,
+            pa.`especialidad`,
+            pa.`miniatura`,
+            pa.`foto`, 
+            upa.`nombre_usuario`,
+            upa.`permisos`
+            FROM 
+            `historia_clinica` h
+            LEFT JOIN `pacientes` paci ON h.`id_paciente` = paci.`id`
+            LEFT JOIN (SELECT
+            p.`id`,
+            p.`tipo_documento`,
+            p.`numero_documento`,
+            p.`nombre_1`,
+            p.`nombre_2`,
+            p.`apellido_1`,
+            p.`apellido_2`,
+            p.`sexo`,
+            p.`correo`,
+            p.`telefono_1`,
+            p.`telefono_2`,
+            p.`fecha_nacimiento`,
+            p.`cargo`,
+            p.`especialidad`,
+            p.`miniatura`,
+            p.`foto`,
+            u.`nombre_usuario`,
+            u.`permisos`
+            FROM `personal` p
+            LEFT JOIN `usuarios` u ON p.`id` = u.`id_personal`) tpcpa ON  h.`id_paciente` = tpcpa.`id`
+            LEFT JOIN `personal`pc on h.`id_personal_creado` = pc.`id`
+            LEFT JOIN `usuarios`upc ON h.`id_personal_creado` = upc.`id_personal`
+            LEFT JOIN `personal`pa ON h.`id_personal_asignado` = pa.`id`
+            LEFT JOIN `usuarios`upa ON h.`id_personal_asignado` = upa.`id_personal` WHERE h.`id` = $id LIMIT 1;
+            ";
+            mysqli_query($conn,$sql);
         }
         echo "Registro con exitó/0";
     }else{
@@ -1165,9 +1194,11 @@ if($tipo=="vr")
     $id = $_POST["id"];
     $creado_usuario = $_POST["creado_usuario"];
     $id_creado_usuario = $_POST["id_creado_usuario"];
-    $sql = "UPDATE `historia_clinica` SET `archivado`= b'1' WHERE `historia_clinica`.`id` = '$id';";
+    $sql = "UPDATE `historia_clinica` SET `archivado`= 1 WHERE `historia_clinica`.`id` = '$id';";
     if(mysqli_query($conn,$sql)){
-        $query_consulta_tabla_personal_usuario = mysqli_query($conn,"INSERT INTO `historia_archivado` (`fecha_creacion`,
+          $sql = "ALTER TABLE `historia_archivado` AUTO_INCREMENT = 1;";
+          mysqli_query($conn,$sql);
+          $sql = "INSERT INTO `historia_archivado` (`fecha_creacion`,
         `id_h`,
         `fecha_consulta_h`,
         `id_creado_usuario`,
@@ -1388,11 +1419,12 @@ if($tipo=="vr")
         LEFT JOIN `usuarios`upc ON h.`id_personal_creado` = upc.`id_personal`
         LEFT JOIN `personal`pa ON h.`id_personal_asignado` = pa.`id`
             LEFT JOIN `usuarios`upa ON h.`id_personal_asignado` = upa.`id_personal` WHERE h.`id` = '$id' LIMIT 1;
-            ");
+            ";
+            mysqli_query($conn,$sql);
         
         echo "Archivado con exitó";
     }else{
-        echo "Fallo cambio";
+        echo "0";
     }
 }else if($tipo=="exdpa"){
     $id = $_POST["id"];
@@ -1439,11 +1471,17 @@ if($tipo=="vr")
     $telefono_1 = $_POST["telefono_1"];
     $telefono_2 = $_POST["telefono_2"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    if($fecha_nacimiento == "")
+    {
+      $fecha_nacimiento = "null";
+    }else{
+      $fecha_nacimiento = "'$fecha_nacimiento'";
+    }
     $provincia = $_POST["provincia"];
     $canton = $_POST["canton"];
     $direccion = $_POST["direccion"];
     $ocupacion = $_POST["ocupacion"];
-    $sql = "UPDATE `pacientes` SET `tipo_documento`='$tipo_documento',`numero_documento`='$numero_documento',`nombre_1`='$nombre_1',`nombre_2`='$nombre_2',`apellido_1`='$apellido_1',`apellido_2`='$apellido_2',`sexo`='$sexo',`correo`='$correo',`telefono_1`='$telefono_1',`telefono_2`='$telefono_2',`fecha_nacimiento`='$fecha_nacimiento',`provincia`='$provincia',`canton`='$canton',`direccion`='$direccion',`ocupacion`='$ocupacion' WHERE `id`='$id'";
+    $sql = "UPDATE `pacientes` SET `tipo_documento`='$tipo_documento',`numero_documento`='$numero_documento',`nombre_1`='$nombre_1',`nombre_2`='$nombre_2',`apellido_1`='$apellido_1',`apellido_2`='$apellido_2',`sexo`='$sexo',`correo`='$correo',`telefono_1`='$telefono_1',`telefono_2`='$telefono_2',`fecha_nacimiento`=$fecha_nacimiento,`provincia`='$provincia',`canton`='$canton',`direccion`='$direccion',`ocupacion`='$ocupacion' WHERE `id`='$id'";
     if(mysqli_query($conn,$sql)){
         echo "Registro con exitó";
     }else{
@@ -1468,8 +1506,7 @@ if($tipo=="vr")
     }
     $usuario = $_POST["usuario"];
     $cantidad_filas = $_POST["cantidad_filas"];
-    //$query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'1' AND h.`id_personal_asignado`= '$id_asignado' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
-    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, pa.`id` AS `id_paciente` , CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= b'1' AND h.`archivado`= b'1' AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
+    $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT h.`id`, h.`fecha_consulta`, h.`primera_consulta`, pa.`numero_documento`, pa.`id` AS `id_paciente` , CONCAT(pa.`nombre_1`, ' ' ,pa.`apellido_1`) AS `nombre`, u.`nombre_usuario` FROM ((`historia_clinica` h LEFT JOIN `pacientes` pa ON h.`id_paciente` = pa.`id`) LEFT JOIN `usuarios` u ON h.`id_personal_creado` = u.`id_personal`) WHERE h.`habilitado`= 1 AND h.`archivado`= 1 AND h.`id` LIKE '%$id%' AND h.`fecha_consulta` LIKE '%$fecha_consulta%' AND h.`primera_consulta` LIKE '%$primera_consulta%' AND u.`nombre_usuario` LIKE '%$usuario%' AND ( $isnullorlike1 ) AND ( $isnullorlike2 ) ORDER BY h.`id` DESC LIMIT $cantidad_filas;");
     $numero_filas_consulta_tabla_personal_usuario = mysqli_num_rows($query_consulta_tabla_personal_usuario); 
     $i = 1;
     $ids = array();
@@ -1811,14 +1848,19 @@ if($tipo=="vr")
     $telefono_1 = $_POST["telefono_1"];
     $telefono_2 = $_POST["telefono_2"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    if($fecha_nacimiento == ""){
+      $fecha_nacimiento = "null";
+    }else{
+      $fecha_nacimiento = "'$fecha_nacimiento'";
+    }
     $miniatura = $_POST["miniatura"];
     $foto = $_POST["foto"];
 
-    $sql = "UPDATE `personal` SET `nombre_1`='$nombre_1',`nombre_2`='$nombre_2',`apellido_1`='$apellido_1',`apellido_2`='$apellido_2',`sexo`='$sexo',`correo`='$correo',`telefono_1`='$telefono_1',`telefono_2`='$telefono_2',`fecha_nacimiento`='$fecha_nacimiento',`miniatura`='$miniatura',`foto`='$foto' WHERE `id`='$id';";
+    $sql = "UPDATE `personal` SET `nombre_1`='$nombre_1',`nombre_2`='$nombre_2',`apellido_1`='$apellido_1',`apellido_2`='$apellido_2',`sexo`='$sexo',`correo`='$correo',`telefono_1`='$telefono_1',`telefono_2`='$telefono_2', `fecha_nacimiento`=$fecha_nacimiento ,`miniatura`='$miniatura',`foto`='$foto' WHERE `id`='$id';";
     if(mysqli_query($conn,$sql)){
-        echo "Exito";
+        echo "1";
     }else{
-        echo "Fallo";
+        echo "0";
     }
 }else if($tipo=="cpp"){
     $id = $_POST["id"];
@@ -2025,7 +2067,7 @@ $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["habilitado"]."</td> 
             <td class='fila_selecionada_".($i-1)."'>".$fila_tabla_personal_usuario["nombre_usuario"]."</td>           
             
-            <td class='diseno_editar fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
+            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'> 
                 <div onmouseout='desresaltar_editar(".($i-1).")' onmouseover='resaltar_editar(".($i-1).")' class='diseño_editar_".($i-1)." iconos_tabla_accion' onclick='accion_editar(".($i-1).")'>
                     <svg xmlns='http://www.w3.org/2000/svg'  width='16' height='16' class='diseño_editar_".($i-1)." bi bi-pencil' viewBox='0 0 16 16'>
                         <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
@@ -2033,13 +2075,19 @@ $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT
                     EDITAR
                 </div>
             </td>
-            
+            <td class='fila_selecionada_".($i-1)." tabla_contenedores_accion_pp'>
+                <div onmouseout='desresaltar_eliminar(".($i-1).")' onmouseover='resaltar_eliminar(".($i-1).")'class='diseño_eliminar_".($i-1)." iconos_tabla_accion' onclick='accion_eliminar(".($i-1).")'>
+                    <svg xmlns='http://www.w3.org/2000/svg'   width='16' height='16' class='diseño_eliminar_".($i-1)." n bi bi-trash-fill' viewBox='0 0 16 16'>
+                        <path d='M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z'/>
+                    </svg>
+                    ELIMINAR
+                </div>
+            </td>
                         
             </tr>";
             array_push($ids,$fila_tabla_personal_usuario["nombre_usuario"]);
             $i++;
         }
-
     }
     echo "ids";
     echo json_encode($ids);
@@ -2089,13 +2137,21 @@ $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT
     $telefono_1 = $_POST["telefono_1"];
     $telefono_2 = $_POST["telefono_2"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    if($fecha_nacimiento == "")
+    {
+      $fecha_nacimiento = "null";
+    }else{
+      $fecha_nacimiento = "'$fecha_nacimiento'";
+    }
+    
+
     $cargo = $_POST["cargo"];
     $especialidad = $_POST["especialidad"];
     $usuario = $_POST["usuario"];
 
-    $sql = "UPDATE `usuarios` SET `nombre_usuario`='$usuario', `habilitado`='$habilitado' WHERE `id_personal`='$id_personal';";
+    $sql = "UPDATE `usuarios` SET `nombre_usuario`='$usuario', `habilitado`=$habilitado WHERE `id_personal`='$id_personal';";
     if(mysqli_query($conn,$sql)){
-        $sql = "UPDATE `personal` SET `habilitado`='$habilitado',`tipo_documento`='$tipo_documento',`numero_documento`='$numero_documento',`nombre_1`='$nombre_1',`nombre_2`=' $nombre_2',`apellido_1`='$apellido_1',`apellido_2`='$apellido_2',`sexo`='$sexo',`correo`='$correo',`telefono_1`='$telefono_1',`telefono_2`='$telefono_2',`fecha_nacimiento`='$fecha_nacimiento',`cargo`='$cargo',`especialidad`='$especialidad',`miniatura`='',`foto`='' WHERE `id`='$id_personal';";
+        $sql = "UPDATE `personal` SET `habilitado`=$habilitado,`tipo_documento`='$tipo_documento',`numero_documento`='$numero_documento',`nombre_1`='$nombre_1',`nombre_2`=' $nombre_2',`apellido_1`='$apellido_1',`apellido_2`='$apellido_2',`sexo`='$sexo',`correo`='$correo',`telefono_1`='$telefono_1',`telefono_2`='$telefono_2', `fecha_nacimiento`=$fecha_nacimiento,`cargo`='$cargo',`especialidad`='$especialidad',`miniatura`='',`foto`='' WHERE `id`='$id_personal';";
         if(mysqli_query($conn,$sql)){
             echo "1";
         }else{
@@ -2118,6 +2174,13 @@ $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT
     $telefono_1 = $_POST["telefono_1"];
     $telefono_2 = $_POST["telefono_2"];
     $fecha_nacimiento = $_POST["fecha_nacimiento"];
+    if($fecha_nacimiento == "")
+    {
+      $fecha_nacimiento = "null";
+    }else{
+      $fecha_nacimiento = "'$fecha_nacimiento'";
+    }
+
     $cargo = $_POST["cargo"];
     $especialidad = $_POST["especialidad"];
     $usuario = $_POST["usuario"];
@@ -2125,24 +2188,25 @@ $query_consulta_tabla_personal_usuario = mysqli_query($conn,"SELECT
     $foto = "";
     $contrasena_usuario = password_hash($_POST["contrasena_usuario"], PASSWORD_BCRYPT);
 
-    $scripsql = "SELECT `nombre_usuario` FROM `usuarios` WHERE `nombre_usuario` = REPLACE('$usuario',' ','');";
-    $qy = mysqli_query($conn,$scripsql);
-    if (mysqli_num_rows($qy)>=1){
-        echo "0";
-    }else{
-        $scripsql = "SET @variable_id=uuid();";
-        $qy = mysqli_query($conn,$scripsql);
-        $scripsql = "INSERT INTO `personal` (`id`, `habilitado`, `tipo_documento`, `numero_documento`, `nombre_1`, `nombre_2`, `apellido_1`, `apellido_2`, `sexo`, `correo`, `telefono_1`, `telefono_2`, `fecha_nacimiento`, `cargo`, `especialidad`, `miniatura`, `foto`) VALUES (@variable_id,'$habilitado','$tipo_documento','$numero_documento','$nombre_1','$nombre_2','$apellido_1','$apellido_2','$sexo','$correo','$telefono_1','$telefono_2','$fecha_nacimiento','$cargo','$especialidad','$miniatura','$foto');";
+    $scripsql = "SELECT nombre_usuario FROM usuarios WHERE nombre_usuario = REPLACE('$usuario',' ','');";
+    if (mysqli_num_rows(mysqli_query($conn,$scripsql))==0){
+      $scripsql = "SET @variable_id=uuid();";
+      mysqli_query($conn,$scripsql);
+      $scripsql = "INSERT INTO personal (id, habilitado, tipo_documento, numero_documento, nombre_1, nombre_2, apellido_1, apellido_2, sexo, correo, telefono_1, telefono_2, fecha_nacimiento, cargo, especialidad, miniatura, foto) VALUES (@variable_id,$habilitado,'$tipo_documento','$numero_documento','$nombre_1','$nombre_2','$apellido_1','$apellido_2','$sexo','$correo','$telefono_1','$telefono_2',$fecha_nacimiento,'$cargo','$especialidad','$miniatura','$foto')";
+      if(mysqli_query($conn,$scripsql)){
+        $scripsql = "INSERT INTO usuarios (nombre_usuario, contrasena_usuario, id_personal, permisos, habilitado) VALUES ('$usuario','$contrasena_usuario',@variable_id,1,$habilitado);";
+        //echo 'Error: '. $conn->error;
+        //$resl = mysqli_query($conn,$scripsql);
         if(mysqli_query($conn,$scripsql)){
-            $scripsql = "INSERT INTO `usuarios`(`nombre_usuario`, `contrasena_usuario`, `id_personal`, `permisos`, `habilitado`) VALUES ('$usuario','$contrasena_usuario',@variable_id,'1','$habilitado');";
-            if(mysqli_query($conn,$scripsql)){
-                echo "1";
-            }else{
-                echo "0";
-            }
+          echo "1";
         }else{
-            echo "0";
+          echo "0";
         }
+      }else{
+        echo "0";
+      }
+    }else{
+      echo "0";
     }
 }else if($tipo=="elpers"){
     $id = $_POST["id"];
@@ -2225,14 +2289,12 @@ IF('$nombres'='',CONCAT(`nombre_1_paci`,' ',`apellido_1_paci`) LIKE '%%' OR  CON
     echo "ids";
     echo json_encode($ids);
     
-}else
-    
-
+}
 
 $conn->close();
 
 } catch (Exception $e) {
-    echo "0" ;
+    echo "0";
 }
 
 

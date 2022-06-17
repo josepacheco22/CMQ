@@ -112,8 +112,9 @@ function llenar_lista_personal(){
         beforeSend: function (){
         },
         success:function (response){
-            if(response!="")
+            if(response!="0")
             {
+              console.log(response);
                 var division_respuesta = response.split("ids");
                 $(".lista_personal_asignar").detach();
                 $("#input_asignado_pp").append(division_respuesta[0]);   

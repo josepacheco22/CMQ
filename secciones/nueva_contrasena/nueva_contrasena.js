@@ -105,10 +105,10 @@ document.getElementById("input_contrasena_confirmar_dp").addEventListener('keyup
 document.getElementById("boton_confirmar_confirmar_contrasena_nueva_pp").onclick = function(){
     document.getElementById("nueva_contrasena_2").style.display = "none";
     document.getElementById("contenido_esperar_pp").style.display = "inline-block";
-    guardar_datos_personal_con_esperar();
+    guardar_contra_personal_con_esperar();
 };
 
-function guardar_datos_personal_con_esperar() {
+function guardar_contra_personal_con_esperar() {
     var parametros_rp = {
         "tipo": "cpp",
         "id": cookies_pagina["id_personal"],

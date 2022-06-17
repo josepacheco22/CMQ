@@ -70,7 +70,6 @@ document.getElementById("boton_confirmar_cofirmar_editar_info_personal_pp").oncl
     {
         document.getElementById("input_fecha_nacimiento_dp").style.border= "3px solid #e24444";
     }else{
-        console.log("ddwsda");
         document.getElementById("input_fecha_nacimiento_dp").style.border= "3px solid #787ff6";
         document.getElementById("contenido_editar_infromacion_personal").style.display = "none";
         document.getElementById("contenido_confirmar_pp").style.display = "inline-block";
@@ -90,22 +89,31 @@ document.getElementById("boton_confirmar_aceptar_cambios_pp").onclick = function
 
 var bandera_guardado = 0;
 function guardar_datos_personal_con_esperar() {
+
+  var fecha_nacimiento_consulta_1 = document.getElementById("input_fecha_nacimiento_dp").value;
+  let fecha_nacimiento_consulta_1_valido = Date.parse(fecha_nacimiento_consulta_1);
+  if(fecha_nacimiento_consulta_1==""||isNaN(fecha_nacimiento_consulta_1_valido)){
+    fecha_nacimiento_consulta_1 = "";
+  }else{
+    fecha_nacimiento_consulta_1 = document.getElementById("input_fecha_nacimiento_dp").value;
+  }
+
     var parametros_rp = {
         "tipo": "gdpepp",
         "id": cookies_pagina["id_personal"],
-        "nombre_1": document.getElementById("input_nombre_1_dp").value,
-        "nombre_2": document.getElementById("input_nombre_2_dp").value,
+        "nombre_1": document.getElementById("input_nombre_1_dp").value.replaceAll(" ",""),
+        "nombre_2": document.getElementById("input_nombre_2_dp").value.replaceAll(" ",""),
         "apellido_1": document.getElementById("input_apellido_1_dp").value.replaceAll(" ",""),
         "apellido_2": document.getElementById("input_apellido_2_dp").value.replaceAll(" ",""),
         "sexo": document.getElementById("input_sexo_dp").value,
-        "correo": document.getElementById("input_correo_dp").value,
-        "telefono_1": document.getElementById("input_telefono_1_dp").value,
-        "telefono_2": document.getElementById("input_telefono_2_dp").value,
-        "fecha_nacimiento": document.getElementById("input_fecha_nacimiento_dp").value,
+        "correo": document.getElementById("input_correo_dp").value.replaceAll(" ",""),
+        "telefono_1": document.getElementById("input_telefono_1_dp").value.replaceAll(" ",""),
+        "telefono_2": document.getElementById("input_telefono_2_dp").value.replaceAll(" ",""),
+        "fecha_nacimiento": fecha_nacimiento_consulta_1,
         "miniatura" : "",
         "foto" : ""
     };
-    
+
     $.ajax({ 
         data: parametros_rp,
         url: "consulta.php", 
@@ -113,7 +121,7 @@ function guardar_datos_personal_con_esperar() {
         beforeSend: function (){
         },
         success:function (response){
-            if(response=="Exito")
+            if(response=="1")
             {
                 document.getElementById("label_mensaje_alerta_pp").innerHTML = "DATOS GUARDADOS CON EXITO";
                 document.getElementById("contenido_esperar_pp").style.display = "none";
@@ -125,14 +133,11 @@ function guardar_datos_personal_con_esperar() {
                 document.getElementById("mensaje_alerta_pp").style.display = "inline-block";
                 bandera_guardado = 0;
             }
-
-
         }
     });
 };
 document.getElementById("boton_alerta_cofirmar_pp").onclick = function(){
-    if(bandera_guardado == 1)
-    {
+    if(bandera_guardado == 1){
         location.reload();
     }else{
         document.getElementById("mensaje_alerta_pp").style.display = "none";

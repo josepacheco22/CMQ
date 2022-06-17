@@ -551,11 +551,24 @@ document.getElementById("boton_confirmar_aceptar_pp").onclick = function(){
     document.getElementById("contenido_esperar").style.display = "inline-block";
     guardar_datos_personal();
 };
+var input_habilitado_guard= "1";
 function guardar_datos_personal(){
-    var input_habilitado_guard= "1";
+    input_habilitado_guard= "1";
     if(document.getElementById("input_habilitado").checked == false){
         input_habilitado_guard= "0";
     }
+
+
+
+    var fecha_nacimiento_consulta_1 = document.getElementById("input_fecha_nacimiento").value;
+    let fecha_nacimiento_consulta_1_valido = Date.parse(fecha_nacimiento_consulta_1);
+    if(fecha_nacimiento_consulta_1==""||isNaN(fecha_nacimiento_consulta_1_valido)){
+      fecha_nacimiento_consulta_1 = "";
+      //fecha_nacimiento_consulta_1 = hoy.getFullYear()+"-"+(((hoy.getMonth()+1)+"").padStart(2, "0"))+"-"+((hoy.getDate())+"").padStart(2, "0");
+    }
+
+
+
     var parametros_rp = {
         "tipo": "gnuper",
         "id_personal": "",
@@ -571,7 +584,7 @@ function guardar_datos_personal(){
         "contrasena_usuario": document.getElementById("input_contrasena_1").value,
         "telefono_1": document.getElementById("input_telefono_1").value,
         "telefono_2": document.getElementById("input_telefono_2").value,
-        "fecha_nacimiento": document.getElementById("input_fecha_nacimiento").value,
+        "fecha_nacimiento": fecha_nacimiento_consulta_1,
         "cargo": document.getElementById("input_cargo").value,
         "especialidad": document.getElementById("input_especialidad").value,
         "usuario": document.getElementById("input_usuario").value
@@ -588,13 +601,8 @@ function guardar_datos_personal(){
             }else{
                 document.getElementById("label_mensaje_alerta_superior_rpa").innerHTML = "FALLO REGISTRO";
             }
-
-                
-
-                
-                document.getElementById("mensaje_alerta").style.display = "inline-block";  
-                
-     
+            document.getElementById("contenido_esperar").style.display = "none";
+            document.getElementById("mensaje_alerta").style.display = "inline-block";  
         }
     });
 };

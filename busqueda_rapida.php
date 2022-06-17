@@ -1,6 +1,7 @@
 <?php
 try {
-$conn = new mysqli("localhost","cmq-web","CmQu1n1nde","cmq");
+$conn = new mysqli("localhost","root","CmQu1n1nde","cmq");
+//$conn = new mysqli("192.168.100.8","root","CmQu1n1nde","cmq");
 $tipo = $_POST["tipo"];
 if($tipo=="bndp"){
     $parametro = $_POST["parametro"];
@@ -39,6 +40,6 @@ if($tipo=="bndp"){
 
 $conn->close();
 } catch (Exception $e) {
-    echo "NO FUE POSIBLE CONECTARSE AL SERVIDOR";
+    echo "0";
 }
 ?>

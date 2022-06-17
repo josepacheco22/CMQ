@@ -1,16 +1,5 @@
-
-
-document.getElementById("input_numero_documento_rpa").style.animationName = "none";
-document.getElementById("input_numero_documento_rpa").style.border= "3px solid "+color_1_formulario;
-
-
-
-
-
-
-
-$( "#input_numero_documento_rpa").blur(function(){
-  document.getElementById("input_numero_documento_rpa").style.animationName = "indicar_buscar";
-  document.getElementById("input_numero_documento_rpa").style.animationDuration = "300ms";
-  document.getElementById("input_numero_documento_rpa").style.animationIterationCount = "infinite";
-});
+var fecha_actual_consulta_1 = document.getElementById("input_fecha_consulta_pp").value; 
+    let fecha_actual_consulta_1_valido = Date.parse(fecha_actual_consulta_1);
+    if(fecha_actual_consulta_1==""||isNaN(fecha_actual_consulta_1_valido)){
+        fecha_actual_consulta_1 = hoy.getFullYear()+"-"+(((hoy.getMonth()+1)+"").padStart(2, "0"))+"-"+((hoy.getDate())+"").padStart(2, "0");
+    }

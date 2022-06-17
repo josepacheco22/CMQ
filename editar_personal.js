@@ -495,6 +495,11 @@ function guardar_datos_personal(){
     if(document.getElementById("input_habilitado").checked == false){
         input_habilitado_guard= "0";
     }
+    var fecha_nacimiento_consulta_1 = document.getElementById("input_fecha_nacimiento").value;
+    let fecha_nacimiento_consulta_1_valido = Date.parse(fecha_nacimiento_consulta_1);
+    if(fecha_nacimiento_consulta_1==""||isNaN(fecha_nacimiento_consulta_1_valido)){
+      fecha_nacimiento_consulta_1 = "";
+    }
     var parametros_rp = {
         "tipo": "gdaper",
         "id_personal": id_personal,
@@ -509,7 +514,7 @@ function guardar_datos_personal(){
         "correo": document.getElementById("input_correo").value,
         "telefono_1": document.getElementById("input_telefono_1").value,
         "telefono_2": document.getElementById("input_telefono_2").value,
-        "fecha_nacimiento": document.getElementById("input_fecha_nacimiento").value,
+        "fecha_nacimiento": fecha_nacimiento_consulta_1,
         "cargo": document.getElementById("input_cargo").value,
         "especialidad": document.getElementById("input_especialidad").value,
         "usuario": document.getElementById("input_usuario").value

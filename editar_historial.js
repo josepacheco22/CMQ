@@ -140,19 +140,11 @@ function llenar_lista_personal(){
                 $(".lista_personal_asignar").detach();
                 $("#input_asignado_pp").append(division_respuesta[0]);   
                 ids_personal_asignados = JSON.parse(division_respuesta[1]);
-
-                document.getElementById("input_asignado_pp").options.item(ids_personal_asignados.indexOf(datos_historial["id_personal_asignado"])).selected = 'selected';
-                /*document.getElementById("input_creado_por_pp").value = document.getElementById("input_asignado_pp").options[document.getElementById("input_asignado_pp").value].text;
-
-                
-                paciente_seleccionado = sessionStorage.getItem('id_paciente');
-                if( paciente_seleccionado == ""){
-                    document.getElementById("contenido_esperar_pp").style.display = "none";
-                    document.getElementById("modal_pp").style.display = "none";
-                    document.getElementById("boton_abrir_paciente_pp").style.display = "none";
+                if(datos_historial["id_personal_asignado"] != null){
+                  document.getElementById("input_asignado_pp").options.item(ids_personal_asignados.indexOf(datos_historial["id_personal_asignado"])).selected = 'selected';
                 }else{
-                    document.getElementById("boton_abrir_paciente_pp").style.display = "inline-block";
-                }*/
+                  document.getElementById("input_asignado_pp").options.item(0).selected = 'selected'
+                }
                 document.getElementById("contenido_esperar_pp").style.display = "none";
                 document.getElementById("modal_pp").style.display = "none";
             } 

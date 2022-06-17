@@ -589,6 +589,11 @@ document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
     document.getElementById("contenido_esperar").style.display = "inline-block";
     
     fecha_actual = new Date();
+    var fecha_nacimiento_consulta_1 = document.getElementById("input_fecha_nacimiento").value;
+    let fecha_nacimiento_consulta_1_valido = Date.parse(fecha_nacimiento_consulta_1);
+    if(fecha_nacimiento_consulta_1==""||isNaN(fecha_nacimiento_consulta_1_valido)){
+      fecha_nacimiento_consulta_1 = "";
+    }
     var parametros_rp = {
         "tipo": "gedp", //"tipo": "rpa",
         "id_paciente": id_paciente,
@@ -602,7 +607,8 @@ document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
         "correo": document.getElementById("input_correo_rpa").value,
         "telefono_1": document.getElementById("input_telefono_1_rpa").value,
         "telefono_2": document.getElementById("input_telefono_2_rpa").value,
-        "fecha_nacimiento": document.getElementById("input_fecha_nacimiento_rpa").value,
+
+        "fecha_nacimiento": fecha_nacimiento_consulta_1,
         "provincia": document.getElementById("input_provincia_rpa").value,
         "canton": document.getElementById("input_canton_rpa").value,
         "direccion": document.getElementById("input_direccion_rpa").value,
