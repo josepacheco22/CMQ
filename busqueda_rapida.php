@@ -1,7 +1,10 @@
 <?php
-try {
-$conn = new mysqli("localhost","root","CmQu1n1nde","cmq");
-//$conn = new mysqli("192.168.100.8","root","CmQu1n1nde","cmq");
+try{
+
+$conn = new mysqli("192.168.100.8","root","CmQu1n1nde","cmq");
+//$conn = new mysqli("localhost","root","CmQu1n1nde","cmq");
+
+
 $tipo = $_POST["tipo"];
 if($tipo=="bndp"){
     $parametro = $_POST["parametro"];

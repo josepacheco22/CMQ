@@ -272,11 +272,11 @@ function funcion_verificar_numero_documento_guardar(){
 
 var bandera = "no";
 function guardar_nuevo_paciente(){ 
-    document.getElementById("input_numero_documento_rpa").style.animationName = "anim";
+    /*document.getElementById("input_numero_documento_rpa").style.animationName = "anim";
     document.getElementById("input_numero_documento_rpa").style.animationDuration = "300ms";
     document.getElementById("input_numero_documento_rpa").style.animationIterationCount = "infinite";
     document.getElementById("alerta_numero_documento_2_rpa").style.display = "none";
-    document.getElementById("alerta_numero_documento_rpa").style.display = "none";
+    document.getElementById("alerta_numero_documento_rpa").style.display = "none";*/
     document.getElementById("modal_pp").style.display = "block";
     document.getElementById("contenido_esperar").style.display = "inline-block";
 
@@ -323,7 +323,7 @@ function guardar_nuevo_paciente(){
         document.getElementById("alerta_telefono_1_rpa").style.display = "none";
     }
     let validar_fecha = Date.parse(document.getElementById("input_fecha_nacimiento_rpa").value);
-    if (isNaN(validar_fecha)) {
+    if (isNaN(validar_fecha) || (document.getElementById("input_fecha_nacimiento_rpa").value).length < 10) {
         bandera = "si";
         document.getElementById("input_fecha_nacimiento_rpa").style.border= "3px solid #e24444";
         document.getElementById("alerta_fecha_nacimiento_rpa").style.display = "flex";
@@ -331,70 +331,14 @@ function guardar_nuevo_paciente(){
         document.getElementById("input_fecha_nacimiento_rpa").style.border= "3px solid #787ff6";
         document.getElementById("alerta_fecha_nacimiento_rpa").style.display = "none";
     }
-    /*var fecha_separada = input_fecha_nacimiento_rpa.value.split("-");
-    
-    if((input_fecha_nacimiento_rpa.value)==""||((input_fecha_nacimiento_rpa.value).length)<10) {
-        bandera = "si";
-        input_fecha_nacimiento_rpa.style.border= "3px solid #e24444";
-        alerta_fecha_nacimiento_rpa.style.display = "block";
+
+    if(bandera =="no") {
+      funcion_verificar_numero_documento_guardar();
+
     }else{
-        var fecha_separada = input_fecha_nacimiento_rpa.value.split("-");
-        if(1980 < parseInt(fecha_separada[0]) && (parseInt(fecha_separada[2]))<=(fecha_actual.getFullYear())){
-            var numero_mes=12;
-            if( (parseInt(fecha_separada[0])) ==(fecha_actual.getFullYear())){
-                numero_mes = fecha_actual.getMonth()+1;
-            }
-            if((parseInt(fecha_separada[1]))<=numero_mes){
-                if((parseInt(fecha_separada[0]))==(fecha_actual.getFullYear())&&(parseInt(fecha_separada[1])) == numero_mes){
-                    if((parseInt(fecha_separada[2]))>fecha_actual.getDate())
-                    {
-                        bandera = "si";
-                        input_fecha_nacimiento_rpa.style.border= "3px solid #e24444";
-                        alerta_fecha_nacimiento_rpa.style.display = "block";
-                    }
-                }
-                else{
-                    var diasMes = new Date((parseInt(fecha_separada[0])), (parseInt(fecha_separada[1])), 0).getDate();
-                    if((parseInt(fecha_separada[2]))>diasMes){
-                        bandera = "si";
-                        input_fecha_nacimiento_rpa.style.border= "3px solid #e24444";
-                        alerta_fecha_nacimiento_rpa.style.display = "block";
-                    }
-                }
-            }else{
-                bandera = "si";
-                input_fecha_nacimiento_rpa.style.border= "3px solid #e24444";
-                alerta_fecha_nacimiento_rpa.style.display = "block";
-            }
-        }else{
-            bandera = "si";
-            input_fecha_nacimiento_rpa.style.border= "3px solid #e24444";
-            alerta_fecha_nacimiento_rpa.style.display = "block";
-        }
+      document.getElementById("contenido_esperar").style.display = "none";
+      document.getElementById("modal_pp").style.display = "none";
     }
-    */
-    funcion_verificar_numero_documento_guardar();
-    /*if(bandera =="no"&&existe_numero_documento=="0") {
-        document.getElementById("label_confirmar_registro_tipo_documento").innerHTML=input_tipo_documento_rpa.value;
-        document.getElementById("label_confirmar_registro_numero_documento").innerHTML= input_numero_documento_rpa.value;
-        document.getElementById("label_confirmar_registro_nombres").innerHTML= input_nombre_1_rpa.value+" "+input_nombre_2_rpa.value;
-        document.getElementById("label_confirmar_registro_apellidos").innerHTML = input_apellido_1_rpa.value+" "+input_apellido_2_rpa.value;
-        document.getElementById("label_confirmar_registro_sexo").innerHTML=input_sexo_rpa.value;
-        document.getElementById("label_confirmar_registro_correo").innerHTML=input_correo_rpa.value;
-        document.getElementById("label_confirmar_registro_telefono").innerHTML=input_telefono_1_rpa.value;
-        document.getElementById("label_confirmar_registro_convencional").innerHTML=input_telefono_2_rpa.value;
-        document.getElementById("label_confirmar_registro_fecha_nacimiento").innerHTML = (fecha_separada[2]+"-"+fecha_separada[1]+"-"+fecha_separada[0]);
-        document.getElementById("label_confirmar_registro_ocupacion").innerHTML=input_ocupacion_rpa.value;
-        document.getElementById("label_confirmar_registro_provincia").innerHTML=input_provincia_rpa.value;
-        document.getElementById("label_confirmar_registro_canton").innerHTML=input_canton_rpa.value;
-        document.getElementById("label_confirmar_registro_direccion").innerHTML=input_direccion_rpa.value;
-        
-    }else{
-        
-    document.getElementById("contenido_esperar").style.display = "none";
-    document.getElementById("modal_pp").style.display = "none";
-    document.getElementById("alerta_general_rpa").style.display = "flex";
-    }*/
 };
 
 document.getElementById("ejecutar_guardar_inferior_rpa").onclick = function(){
@@ -587,13 +531,7 @@ function regresar_inputs_normalidad_rp(){
 document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
     document.getElementById("contenido_confirmar_rpa").style.display = "none";
     document.getElementById("contenido_esperar").style.display = "inline-block";
-    
-    fecha_actual = new Date();
-    var fecha_nacimiento_consulta_1 = document.getElementById("input_fecha_nacimiento").value;
-    let fecha_nacimiento_consulta_1_valido = Date.parse(fecha_nacimiento_consulta_1);
-    if(fecha_nacimiento_consulta_1==""||isNaN(fecha_nacimiento_consulta_1_valido)){
-      fecha_nacimiento_consulta_1 = "";
-    }
+
     var parametros_rp = {
         "tipo": "gedp", //"tipo": "rpa",
         "id_paciente": id_paciente,
@@ -607,8 +545,7 @@ document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
         "correo": document.getElementById("input_correo_rpa").value,
         "telefono_1": document.getElementById("input_telefono_1_rpa").value,
         "telefono_2": document.getElementById("input_telefono_2_rpa").value,
-
-        "fecha_nacimiento": fecha_nacimiento_consulta_1,
+        "fecha_nacimiento": document.getElementById("input_fecha_nacimiento_rpa").value,
         "provincia": document.getElementById("input_provincia_rpa").value,
         "canton": document.getElementById("input_canton_rpa").value,
         "direccion": document.getElementById("input_direccion_rpa").value,
@@ -640,51 +577,7 @@ document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
         }
     });
 };
-/*
-document.getElementById("boton_confirmar_cofirmar_rpa").onclick = function(){
-    document.getElementById("contenido_confirmar_rpa").style.display = "none";
-    document.getElementById("contenido_esperar").style.display = "inline-block";
-    fecha_actual = new Date();
-    var parametros_rp = {
-        "tipo": "rpa",
-        "id_personal_creado": cookies_pagina["id_personal"],
-        "fecha_creacion": fecha_actual.getFullYear()+"-"+(fecha_actual.getMonth()+1)+"-"+fecha_actual.getDate(),
-        "tipo_documento": input_tipo_documento_rpa.value,
-        "numero_documento": input_numero_documento_rpa.value.replaceAll("-","").replaceAll(" ",""),
-        "nombre_1": input_nombre_1_rpa.value,
-        "nombre_2": input_nombre_2_rpa.value,
-        "apellido_1": input_apellido_1_rpa.value,
-        "apellido_2": input_apellido_2_rpa.value,
-        "sexo": input_sexo_rpa.value,
-        "correo": input_correo_rpa.value,
-        "telefono_1": input_telefono_1_rpa.value,
-        "telefono_2": input_telefono_2_rpa.value,
-        "fecha_nacimiento": input_fecha_nacimiento_rpa.value,
-        "provincia": input_provincia_rpa.value,
-        "canton": input_canton_rpa.value,
-        "direccion": input_direccion_rpa.value,
-        "ocupacion": input_ocupacion_rpa.value 
-    };
-    $.ajax({ 
-        data: parametros_rp,
-        url: "consulta.php", 
-        type: "POST",
-        beforeSend: function (){
-        },
-        success:function (response){
-            
-            document.getElementById("label_mensaje_alerta_superior_rpa").innerHTML=response;
-            document.getElementById("contenido_esperar").style.display =  "none";
-            document.getElementById("mensaje_alerta_rpa").style.display = "inline-block"; 
-        },
-        error : function(xhr, status) {
-            document.getElementById("contenido_esperar").style.display =  "none";
-            document.getElementById("label_mensaje_alerta_superior_rpa").innerHTML="Error, No fue posible conectarse a la base de datos.";
-            document.getElementById("mensaje_alerta_rpa").style.display = "inline-block";
-        }
-    });
-};
-*/
+
 document.getElementById("ejecutar_borrar_todo_rpa").onclick = function(){
     regresar_inputs_normalidad_rp();
 };
